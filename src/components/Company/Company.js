@@ -1,26 +1,7 @@
 import React from "react";
 import "./Company.scss";
 import CompanyJob from "../CompanyJob/CompanyJob";
-import Zoom from "@mui/material/Zoom";
-import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
-import { styled } from "@mui/material/styles";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-
-const HtmlTooltip = styled(({ className, ...props }) => (
-  <Tooltip {...props} classes={{ popper: className }} />
-))(({ theme }) => ({
-  [`& .${tooltipClasses.tooltip}`]: {
-    backgroundColor: "#e8e7ff",
-    color: "#4e21e7",
-    maxWidth: 220,
-    fontSize: theme.typography.pxToRem(12),
-    fontFamily: "'Poppins', sans-serif",
-    border: "1px solid #dadde9",
-    display: "flex",
-    flexDirection: "column",
-    gap: "10px",
-  },
-}));
 
 const Company = ({ company }) => {
   return (
