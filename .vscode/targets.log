@@ -7,7 +7,7 @@ make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --quest
 # There is NO WARRANTY, to the extent permitted by law.
  
 
-# Make data base, printed on Thu Oct 06 16:51:05 2022
+# Make data base, printed on Thu Oct 06 17:29:29 2022
 
 # Variables
 
@@ -73,7 +73,7 @@ ELECTRON_RUN_AS_NODE = 1
 # automatic
 %F = $(notdir $%)
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_26120_FXLBMSOBQWDKVIZZ
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_22320_FNFJUSYNJLESMOLS
 # environment
 COMPUTERNAME = DESKTOP-7JP9R10
 # environment
@@ -159,8 +159,7 @@ COMSPEC = C:\Windows\system32\cmd.exe
 # default
 MAKEFILES := 
 # automatic
-<F =  
-$(notdir $<)
+<F = $(notdir $<)
 # environment
 LC_ALL = C
 # automatic
@@ -184,7 +183,7 @@ PROCESSOR_LEVEL = 6
 # environment
 FPS_BROWSER_APP_PROFILE_STRING = Internet Explorer
 # environment
-VSCODE_PID = 26120
+VSCODE_PID = 22320
 # environment
 USERDOMAIN_ROAMINGPROFILE = DESKTOP-7JP9R10
 # variable set hash-table stats:
@@ -198,17 +197,17 @@ USERDOMAIN_ROAMINGPROFILE = DESKTOP-7JP9R10
 
 # C:\ProgramData\DockerDesktop\version-bin: could not be stat'd.
 # C:\Windows\System32\WindowsPowerShell\v1.0\ (key C:/Windows/System32/WindowsPowerShell/v1.0/, mtime 1633528696): 30 files, no impossibilities.
-# . (key c:/Users/ufukk/Desktop/Coding Projects/Kerbb/kerbb-react-redux, mtime 1665064257): 16 files, no impossibilities.
+# . (key c:/Users/ufukk/Desktop/Coding Projects/Kerbb/kerbb-react-redux, mtime 1665064277): 17 files, no impossibilities.
 # C:\Users\ufukk\AppData\Local\Programs\mongosh (key C:/Users/ufukk/AppData/Local/Programs/mongosh, mtime 1652285564): 8 files, no impossibilities.
 # C:\Users\ufukk\AppData\Roaming\npm (key C:/Users/ufukk/AppData/Roaming/npm, mtime 1662554638): 22 files, no impossibilities.
 # C:\Program Files\Docker\Docker\resources\bin (key C:/Program Files/Docker/Docker/resources/bin, mtime 1652439387): 13 files, no impossibilities.
 # C:\Program Files\Git\cmd (key C:/Program Files/Git/cmd, mtime 1653046097): 8 files, no impossibilities.
-# C:\Windows\System32\OpenSSH\: could not be stat'd.
+# C:\Windows\Syste 
+m32\OpenSSH\: could not be stat'd.
 # C:\MinGW\bin (key C:/MinGW/bin, mtime 1660157139): 53 files, no impossibilities.
 # C:\Users\ufukk\AppData\Local\Microsoft\WindowsApps (key C:/Users/ufukk/AppData/Local/Microsoft/WindowsApps, mtime 1664624454): 15 files, no impossibilities.
 # C:\Users\ufukk\AppData\Local\Programs\Microsoft VS Code\bin (key C:/Users/ufukk/AppData/Local/Programs/Microsoft VS Code/bin, mtime 1663265500): 4 files, no impossibilities.
-# C:\Windows (key C:/Windows, mtime 1663201059): 106 files, 
- no impossibilities.
+# C:\Windows (key C:/Windows, mtime 1663201059): 106 files, no impossibilities.
 # C:\Users\ufukk\AppData\Local\Programs\Python\Python310\ (key C:/Users/ufukk/AppData/Local/Programs/Python/Python310/, mtime 1649688278): 18 files, no impossibilities.
 # C:\Users\ufukk\AppData\Local\Programs\Python\Python310\Scripts\ (key C:/Users/ufukk/AppData/Local/Programs/Python/Python310/Scripts/, mtime 1649866859): 9 files, no impossibilities.
 # C:\Windows\System32\Wbem (key C:/Windows/System32/Wbem, mtime 1657925746): 153 files, no impossibilities.
@@ -218,7 +217,7 @@ USERDOMAIN_ROAMINGPROFILE = DESKTOP-7JP9R10
 # C:\Program Files\nodejs (key C:/Program Files/nodejs, mtime 1652102013): 13 files, no impossibilities.
 # C:\Program Files\MongoDB\Server\5.0\bin (key C:/Program Files/MongoDB/Server/5.0/bin, mtime 1652299793): 9 files, no impossibilities.
 
-# 3371 files, no impossibilities in 20 directories.
+# 3372 files, no impossibilities in 20 directories.
 
 # Implicit Rules
 
@@ -286,16 +285,15 @@ build-dev:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 7 (6) / strings = 3329 / storage = 49972 B / avg = 15 B
-# current buf: size = 8174 B / used = 971 B / count = 74 / avg = 13 B
-# other used: total = 41798 B / count = 3255 / avg = 12 B
-# other free: total = 43 B / max = 13 B / min = 3 B / avg = 7 B
+# strcache buffers: 7 (5) / strings = 3330 / storage = 49977 B / avg = 15 B
+# current buf: size = 8174 B / used = 990 B / count = 75 / avg = 13 B
+# other used: total = 41803 B / count = 3255 / avg = 12 B
+# other free: total = 57 B / max = 16 B / min = 2 B / avg = 9 B
 
-# strcache performance: lookups = 3403 / hit rate = 2%
+# strcache performance: lookups = 3404 / hit rate = 2%
 # hash-table stats:
-# Load=3329/8192=41%, Rehash=0, Collisions=1112/3403=33%
-# Finished Make data base on Thu Oc 
-t 06 16:51:05 2022
+# Load=3330/8192=41%, Rehash=0, Collisions=1113/3404=33%
+# Finished Make data base on Thu Oct 06 17:29:29 2022
 
  
 make.exe: *** No rule to make target 'all'.  Stop.

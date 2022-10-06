@@ -322,8 +322,8 @@
         padding-left: 2rem;
         @include media("<=m-phone") {
           height: 25vh;
-          padding-right: 1rem;
-          padding-left: 1rem;
+          padding-right: 0rem;
+          padding-left: 0rem;
         }
         @include media("<=tablet") {
           height: 35vh;
@@ -333,8 +333,8 @@
     .news-detail-inner-content-container {
       color: $kerbb-color-dark;
       p {
-        padding-right: 2rem;
-        padding-left: 2rem;
+        padding-right: 1rem;
+        padding-left: 1rem;
         @include media("<=m-phone") {
           padding-right: 1rem;
           padding-left: 1rem;
