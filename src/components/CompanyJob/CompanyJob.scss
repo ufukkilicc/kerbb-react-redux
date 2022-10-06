@@ -7,12 +7,13 @@
   justify-content: flex-start;
   align-items: flex-start;
   border-radius: 5px;
-  width: 50%;
-  padding: 10px;
+  width: 100%;
+  padding: 5px;
   &:hover {
     background-color: $kerbb-purple-light;
   }
   .company-job-container {
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -35,7 +36,7 @@
           -webkit-line-clamp: 2;
           -webkit-box-orient: vertical;
           -moz-line-clamp: 2;
-          min-height: 42px;
+          min-height: 14px;
         }
       }
 
@@ -64,7 +65,7 @@
         }
         .company-location-icon-container {
           color: $kerbb-color-dark;
-          opacity: 0.8;
+          opacity: 0.5;
           transform: scale(0.3);
         }
       }
@@ -80,7 +81,7 @@
         }
         .company-date-icon-container {
           color: $kerbb-color-dark;
-          opacity: 0.8;
+          opacity: 0.5;
           transform: scale(0.3);
         }
       }
