@@ -1,0 +1,30 @@
+@import "../../common/global";
+@import "../../common/fonts";
+@import "../../common/colors";
+@import "../../common/responsive";
+
+.dashboard-container {
+  display: grid;
+  grid-template-columns: 6fr 2fr;
+  @include media("<=tablet") {
+    grid-template-columns: 1fr;
+  }
+  .dashboard-content-container {
+    height: 100vh;
+    padding: 0 2rem;
+    @include media("<=tablet") {
+      padding: 0 1rem;
+    }
+    @include media("<=m-phone") {
+      padding: 0;
+    }
+  }
+  .side-info-container {
+    height: 100vh;
+    padding: 0 1rem;
+    @include kerbb-border-line-left();
+    @include media("<=tablet") {
+      display: none;
+    }
+  }
+}

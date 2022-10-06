@@ -1,0 +1,143 @@
+@import "../../common/global";
+@import "../../common/fonts";
+@import "../../common/responsive";
+
+.share-drawer-mobile-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  height: auto;
+  //   overflow-y: scroll;
+  //   &::-webkit-scrollbar {
+  //     display: none;
+  //   }
+  .share-drawer-header-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0rem;
+    .share-drawer-header {
+      color: $kerbb-color-dark;
+      opacity: 0.8;
+    }
+    .share-drawer-close-button-container {
+      position: absolute;
+      align-self: center;
+      left: 5px;
+      color: $kerbb-color-dark;
+      opacity: 0.8;
+      cursor: pointer;
+      &:hover {
+        opacity: 0.5;
+      }
+      &:active {
+        opacity: 0.8;
+      }
+    }
+  }
+  .share-drawer-first-section-container {
+    width: 100%;
+    .share-drawer-logo-image-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      padding: 3rem 0rem;
+      img {
+        width: 100px;
+        height: 100px;
+      }
+    }
+  }
+  .share-drawer-second-section-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    .share-drawer-company-info {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: flex-end;
+      gap: 0.5rem;
+      padding: 0 1rem;
+      padding-top: 0.5rem;
+      .share-drawer-company-name-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        .share-drawer-company-name {
+          color: $kerbb-color-dark;
+        }
+        .share-drawer-company-name-divider {
+          color: $kerbb-color-dark;
+        }
+        .share-drawer-company-info-header {
+          color: $kerbb-color-dark;
+          font-weight: 500;
+          padding-left: 1rem;
+        }
+      }
+    }
+  }
+  .share-drawer-third-section-container {
+    margin-top: 1rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0rem;
+    .share-drawer-socials-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 1rem;
+      .copy-link {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        &:hover {
+          opacity: 0.8;
+        }
+        &:active {
+          opacity: 1;
+        }
+        .copy-link-icon-container {
+          background-color: white;
+          height: 50px;
+          width: 50px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 25px;
+        }
+      }
+      .share-drawer-socials-item {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        &:hover {
+          opacity: 0.8;
+        }
+        &:active {
+          opacity: 1;
+        }
+        .share-drawer-socials-item-header-container {
+          .share-drawer-socials-item-header {
+            font-size: 12px;
+          }
+        }
+      }
+    }
+  }
+}

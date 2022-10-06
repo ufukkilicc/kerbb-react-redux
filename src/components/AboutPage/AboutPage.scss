@@ -1,0 +1,253 @@
+@import "../../common/global";
+@import "../../common/colors";
+@import "../../common/fonts";
+@import "../../common/responsive";
+
+.about-page-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  @include media("<=tablet") {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+  .about-page {
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    .header-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      @include kerbb-border-line-bottom();
+      padding: 1rem 1rem;
+      .header {
+        font-size: 2rem;
+        color: $kerbb-color-dark;
+        font-weight: 500;
+      }
+    }
+    .first-section-container {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding: 2rem 0rem;
+      @include kerbb-border-line-bottom();
+      @include media("<=tablet") {
+        grid-template-columns: 1fr;
+      }
+      .first-section-paragraph-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding: 0rem 15%;
+        color: $kerbb-color-dark;
+        gap: 0.5rem;
+        @include kerbb-border-line-right();
+      }
+      .first-section-illustration {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0rem 15%;
+        @include kerbb-border-line-right();
+        @include media("<=tablet") {
+          display: none;
+        }
+      }
+    }
+  }
+  .bottom-navi-container {
+    padding: 2rem 2rem;
+    padding-bottom: 1rem;
+    width: 100%;
+    background-color: $kerbb-purple-light;
+    @include kerbb-border-line-top();
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    .bottom-navi-slogan-logo-info-container {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      @include media("<=m-table") {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+      }
+      .slogan-logo-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 0.5rem;
+        .logo-container {
+          position: relative;
+          .logo-header {
+            color: $kerbb-color-logo;
+          }
+          .logo {
+            position: absolute;
+            top: 5px;
+            right: -10px;
+            height: 20px;
+            width: 20px;
+            border-right: 3px solid $kerbb-color-logo;
+            border-top: 3px solid $kerbb-color-logo;
+          }
+        }
+        .slogan-container {
+          .slogan {
+            color: $kerbb-color-dark;
+          }
+        }
+      }
+      .info-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        // Temporary
+        gap: 1rem;
+        color: $kerbb-color-logo;
+        // Temprary
+        .info-inner-container {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: flex-start;
+          gap: 2rem;
+          .info-companies-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            gap: 1rem;
+            .info-companies-header {
+              color: $kerbb-color-logo;
+              opacity: 0.9;
+            }
+            .info-companies-list {
+              display: flex;
+              flex-direction: column;
+              justify-content: flex-start;
+              align-items: flex-start;
+              gap: 5px;
+              .companies-item {
+                color: $kerbb-color-dark;
+              }
+            }
+          }
+          .info-site-links-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            gap: 1rem;
+            .info-site-links-header {
+              color: $kerbb-color-logo;
+              opacity: 0.9;
+            }
+            .info-site-links-list {
+              display: flex;
+              flex-direction: column;
+              justify-content: flex-start;
+              align-items: flex-start;
+              gap: 5px;
+              .site-links-item {
+                color: $kerbb-color-logo;
+                opacity: 0.9;
+                &:hover {
+                  opacity: 0.7;
+                }
+                &:active {
+                  opacity: 0.9;
+                }
+              }
+            }
+          }
+          .info-news-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            gap: 1rem;
+            .info-news-header {
+              color: $kerbb-color-logo;
+              opacity: 0.9;
+            }
+            .info-news-list {
+              display: flex;
+              flex-direction: column;
+              justify-content: flex-start;
+              align-items: flex-start;
+              gap: 5px;
+              .news-item {
+                color: $kerbb-color-dark;
+              }
+            }
+          }
+          .info-partners-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            gap: 1rem;
+            .info-partners-header {
+              color: $kerbb-color-logo;
+              opacity: 0.9;
+            }
+            .info-partners-list {
+              display: flex;
+              flex-direction: column;
+              justify-content: flex-start;
+              align-items: flex-start;
+              gap: 5px;
+              .partners-item {
+                color: $kerbb-color-dark;
+                a {
+                  color: $kerbb-color-dark;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .bottom-navi-socials-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .socials-list {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        .socials-item {
+          opacity: 0.9;
+          a {
+            color: $kerbb-color-logo;
+          }
+        }
+      }
+    }
+  }
+}

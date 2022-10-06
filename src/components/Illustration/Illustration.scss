@@ -1,0 +1,74 @@
+@import "../../common/global";
+@import "../../common/fonts";
+@import "../../common/colors";
+@import "../../common/responsive";
+
+.illustration {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  .companies-list {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    .companies-item {
+      position: absolute;
+      height: 50px;
+      width: 50px;
+      border-radius: 5px;
+      animation: company 1s ease-in-out;
+      transition: 2s ease-in-out;
+      border-radius: 5px;
+      //   padding: 5px;
+      //   background-color: $kerbb-color-logo;
+      @keyframes company {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+      img {
+        height: 50px;
+        width: 50px;
+        border-radius: 5px;
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+    }
+  }
+  .companies-list-none {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    .companies-item {
+      position: absolute;
+      height: 50px;
+      width: 50px;
+      border-radius: 5px;
+      animation: company 1s ease-in-out;
+      transition: 1s ease-in-out;
+      border-radius: 5px;
+      //   padding: 5px;
+      //   background-color: $kerbb-color-logo;
+      @keyframes company {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+      img {
+        height: 50px;
+        width: 50px;
+        border-radius: 5px;
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+    }
+  }
+}

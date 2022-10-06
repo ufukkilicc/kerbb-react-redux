@@ -1,0 +1,1656 @@
+@import "../../common/global";
+@import "../../common/fonts";
+@import "../../common/responsive";
+
+.search-page-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+  width: 100%;
+  height: 100vh;
+  gap: 1rem;
+  transition: 0.1s ease-in-out;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  @include media("<=tablet") {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+  @include media("<=m-phone") {
+    padding: 50px 1rem;
+  }
+  scroll-behavior: smooth;
+  .search-page-in-navi-container-active {
+    top: 0;
+    position: sticky;
+    padding-top: 1rem;
+    z-index: 15;
+    background-color: white;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+    gap: 1rem;
+    transition: 0.7s ease-in-out;
+    .info-container {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      .info-section-one {
+        .company-jobs-switch-container {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          gap: 0.1rem;
+          .switch-icon {
+            color: $kerbb-color-dark;
+            opacity: 0.7;
+            transform: scale(0.4);
+          }
+          .company-switch-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            color: $kerbb-color-dark;
+            cursor: pointer;
+
+            .company-switch-header {
+              opacity: 0.7;
+              font-size: 14px;
+            }
+          }
+          .company-switch-container-active {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            color: $kerbb-color-logo;
+            cursor: pointer;
+            .company-switch-icon {
+              opacity: 0.7;
+              transform: scale(0.4);
+            }
+            .company-switch-header {
+              opacity: 0.7;
+              font-size: 14px;
+            }
+          }
+          .job-switch-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            color: $kerbb-color-dark;
+            cursor: pointer;
+            .job-switch-header {
+              opacity: 0.7;
+              font-size: 14px;
+            }
+          }
+          .job-switch-container-active {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            color: $kerbb-color-logo;
+            cursor: pointer;
+            .job-switch-icon {
+              opacity: 0.7;
+              transform: scale(0.4);
+            }
+            .job-switch-header {
+              opacity: 0.7;
+              font-size: 14px;
+            }
+          }
+        }
+      }
+      .info-section-second {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        .info-jobs-container {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+          .jobs-count {
+            background-color: $kerbb-purple-light;
+            font-weight: bold;
+            color: $kerbb-color-logo;
+            padding: 5px 15px;
+            margin-right: 0.5rem;
+            border-radius: 20px;
+            font-size: 12px;
+          }
+          .jobs-header {
+            color: $kerbb-color-dark;
+            font-size: 12px;
+            opacity: 0.9;
+          }
+        }
+        .info-companies-container {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+          .companies-count {
+            background-color: $kerbb-purple-light;
+            color: $kerbb-color-logo;
+            font-weight: bold;
+            padding: 5px 15px;
+            margin-right: 0.5rem;
+            border-radius: 20px;
+            font-size: 12px;
+          }
+          .companies-header {
+            color: $kerbb-color-dark;
+            font-size: 12px;
+            opacity: 0.9;
+          }
+        }
+      }
+    }
+    .search-container {
+      width: 100%;
+      .search-form {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        @include media("<=tablet") {
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+        .search-form-what-container {
+          position: relative;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+          width: 45%;
+          height: auto;
+          padding: 0.5rem 1rem;
+          @include kerbb-border();
+          border-radius: 5px;
+          transition: 0.1s ease-in-out;
+          @include media("<=tablet") {
+            width: 100%;
+          }
+          &:focus-within {
+            @include kerbb-border-active();
+            .search-form-what-header-container {
+              color: $kerbb-color-logo;
+              font-size: 12px;
+              transition: 0.1s ease-in-out;
+            }
+          }
+          .search-form-what-header-container {
+            color: $kerbb-color-dark;
+            font-size: 12px;
+            transition: 0.1s ease-in-out;
+          }
+          input {
+            width: 60%;
+            border: none;
+            font-family: $kerbb-font-logo;
+            font-size: 12px;
+            letter-spacing: 1px;
+            &:focus {
+              outline: none;
+            }
+            &:focus ~ .search-form-what-icon-container {
+              color: $kerbb-color-logo;
+              opacity: 0.8;
+            }
+          }
+          .search-form-what-icon-container {
+            transition: 0.1s ease-in-out;
+            color: $kerbb-color-dark;
+            opacity: 0.8;
+          }
+          .search-form-what-icon-second-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: 0.1s ease-in-out;
+            color: $kerbb-color-logo;
+            opacity: 0.8;
+            cursor: pointer;
+            &:hover {
+              opacity: 0.5;
+            }
+            &:active {
+              opacity: 0.8;
+            }
+          }
+          .search-form-what-autocomplete-dropdown-container-active {
+            .search-form-what-autocomplete-dropdown-inner-container {
+              display: flex;
+              flex-direction: column;
+              justify-content: flex-start;
+              align-items: flex-start;
+              gap: 0.5rem;
+              padding: 1.5rem 0.5rem;
+              position: absolute;
+              top: 120%;
+              left: 0;
+              width: 100%;
+              background-color: white;
+              z-index: 15;
+              border-radius: 5px;
+              @include kerbb-border();
+              box-shadow: rgb(0 0 0 / 15%) 0px 2px 10px 0px;
+              transition: 0.1s ease-in-out;
+              .companies-dropdown-container {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                gap: 0.5rem;
+                .companies-dropdown-header-container {
+                  width: 100%;
+                  padding-bottom: 0.5rem;
+                  @include kerbb-border-line-bottom();
+                  .companies-dropdown-header {
+                    color: $kerbb-color-dark;
+                    opacity: 0.5;
+                    font-weight: 500;
+                  }
+                }
+                .companies-dropdown-none-list-header {
+                  color: $kerbb-color-dark;
+                  opacity: 0.6;
+                  font-weight: 500;
+                }
+                .companies-dropdown-list {
+                  width: 100%;
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: flex-start;
+                  align-items: flex-start;
+                  .companies-dropdown-item {
+                    width: 100%;
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: flex-start;
+                    padding: 5px;
+                    cursor: pointer;
+                    &:hover {
+                      background-color: $kerbb-purple-light;
+                    }
+                    &:active {
+                      background-color: white;
+                    }
+                    .companies-dropdown-company {
+                      display: flex;
+                      flex-direction: row;
+                      justify-content: center;
+                      align-items: center;
+                      gap: 0.5rem;
+                      .companies-dropdown-company-image-container {
+                        border-radius: 20px;
+                        width: 25px;
+                        height: 25px;
+                        img {
+                          border-radius: 20px;
+                          width: 25px;
+                          height: 25px;
+                        }
+                      }
+                      .companies-dropdown-company-name-container {
+                        .companies-dropdown-company-name {
+                          color: $kerbb-color-dark;
+                          opacity: 0.9;
+                          font-weight: 500;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+              .jobs-dropdown-container {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                gap: 0.5rem;
+                .jobs-dropdown-header-container {
+                  width: 100%;
+                  padding-bottom: 0.5rem;
+                  @include kerbb-border-line-bottom();
+                  .jobs-dropdown-header {
+                    color: $kerbb-color-dark;
+                    opacity: 0.5;
+                    font-weight: 500;
+                  }
+                }
+                .jobs-dropdown-none-list-header {
+                  color: $kerbb-color-dark;
+                  opacity: 0.6;
+                  font-weight: 500;
+                }
+                .jobs-dropdown-list {
+                  width: 100%;
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: flex-start;
+                  align-items: flex-start;
+                  .jobs-dropdown-item {
+                    width: 100%;
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: flex-start;
+                    padding: 5px;
+                    cursor: pointer;
+                    &:hover {
+                      background-color: $kerbb-purple-light;
+                    }
+                    &:active {
+                      background-color: white;
+                    }
+                    .jobs-dropdown-job {
+                      display: flex;
+                      flex-direction: row;
+                      justify-content: center;
+                      align-items: center;
+                      gap: 0.5rem;
+                      .jobs-dropdown-job-image-container {
+                        border-radius: 20px;
+                        width: 25px;
+                        height: 25px;
+                        img {
+                          border-radius: 20px;
+                          width: 25px;
+                          height: 25px;
+                        }
+                      }
+                      .jobs-dropdown-job-name-container {
+                        .jobs-dropdown-job-name {
+                          color: $kerbb-color-dark;
+                          opacity: 0.9;
+                          font-weight: 500;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+              .search-history-dropdown-container {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                gap: 0.5rem;
+                .search-history-dropdown-header-container {
+                  width: 100%;
+                  padding-bottom: 0.5rem;
+                  @include kerbb-border-line-bottom();
+                  .search-history-dropdown-header {
+                    color: $kerbb-color-dark;
+                    opacity: 0.5;
+                    font-weight: 500;
+                  }
+                }
+                .search-history-dropdown-list {
+                  width: 100%;
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: flex-start;
+                  align-items: flex-start;
+                  .search-history-dropdown-item {
+                    width: 100%;
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: flex-start;
+                    padding: 5px;
+                    cursor: pointer;
+                    &:hover {
+                      background-color: $kerbb-purple-light;
+                    }
+                    &:active {
+                      background-color: white;
+                    }
+                    .search-history-dropdown-search-history {
+                      display: flex;
+                      flex-direction: row;
+                      justify-content: center;
+                      align-items: center;
+                      gap: 0.5rem;
+                      .search-history-dropdown-icon-container {
+                        color: $kerbb-color-dark;
+                        opacity: 0.9;
+                      }
+                      .search-history-dropdown-name-container {
+                        .search-history-dropdown-name {
+                          color: $kerbb-color-dark;
+                          opacity: 0.9;
+                          font-weight: 500;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+              .arrow-container {
+                display: none;
+              }
+            }
+            .search-form-what-autocomplete-dropdown-loader {
+              display: flex;
+              flex-direction: row;
+              justify-content: center;
+              align-items: center;
+              gap: 0.5rem;
+              padding: 1.5rem 0.5rem;
+              position: absolute;
+              top: 120%;
+              left: 0;
+              width: 100%;
+              background-color: white;
+              z-index: 15;
+              border-radius: 5px;
+              @include kerbb-border();
+              box-shadow: rgb(0 0 0 / 15%) 0px 2px 10px 0px;
+            }
+          }
+          .search-form-what-autocomplete-dropdown-container {
+            display: none;
+          }
+        }
+
+        .search-form-where-container {
+          position: relative;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+          width: 45%;
+          height: auto;
+          padding: 0.5rem 1rem;
+          @include kerbb-border();
+          border-radius: 5px;
+          @include media("<=tablet") {
+            width: 100%;
+          }
+          transition: 0.1s ease-in-out;
+          &:focus-within {
+            @include kerbb-border-active();
+            .search-form-where-header-container {
+              color: $kerbb-color-logo;
+              font-size: 12px;
+              transition: 0.1s ease-in-out;
+            }
+          }
+          .search-form-where-header-container {
+            color: $kerbb-color-dark;
+            font-size: 12px;
+            transition: 0.1s ease-in-out;
+          }
+          input {
+            width: 60%;
+            border: none;
+            font-family: $kerbb-font-logo;
+            font-size: 12px;
+            letter-spacing: 1px;
+            &:focus {
+              outline: none;
+            }
+            &:focus ~ .search-form-where-icon-container {
+              color: $kerbb-color-logo;
+              opacity: 0.8;
+            }
+          }
+          .search-form-where-icon-container {
+            transition: 0.1s ease-in-out;
+            color: $kerbb-color-dark;
+            opacity: 0.8;
+          }
+          .search-form-where-icon-second-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: 0.1s ease-in-out;
+            color: $kerbb-color-logo;
+            opacity: 0.8;
+            cursor: pointer;
+            &:hover {
+              opacity: 0.5;
+            }
+            &:active {
+              opacity: 0.8;
+            }
+          }
+          .search-form-where-autocomplete-dropdown-container-active {
+            .search-form-where-autocomplete-dropdown-inner-container {
+              display: flex;
+              flex-direction: column;
+              justify-content: flex-start;
+              align-items: flex-start;
+              gap: 0.5rem;
+              padding: 1.5rem 0.5rem;
+              position: absolute;
+              top: 120%;
+              left: 0;
+              width: 100%;
+              background-color: white;
+              z-index: 15;
+              border-radius: 5px;
+              @include kerbb-border();
+              box-shadow: rgb(0 0 0 / 15%) 0px 2px 10px 0px;
+              transition: 0.1s ease-in-out;
+              .locations-dropdown-container {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                gap: 0.5rem;
+                .locations-dropdown-header-container {
+                  width: 100%;
+                  padding-bottom: 0.5rem;
+                  @include kerbb-border-line-bottom();
+                  .locations-dropdown-header {
+                    color: $kerbb-color-dark;
+                    opacity: 0.5;
+                    font-weight: 500;
+                  }
+                }
+
+                .locations-dropdown-none-list-header {
+                  color: $kerbb-color-dark;
+                  opacity: 0.6;
+                  font-weight: 500;
+                }
+                .locations-dropdown-list {
+                  width: 100%;
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: flex-start;
+                  align-items: flex-start;
+                  .locations-dropdown-item {
+                    width: 100%;
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: flex-start;
+                    padding: 5px;
+                    cursor: pointer;
+                    &:hover {
+                      background-color: $kerbb-purple-light;
+                    }
+                    &:active {
+                      background-color: white;
+                    }
+                    .locations-dropdown-location {
+                      display: flex;
+                      flex-direction: row;
+                      justify-content: center;
+                      align-items: center;
+                      gap: 0.5rem;
+                      .locations-dropdown-location-icon-container {
+                        color: $kerbb-color-dark;
+                        opacity: 0.9;
+                      }
+                      .locations-dropdown-location-name-container {
+                        .locations-dropdown-location-name {
+                          color: $kerbb-color-dark;
+                          opacity: 0.9;
+                          font-weight: 500;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+              .search-history-dropdown-container {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                gap: 0.5rem;
+                .search-history-dropdown-header-container {
+                  width: 100%;
+                  padding-bottom: 0.5rem;
+                  @include kerbb-border-line-bottom();
+                  .search-history-dropdown-header {
+                    color: $kerbb-color-dark;
+                    opacity: 0.5;
+                    font-weight: 500;
+                  }
+                }
+                .search-history-dropdown-list {
+                  width: 100%;
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: flex-start;
+                  align-items: flex-start;
+                  .search-history-dropdown-item {
+                    width: 100%;
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: flex-start;
+                    padding: 5px;
+                    cursor: pointer;
+                    &:hover {
+                      background-color: $kerbb-purple-light;
+                    }
+                    &:active {
+                      background-color: white;
+                    }
+                    .search-history-dropdown-search-history {
+                      display: flex;
+                      flex-direction: row;
+                      justify-content: center;
+                      align-items: center;
+                      gap: 0.5rem;
+                      .search-history-dropdown-icon-container {
+                        color: $kerbb-color-dark;
+                        opacity: 0.9;
+                      }
+                      .search-history-dropdown-name-container {
+                        .search-history-dropdown-name {
+                          color: $kerbb-color-dark;
+                          opacity: 0.9;
+                          font-weight: 500;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          .search-form-where-autocomplete-dropdown-container {
+            display: none;
+          }
+        }
+        .search-form-button {
+          background-color: $kerbb-color-logo;
+          color: white;
+          width: 5%;
+          height: 2.5rem;
+          @include kerbb-border();
+          border-radius: 5px;
+          font-family: $kerbb-font-logo;
+          font-size: 12px;
+          transition: 0.1s ease-in-out;
+          cursor: pointer;
+          &:hover {
+            opacity: 0.7;
+          }
+          &:active {
+            opacity: 1;
+          }
+          @include media("<=tablet") {
+            width: 20%;
+          }
+        }
+      }
+    }
+    .filter-and-notification-container {
+      position: relative;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      .filter-icon-and-filters-live-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        .filter-icon-container {
+          position: relative;
+          transition: 0.1s ease-in-out;
+          cursor: pointer;
+          &:hover {
+            opacity: 0.7;
+          }
+          &:active {
+            opacity: 1;
+          }
+          .filter-icon {
+            transform: scale(0.8);
+            background-color: $kerbb-color-logo;
+            padding: 5px;
+            padding-bottom: 0;
+            border-radius: 5px;
+            color: white;
+          }
+        }
+        .filters-live-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          opacity: 0.9;
+          .filters-live-list {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.5rem;
+            opacity: 0;
+            pointer-events: none;
+            .filters-live-item {
+              color: $kerbb-color-logo;
+              display: flex;
+              flex-direction: row;
+              justify-content: space-around;
+              align-items: center;
+              .filters-live-item-icon {
+                transform: scale(0.8);
+                padding: 1px;
+              }
+              .filters-live-item-header {
+                font-size: 12px;
+              }
+            }
+          }
+        }
+      }
+      .notification-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        pointer-events: none;
+        opacity: 0;
+        .notification-icon-bell {
+          opacity: 0.5;
+          padding: 1px;
+          padding-bottom: 0;
+        }
+        .notification-icon-switch {
+          opacity: 0.5;
+          padding: 1px;
+          padding-bottom: 0;
+          transform: scale(0.9);
+        }
+        .notification-header {
+          color: $kerbb-color-dark;
+          font-size: 12px;
+          opacity: 0.9;
+        }
+      }
+    }
+  }
+  .search-page-in-navi-container {
+    top: -100%;
+    padding-top: 1rem;
+    position: sticky;
+    z-index: 15;
+    background-color: white;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+    gap: 1rem;
+    transition: 0.7s ease-in-out;
+    .info-container {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      .info-section-one {
+        .company-jobs-switch-container {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          gap: 0.1rem;
+          .switch-icon {
+            color: $kerbb-color-dark;
+            opacity: 0.7;
+            transform: scale(0.4);
+          }
+          .company-switch-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            color: $kerbb-color-dark;
+            cursor: pointer;
+
+            .company-switch-header {
+              opacity: 0.7;
+              font-size: 14px;
+            }
+          }
+          .company-switch-container-active {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            color: $kerbb-color-logo;
+            cursor: pointer;
+            .company-switch-icon {
+              opacity: 0.7;
+              transform: scale(0.4);
+            }
+            .company-switch-header {
+              opacity: 0.7;
+              font-size: 14px;
+            }
+          }
+          .job-switch-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            color: $kerbb-color-dark;
+            cursor: pointer;
+            .job-switch-header {
+              opacity: 0.7;
+              font-size: 14px;
+            }
+          }
+          .job-switch-container-active {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            color: $kerbb-color-logo;
+            cursor: pointer;
+            .job-switch-icon {
+              opacity: 0.7;
+              transform: scale(0.4);
+            }
+            .job-switch-header {
+              opacity: 0.7;
+              font-size: 14px;
+            }
+          }
+        }
+      }
+      .info-section-second {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        .info-jobs-container {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+          .jobs-count {
+            background-color: $kerbb-purple-light;
+            font-weight: bold;
+            color: $kerbb-color-logo;
+            padding: 5px 15px;
+            margin-right: 0.5rem;
+            border-radius: 20px;
+            font-size: 12px;
+          }
+          .jobs-header {
+            color: $kerbb-color-dark;
+            font-size: 12px;
+            opacity: 0.9;
+          }
+        }
+        .info-companies-container {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+          .companies-count {
+            background-color: $kerbb-purple-light;
+            color: $kerbb-color-logo;
+            font-weight: bold;
+            padding: 5px 15px;
+            margin-right: 0.5rem;
+            border-radius: 20px;
+            font-size: 12px;
+          }
+          .companies-header {
+            color: $kerbb-color-dark;
+            font-size: 12px;
+            opacity: 0.9;
+          }
+        }
+      }
+    }
+    .search-container {
+      width: 100%;
+      .search-form {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        @include media("<=tablet") {
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+        .search-form-what-container {
+          position: relative;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+          width: 45%;
+          height: auto;
+          padding: 0.5rem 1rem;
+          @include kerbb-border();
+          border-radius: 5px;
+          transition: 0.1s ease-in-out;
+          @include media("<=tablet") {
+            width: 100%;
+          }
+          &:focus-within {
+            @include kerbb-border-active();
+            .search-form-what-header-container {
+              color: $kerbb-color-logo;
+              font-size: 12px;
+              transition: 0.1s ease-in-out;
+            }
+          }
+          .search-form-what-header-container {
+            color: $kerbb-color-dark;
+            font-size: 12px;
+            transition: 0.1s ease-in-out;
+          }
+          input {
+            width: 60%;
+            border: none;
+            font-family: $kerbb-font-logo;
+            font-size: 12px;
+            letter-spacing: 1px;
+            &:focus {
+              outline: none;
+            }
+            &:focus ~ .search-form-what-icon-container {
+              color: $kerbb-color-logo;
+              opacity: 0.8;
+            }
+          }
+          .search-form-what-icon-container {
+            transition: 0.1s ease-in-out;
+            color: $kerbb-color-dark;
+            opacity: 0.8;
+          }
+          .search-form-what-icon-second-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: 0.1s ease-in-out;
+            color: $kerbb-color-logo;
+            opacity: 0.8;
+            cursor: pointer;
+            &:hover {
+              opacity: 0.5;
+            }
+            &:active {
+              opacity: 0.8;
+            }
+          }
+          .search-form-what-autocomplete-dropdown-container-active {
+            .search-form-what-autocomplete-dropdown-inner-container {
+              display: flex;
+              flex-direction: column;
+              justify-content: flex-start;
+              align-items: flex-start;
+              gap: 0.5rem;
+              padding: 1.5rem 0.5rem;
+              position: absolute;
+              top: 120%;
+              left: 0;
+              width: 100%;
+              background-color: white;
+              z-index: 15;
+              border-radius: 5px;
+              @include kerbb-border();
+              box-shadow: rgb(0 0 0 / 15%) 0px 2px 10px 0px;
+              transition: 0.1s ease-in-out;
+              .companies-dropdown-container {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                gap: 0.5rem;
+                .companies-dropdown-header-container {
+                  width: 100%;
+                  padding-bottom: 0.5rem;
+                  @include kerbb-border-line-bottom();
+                  .companies-dropdown-header {
+                    color: $kerbb-color-dark;
+                    opacity: 0.5;
+                    font-weight: 500;
+                  }
+                }
+
+                .companies-dropdown-none-list-header {
+                  color: $kerbb-color-dark;
+                  opacity: 0.6;
+                  font-weight: 500;
+                }
+                .companies-dropdown-list {
+                  width: 100%;
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: flex-start;
+                  align-items: flex-start;
+                  .companies-dropdown-item {
+                    width: 100%;
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: flex-start;
+                    padding: 5px;
+                    cursor: pointer;
+                    &:hover {
+                      background-color: $kerbb-purple-light;
+                    }
+                    &:active {
+                      background-color: white;
+                    }
+                    .companies-dropdown-company {
+                      display: flex;
+                      flex-direction: row;
+                      justify-content: center;
+                      align-items: center;
+                      gap: 0.5rem;
+                      .companies-dropdown-company-image-container {
+                        border-radius: 20px;
+                        width: 25px;
+                        height: 25px;
+                        img {
+                          border-radius: 20px;
+                          width: 25px;
+                          height: 25px;
+                        }
+                      }
+                      .companies-dropdown-company-name-container {
+                        .companies-dropdown-company-name {
+                          color: $kerbb-color-dark;
+                          opacity: 0.9;
+                          font-weight: 500;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+              .jobs-dropdown-container {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                gap: 0.5rem;
+                .jobs-dropdown-header-container {
+                  width: 100%;
+                  padding-bottom: 0.5rem;
+                  @include kerbb-border-line-bottom();
+                  .jobs-dropdown-header {
+                    color: $kerbb-color-dark;
+                    opacity: 0.5;
+                    font-weight: 500;
+                  }
+                }
+                .jobs-dropdown-none-list-header {
+                  color: $kerbb-color-dark;
+                  opacity: 0.6;
+                  font-weight: 500;
+                }
+                .jobs-dropdown-list {
+                  width: 100%;
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: flex-start;
+                  align-items: flex-start;
+                  .jobs-dropdown-item {
+                    width: 100%;
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: flex-start;
+                    padding: 5px;
+                    cursor: pointer;
+                    &:hover {
+                      background-color: $kerbb-purple-light;
+                    }
+                    &:active {
+                      background-color: white;
+                    }
+                    .jobs-dropdown-job {
+                      display: flex;
+                      flex-direction: row;
+                      justify-content: center;
+                      align-items: center;
+                      gap: 0.5rem;
+                      .jobs-dropdown-job-image-container {
+                        border-radius: 20px;
+                        width: 25px;
+                        height: 25px;
+                        img {
+                          border-radius: 20px;
+                          width: 25px;
+                          height: 25px;
+                        }
+                      }
+                      .jobs-dropdown-job-name-container {
+                        .jobs-dropdown-job-name {
+                          color: $kerbb-color-dark;
+                          opacity: 0.9;
+                          font-weight: 500;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+              .search-history-dropdown-container {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                gap: 0.5rem;
+                .search-history-dropdown-header-container {
+                  width: 100%;
+                  padding-bottom: 0.5rem;
+                  @include kerbb-border-line-bottom();
+                  .search-history-dropdown-header {
+                    color: $kerbb-color-dark;
+                    opacity: 0.5;
+                    font-weight: 500;
+                  }
+                }
+                .search-history-dropdown-list {
+                  width: 100%;
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: flex-start;
+                  align-items: flex-start;
+                  .search-history-dropdown-item {
+                    width: 100%;
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: flex-start;
+                    padding: 5px;
+                    cursor: pointer;
+                    &:hover {
+                      background-color: $kerbb-purple-light;
+                    }
+                    &:active {
+                      background-color: white;
+                    }
+                    .search-history-dropdown-search-history {
+                      display: flex;
+                      flex-direction: row;
+                      justify-content: center;
+                      align-items: center;
+                      gap: 0.5rem;
+                      .search-history-dropdown-icon-container {
+                        color: $kerbb-color-dark;
+                        opacity: 0.9;
+                      }
+                      .search-history-dropdown-name-container {
+                        .search-history-dropdown-name {
+                          color: $kerbb-color-dark;
+                          opacity: 0.9;
+                          font-weight: 500;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+
+              .arrow-container {
+                display: none;
+              }
+            }
+            .search-form-what-autocomplete-dropdown-loader {
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              gap: 0.5rem;
+              padding: 1.5rem 0.5rem;
+              position: absolute;
+              top: 120%;
+              left: 0;
+              min-height: 580px;
+              width: 100%;
+              background-color: white;
+              z-index: 15;
+              border-radius: 5px;
+              @include kerbb-border();
+              box-shadow: rgb(0 0 0 / 15%) 0px 2px 10px 0px;
+            }
+          }
+          .search-form-what-autocomplete-dropdown-container {
+            display: none;
+          }
+        }
+
+        .search-form-where-container {
+          position: relative;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+          width: 45%;
+          height: auto;
+          padding: 0.5rem 1rem;
+          @include kerbb-border();
+          border-radius: 5px;
+          @include media("<=tablet") {
+            width: 100%;
+          }
+          transition: 0.1s ease-in-out;
+          &:focus-within {
+            @include kerbb-border-active();
+            .search-form-where-header-container {
+              color: $kerbb-color-logo;
+              font-size: 12px;
+              transition: 0.1s ease-in-out;
+            }
+          }
+          .search-form-where-header-container {
+            color: $kerbb-color-dark;
+            font-size: 12px;
+            transition: 0.1s ease-in-out;
+          }
+          input {
+            width: 60%;
+            border: none;
+            font-family: $kerbb-font-logo;
+            font-size: 12px;
+            letter-spacing: 1px;
+            &:focus {
+              outline: none;
+            }
+            &:focus ~ .search-form-where-icon-container {
+              color: $kerbb-color-logo;
+              opacity: 0.8;
+            }
+          }
+          .search-form-where-icon-container {
+            transition: 0.1s ease-in-out;
+            color: $kerbb-color-dark;
+            opacity: 0.8;
+          }
+          .search-form-where-icon-second-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: 0.1s ease-in-out;
+            color: $kerbb-color-logo;
+            opacity: 0.8;
+            cursor: pointer;
+            &:hover {
+              opacity: 0.5;
+            }
+            &:active {
+              opacity: 0.8;
+            }
+          }
+          .search-form-where-autocomplete-dropdown-container-active {
+            .search-form-where-autocomplete-dropdown-inner-container {
+              display: flex;
+              flex-direction: column;
+              justify-content: flex-start;
+              align-items: flex-start;
+              gap: 0.5rem;
+              padding: 1.5rem 0.5rem;
+              position: absolute;
+              top: 120%;
+              left: 0;
+              width: 100%;
+              background-color: white;
+              z-index: 15;
+              border-radius: 5px;
+              @include kerbb-border();
+              box-shadow: rgb(0 0 0 / 15%) 0px 2px 10px 0px;
+              transition: 0.1s ease-in-out;
+              .locations-dropdown-container {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                gap: 0.5rem;
+                .locations-dropdown-header-container {
+                  width: 100%;
+                  padding-bottom: 0.5rem;
+                  @include kerbb-border-line-bottom();
+                  .locations-dropdown-header {
+                    color: $kerbb-color-dark;
+                    opacity: 0.5;
+                    font-weight: 500;
+                  }
+                }
+
+                .locations-dropdown-none-list-header {
+                  color: $kerbb-color-dark;
+                  opacity: 0.6;
+                  font-weight: 500;
+                }
+                .locations-dropdown-list {
+                  width: 100%;
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: flex-start;
+                  align-items: flex-start;
+                  .locations-dropdown-item {
+                    width: 100%;
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: flex-start;
+                    padding: 5px;
+                    cursor: pointer;
+                    &:hover {
+                      background-color: $kerbb-purple-light;
+                    }
+                    &:active {
+                      background-color: white;
+                    }
+                    .locations-dropdown-location {
+                      display: flex;
+                      flex-direction: row;
+                      justify-content: center;
+                      align-items: center;
+                      gap: 0.5rem;
+                      .locations-dropdown-location-icon-container {
+                        color: $kerbb-color-dark;
+                        opacity: 0.7;
+                      }
+                      .locations-dropdown-location-name-container {
+                        .locations-dropdown-location-name {
+                          color: $kerbb-color-dark;
+                          opacity: 0.9;
+                          font-weight: 500;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+              .search-history-dropdown-container {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                gap: 0.5rem;
+                .search-history-dropdown-header-container {
+                  width: 100%;
+                  padding-bottom: 0.5rem;
+                  @include kerbb-border-line-bottom();
+                  .search-history-dropdown-header {
+                    color: $kerbb-color-dark;
+                    opacity: 0.5;
+                    font-weight: 500;
+                  }
+                }
+                .search-history-dropdown-list {
+                  width: 100%;
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: flex-start;
+                  align-items: flex-start;
+                  .search-history-dropdown-item {
+                    width: 100%;
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: flex-start;
+                    padding: 5px;
+                    cursor: pointer;
+                    &:hover {
+                      background-color: $kerbb-purple-light;
+                    }
+                    &:active {
+                      background-color: white;
+                    }
+                    .search-history-dropdown-search-history {
+                      display: flex;
+                      flex-direction: row;
+                      justify-content: center;
+                      align-items: center;
+                      gap: 0.5rem;
+                      .search-history-dropdown-icon-container {
+                        color: $kerbb-color-dark;
+                        opacity: 0.9;
+                      }
+                      .search-history-dropdown-name-container {
+                        .search-history-dropdown-name {
+                          color: $kerbb-color-dark;
+                          opacity: 0.9;
+                          font-weight: 500;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          .search-form-where-autocomplete-dropdown-container {
+            display: none;
+          }
+        }
+        .search-form-button {
+          background-color: $kerbb-color-logo;
+          color: white;
+          width: 5%;
+          height: 2.5rem;
+          @include kerbb-border();
+          border-radius: 5px;
+          font-family: $kerbb-font-logo;
+          font-size: 12px;
+          transition: 0.1s ease-in-out;
+          cursor: pointer;
+          &:hover {
+            opacity: 0.7;
+          }
+          &:active {
+            opacity: 1;
+          }
+          @include media("<=tablet") {
+            width: 20%;
+          }
+        }
+      }
+    }
+    .filter-and-notification-container {
+      position: relative;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+
+      .filter-icon-and-filters-live-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        .filter-icon {
+          transform: scale(0.8);
+          background-color: $kerbb-color-logo;
+          padding: 5px;
+          padding-bottom: 0;
+          border-radius: 5px;
+          color: white;
+          cursor: pointer;
+          &:hover {
+            opacity: 0.9;
+          }
+        }
+        .filters-live-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          opacity: 0.9;
+          .filters-live-list {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.5rem;
+            .filters-live-item {
+              color: $kerbb-color-logo;
+              display: flex;
+              flex-direction: row;
+              justify-content: space-around;
+              align-items: center;
+              .filters-live-item-icon {
+                transform: scale(0.8);
+                padding: 1px;
+              }
+              .filters-live-item-header {
+                font-size: 12px;
+              }
+            }
+          }
+        }
+      }
+      .notification-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        pointer-events: none;
+        opacity: 0;
+        .notification-icon-bell {
+          opacity: 0.5;
+          padding: 1px;
+          padding-bottom: 0;
+        }
+        .notification-icon-switch {
+          opacity: 0.5;
+          padding: 1px;
+          padding-bottom: 0;
+          transform: scale(0.9);
+        }
+        .notification-header {
+          color: $kerbb-color-dark;
+          font-size: 12px;
+          opacity: 0.9;
+        }
+      }
+    }
+  }
+  .skeleton-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    padding-bottom: 2rem;
+    @include media("<=m-table") {
+      grid-template-columns: 1fr;
+    }
+  }
+  .jobs-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    @include media("<=m-table") {
+      grid-template-columns: 1fr;
+    }
+  }
+  .jobs-container-empty {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    opacity: 0.9;
+    .empty {
+      display: none;
+    }
+    .empty-icon-container {
+      transform: scale(1.5);
+      color: $kerbb-color-logo;
+      opacity: 0.8;
+    }
+    .empty-header {
+      color: $kerbb-color-dark;
+      .empty-header-input-what {
+        color: $kerbb-color-logo;
+      }
+      .empty-header-input-where {
+        color: $kerbb-color-logo;
+      }
+    }
+    .empty-paragrahp {
+      color: $kerbb-color-dark;
+    }
+  }
+  .companies-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    @include media("<=m-table") {
+      grid-template-columns: 1fr;
+    }
+  }
+  .companies-container-empty {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .notification-backdrop-container {
+    height: 15rem;
+    width: 40rem;
+    background-color: $kerbb-purple-light;
+    border-radius: 5px;
+  }
+  .loader-container {
+    min-height: 80px;
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 0.5rem 0rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    .loader-active {
+      display: inline-block;
+    }
+    .loader {
+      display: none;
+    }
+    .seen-all-container {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      .seen-all {
+        color: $kerbb-color-logo;
+        opacity: 0.7;
+      }
+    }
+  }
+}

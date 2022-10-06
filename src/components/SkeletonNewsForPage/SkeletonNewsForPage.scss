@@ -1,0 +1,44 @@
+@import "../../common/global";
+@import "../../common/fonts";
+@import "../../common/responsive";
+
+.skeleton-news-for-page {
+  min-height: 210px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 1rem;
+  padding-bottom: 2rem;
+  @include kerbb-border-line-bottom();
+  .skeleton-news-for-page-info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    .skeleton-news-for-page-info-header-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      .skeleton-news-for-page-info-header-first{
+        width: 100%;
+      }
+      .skeleton-news-for-page-info-header-second{
+        width: 40%;
+      }
+    }
+    .skeleton-news-for-page-info-content-container{
+        width: 100%;
+        height: 70px;
+    }
+    .skeleton-news-for-page-info-settings-container{
+        width: 100%;
+    }
+  }
+  .skeleton-news-for-page-image-container{
+    width: 100%;
+    height: 150px;
+  }
+}

@@ -1,0 +1,75 @@
+@import '../../common/global';
+@import '../../common/fonts';
+
+.companies-page {
+  width: 60%;
+  margin-left: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .companies-page-container {
+    width: 90%;
+    height: 95vh;
+    margin-top: 5vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    .companies-page-header-container {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      .companies-page-header {
+        color: $kerbb-color-dark;
+        opacity: 0.9;
+      }
+    }
+    .companies-page-companies-container {
+      overflow-y: scroll;
+      height: 100%;
+      width: 90%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5%;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+    .companies-page-search-container {
+      width: 90%;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      .companies-page-search-inner-container {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 45%;
+        height: 3rem;
+        padding: 0 1rem;
+        @include kerbb-border();
+        border-radius: 5px;
+        input {
+          width: 60%;
+          border: none;
+          font-family: $kerbb-font-logo;
+          letter-spacing: 1px;
+          &:focus {
+            outline: none;
+          }
+        }
+        .companies-page-search-input-icon-container {
+          color: $kerbb-color-dark;
+          opacity: 0.8;
+        }
+      }
+    }
+  }
+}

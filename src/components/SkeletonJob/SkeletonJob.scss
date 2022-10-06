@@ -1,0 +1,56 @@
+@import "../../common/global";
+@import "../../common/fonts";
+@import "../../common/responsive";
+
+.skeleton-job {
+  height: 130px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  .skeleton-header-image-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 0.5rem;
+    .skeleton-image-container {
+      height: 50px;
+      width: 50px;
+    }
+    .skeleton-header-container {
+      height: 40px;
+      width: 30%;
+      margin-top: -7px;
+    }
+  }
+  .skeleton-job-title-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    .skeleton-job-title {
+      height: 30px;
+      width: 65%;
+    }
+  }
+  .skeleton-info-button-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 5%;
+    .skeleton-info-container {
+      height: 30px;
+      width: 75%;
+    }
+    .skeleton-button-container {
+      height: 40px;
+      width: 30%;
+    }
+  }
+}

@@ -1,0 +1,107 @@
+@import "../../common/colors";
+@import "../../common/fonts";
+@import "../../common/global";
+@import "../../common/responsive";
+
+.navbar-side-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  height: 100%;
+  @include media(">side-navbar") {
+    width: 6.5rem;
+  }
+  ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-end;
+    gap: 2rem;
+  }
+  .logo-container {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    .logo-header {
+      color: $kerbb-color-logo;
+    }
+    .logo {
+      position: absolute;
+      top: 5px;
+      right: -10px;
+      height: 20px;
+      width: 20px;
+      border-right: 3px solid $kerbb-color-logo;
+      border-top: 3px solid $kerbb-color-logo;
+    }
+    @include media("<=side-navbar") {
+      .logo-header {
+        display: none;
+      }
+      .logo {
+        position: absolute;
+        top: 5px;
+        right: -10px;
+        height: 25px;
+        width: 25px;
+        border-right: 3px solid $kerbb-color-logo;
+        border-top: 3px solid $kerbb-color-logo;
+      }
+    }
+  }
+  .logo-lined {
+    position: absolute;
+    top: 1rem;
+    right: -1rem;
+    height: 50px;
+    width: 50px;
+    .first-line {
+      position: absolute;
+      top: 0;
+      right: 0;
+      border: 3px solid $kerbb-color-logo;
+      border-top-right-radius: 5px;
+      width: 100%;
+    }
+    .second-line {
+      top: 1.5rem;
+      right: -1.5rem;
+      position: absolute;
+      border: 3px solid $kerbb-color-logo;
+      border-top-right-radius: 5px;
+      width: 100%;
+      transform: rotate(-90deg);
+    }
+  }
+  .navbar-side-items {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .navbar-side-item-active {
+      color: $kerbb-color-logo;
+      transform: scale(1);
+      transition: 0.1s ease-in-out;
+      &:hover {
+        opacity: 0.7;
+      }
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+    .navbar-side-item {
+      opacity: 0.6;
+      color: $kerbb-color-dark;
+      transform: scale(1);
+      transition: 0.1s ease-in-out;
+      &:hover {
+        opacity: 0.5;
+      }
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+  }
+}

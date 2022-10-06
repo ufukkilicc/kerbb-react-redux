@@ -1,0 +1,33 @@
+@import "../../common/global";
+@import "../../common/fonts";
+@import "../../common/colors";
+@import "../../common/responsive";
+
+.top-mobile-navi-container {
+  width: 100%;
+  height: 50px;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 1rem;
+  z-index: 99;
+  @include kerbb-border-line-bottom();
+  .top-mobile-navi-logo-container {
+    position: relative;
+    .logo-header {
+      color: $kerbb-color-logo;
+      font-size: 1.5rem;
+    }
+    .logo {
+      position: absolute;
+      top: 3px;
+      right: -7px;
+      height: 15px;
+      width: 15px;
+      border-right: 2px solid $kerbb-color-logo;
+      border-top: 2px solid $kerbb-color-logo;
+    }
+  }
+}

@@ -1,0 +1,89 @@
+@import "../../common/global";
+@import "../../common/fonts";
+@import "../../common/colors";
+
+.company-job {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  border-radius: 5px;
+  width: 50%;
+  padding: 10px;
+  &:hover {
+    background-color: $kerbb-purple-light;
+  }
+  .company-job-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    .company-job-header-and-icon-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      .company-job-header-container {
+        .company-job-header {
+          color: $kerbb-color-dark;
+          font-size: 14px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: block;
+          display: -webkit-box;
+          display: -moz-box;
+          line-height: normal;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          -moz-line-clamp: 2;
+          min-height: 42px;
+        }
+      }
+
+      .company-job-icon-container {
+        color: $kerbb-color-dark;
+        opacity: 0.8;
+        transform: scale(0.6);
+        color: $kerbb-color-logo;
+      }
+    }
+    .company-location-and-date-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: space-between;
+      margin-left: -7px;
+      .company-location-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        .company-location {
+          color: $kerbb-color-dark;
+          opacity: 0.8;
+          font-size: 12px;
+        }
+        .company-location-icon-container {
+          color: $kerbb-color-dark;
+          opacity: 0.8;
+          transform: scale(0.3);
+        }
+      }
+      .company-date-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        .company-date {
+          color: $kerbb-color-dark;
+          opacity: 0.8;
+          font-size: 12px;
+        }
+        .company-date-icon-container {
+          color: $kerbb-color-dark;
+          opacity: 0.8;
+          transform: scale(0.3);
+        }
+      }
+    }
+  }
+}

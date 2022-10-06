@@ -1,0 +1,106 @@
+@import "../../common/global";
+@import "../../common/fonts";
+@import "../../common/colors";
+
+.job-filter {
+  position: relative;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  cursor: context-menu;
+  .job-filters-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1rem;
+    .job-category-filter-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 0.5rem;
+      .category-filter-header-container {
+        .category-filter-header {
+          color: $kerbb-color-dark;
+          opacity: 0.9;
+        }
+      }
+      .job-category-filter {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        .job-category {
+          color: $kerbb-color-dark;
+          cursor: pointer;
+        }
+      }
+    }
+    .job-size-filter-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 0.5rem;
+      .size-filter-header-container {
+        .size-filter-header {
+          color: $kerbb-color-dark;
+          opacity: 0.9;
+        }
+      }
+      .job-size-filter {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        .job-size {
+          color: $kerbb-color-dark;
+          cursor: pointer;
+        }
+      }
+    }
+    .job-color-filter-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 0.5rem;
+      .color-filter-header-container {
+        .color-filter-header {
+          color: $kerbb-color-dark;
+          opacity: 0.9;
+        }
+      }
+      .job-color-filter {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        .job-color {
+          color: $kerbb-color-dark;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  .first-line {
+    position: absolute;
+    height: 3rem;
+    top: -25px;
+    right: 25px;
+    border: 1px solid $kerbb-color-logo;
+    border-top-left-radius: 5px;
+    transform: rotate(90deg);
+  }
+  .second-line {
+    border: 1px solid $kerbb-color-logo;
+    border-top-right-radius: 5px;
+    position: absolute;
+    height: 3rem;
+    top: 0rem;
+    right: 0;
+  }
+}

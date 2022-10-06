@@ -1,0 +1,586 @@
+@import "../../common/global";
+@import "../../common/fonts";
+@import "../../common/responsive";
+
+.company-detail-page-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+  gap: 1rem;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  @include media("<=tablet") {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+
+  scroll-behavior: smooth;
+  .company-detail-page-navi-active {
+    padding-top: 1rem;
+    position: sticky;
+    top: 0%;
+    z-index: 3;
+    background-color: white;
+    border-radius: 5px;
+    width: 100%;
+    height: 20rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    transition: 1s ease-in-out;
+    @include media("<=m-phone") {
+      padding: 1rem 1rem;
+    }
+    .company-info-container {
+      border-radius: 5px;
+      position: relative;
+      width: 100%;
+      height: 20rem;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: flex-end;
+      // @include kerbb-border-line-bottom();
+      .company-title-and-logo-image-container {
+        width: 100%;
+        z-index: 1;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: flex-end;
+        .company-info-logo-image-container {
+          border-radius: 5px;
+          height: 100px;
+          width: 100px;
+          img {
+            border-top: 5px solid white;
+            border-right: 5px solid white;
+            border-top-right-radius: 5px;
+            height: 100px;
+            width: 100px;
+          }
+        }
+        .company-info-title-container {
+          width: 100%;
+          background-color: white;
+          padding-left: 0.5rem;
+          .company-title {
+            position: relative;
+            color: $kerbb-color-dark;
+            opacity: 0.9;
+            @include media("<=m-phone") {
+              font-size: 1.5rem;
+            }
+            .company-approve-container-active {
+              display: inline-block;
+              top: -5px;
+              right: -5px;
+              color: $kerbb-color-logo;
+              opacity: 0.9;
+            }
+            .company-approve-container {
+              display: none;
+            }
+            .company-job-count {
+              color: $kerbb-color-logo;
+              opacity: 0.9;
+              right: -25px;
+              top: -5px;
+              font-size: 16px;
+            }
+          }
+        }
+      }
+      .company-info-cover-image-container {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 5px;
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: 5px;
+          object-fit: cover;
+        }
+      }
+      .company-settings-container {
+        transform: scale(1.1);
+        position: absolute;
+        top: 0;
+        right: 5px;
+        @include media("<=m-phone") {
+          top: 10px;
+        }
+        .company-settings-icon-container {
+          color: $kerbb-color-dark;
+          opacity: 0.7;
+          cursor: pointer;
+          &:hover {
+            opacity: 0.5;
+          }
+          &:active {
+            opacity: 0.7;
+          }
+        }
+        .company-settings-dropdown-active {
+          display: inline-block;
+          position: absolute;
+          background-color: white;
+          top: 100%;
+          right: 0;
+          border-radius: 5px;
+          padding-top: 5px;
+          padding-bottom: 5px;
+          box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px,
+            rgb(209, 213, 219) 0px 0px 0px 1px inset;
+          animation: dropdown 0.1s ease-in-out;
+          @keyframes dropdown {
+            0% {
+              opacity: 0;
+            }
+            100% {
+              opacity: 1;
+            }
+          }
+          .company-settings-dropdown-list {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            .company-settings-dropdown-item {
+              display: flex;
+              flex-direction: row;
+              justify-content: center;
+              align-items: center;
+              gap: 5px;
+              padding-left: 10px;
+              padding-right: 50px;
+              cursor: pointer;
+              &:hover {
+                opacity: 0.8;
+              }
+              &:active {
+                opacity: 1;
+              }
+              .company-settings-dropdown-item-icon-container {
+                color: $kerbb-color-dark;
+                opacity: 0.6;
+              }
+              .company-settings-dropdown-item-header-container {
+                .company-settings-dropdown-item-header {
+                  color: $kerbb-color-dark;
+                  opacity: 1;
+                  font-size: 12px;
+                  font-weight: 400;
+                }
+              }
+            }
+          }
+        }
+        .company-settings-dropdown {
+          display: none;
+        }
+      }
+    }
+
+    // COMPANY FEATURES CONTAINER
+    .company-features-container {
+      width: 100%;
+      @include kerbb-border-line-bottom();
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      @include media("<=m-phone") {
+        margin: 0rem 0rem;
+      }
+      .company-features {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 2rem;
+        .company-feature {
+          //   border-bottom: 1px solid $kerbb-color-logo;
+          color: $kerbb-color-dark;
+          opacity: 0.9;
+          padding: 0.3rem 0;
+          cursor: pointer;
+        }
+        .company-feature-active {
+          color: $kerbb-color-dark;
+          opacity: 0.9;
+          padding: 0.3rem 0;
+          border-bottom: 2px solid;
+          cursor: pointer;
+        }
+      }
+    }
+    // SEARCHBAR CONTAINER
+    .company-search-container {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      .company-search-inner-container {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 45%;
+        height: 3rem;
+        padding: 0 1rem;
+        @include kerbb-border();
+        border-radius: 5px;
+        input {
+          width: 60%;
+          border: none;
+          font-family: $kerbb-font-logo;
+          letter-spacing: 1px;
+          &:focus {
+            outline: none;
+          }
+        }
+        .company-search-input-icon-container {
+          color: $kerbb-color-dark;
+          opacity: 0.8;
+        }
+      }
+    }
+    .filter-icon-container {
+      transition: 0.1s ease-in-out;
+      @include media("<=m-phone") {
+        padding: 0 0rem;
+      }
+      cursor: pointer;
+      &:hover {
+        opacity: 0.7;
+      }
+      &:active {
+        opacity: 1;
+      }
+      .filter-icon {
+        transform: scale(0.8);
+        padding: 5px;
+        padding-bottom: 0;
+        border-radius: 5px;
+        color: white;
+      }
+    }
+  }
+  .company-detail-page-navi {
+    padding-top: 1rem;
+    position: sticky;
+    top: -100%;
+    z-index: 3;
+    background-color: white;
+    border-radius: 5px;
+    width: 100%;
+    height: 20rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    transition: 1s ease-in-out;
+    @include media("<=m-phone") {
+      padding: 1rem 1rem;
+    }
+    .company-info-container {
+      border-radius: 5px;
+      position: relative;
+      width: 100%;
+      height: 20rem;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: flex-end;
+      // @include kerbb-border-line-bottom();
+      .company-title-and-logo-image-container {
+        width: 100%;
+        z-index: 1;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: flex-end;
+        .company-info-logo-image-container {
+          border-radius: 5px;
+          height: 100px;
+          width: 100px;
+          img {
+            border-top: 5px solid white;
+            border-right: 5px solid white;
+            border-top-right-radius: 5px;
+            height: 100px;
+            width: 100px;
+          }
+        }
+        .company-info-title-container {
+          width: 100%;
+          background-color: white;
+          padding-left: 0.5rem;
+          .company-title {
+            position: relative;
+            color: $kerbb-color-dark;
+            opacity: 0.9;
+            @include media("<=m-phone") {
+              font-size: 1.5rem;
+            }
+            .company-approve-container-active {
+              display: inline-block;
+              top: -5px;
+              right: -5px;
+              color: $kerbb-color-logo;
+              opacity: 0.9;
+            }
+            .company-approve-container {
+              display: none;
+            }
+            .company-job-count {
+              color: $kerbb-color-logo;
+              opacity: 0.9;
+              right: -25px;
+              top: -5px;
+              font-size: 16px;
+            }
+          }
+        }
+      }
+      .company-info-cover-image-container {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 5px;
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: 5px;
+          object-fit: cover;
+        }
+      }
+      .company-settings-container {
+        transform: scale(1.1);
+        position: absolute;
+        top: 0;
+        right: 5px;
+        @include media("<=m-phone") {
+          top: 10px;
+        }
+        .company-settings-icon-container {
+          color: $kerbb-color-dark;
+          opacity: 0.7;
+          cursor: pointer;
+          &:hover {
+            opacity: 0.5;
+          }
+          &:active {
+            opacity: 0.7;
+          }
+        }
+        .company-settings-dropdown-active {
+          display: inline-block;
+          position: absolute;
+          background-color: white;
+          top: 100%;
+          right: 0;
+          border-radius: 5px;
+          padding-top: 5px;
+          padding-bottom: 5px;
+          box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px,
+            rgb(209, 213, 219) 0px 0px 0px 1px inset;
+          animation: dropdown 0.1s ease-in-out;
+          @keyframes dropdown {
+            0% {
+              opacity: 0;
+            }
+            100% {
+              opacity: 1;
+            }
+          }
+          .company-settings-dropdown-list {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            .company-settings-dropdown-item {
+              display: flex;
+              flex-direction: row;
+              justify-content: center;
+              align-items: center;
+              gap: 5px;
+              padding-left: 10px;
+              padding-right: 50px;
+              cursor: pointer;
+              &:hover {
+                opacity: 0.8;
+              }
+              &:active {
+                opacity: 1;
+              }
+              .company-settings-dropdown-item-icon-container {
+                color: $kerbb-color-dark;
+                opacity: 0.6;
+              }
+              .company-settings-dropdown-item-header-container {
+                .company-settings-dropdown-item-header {
+                  color: $kerbb-color-dark;
+                  opacity: 1;
+                  font-size: 12px;
+                  font-weight: 400;
+                }
+              }
+            }
+          }
+        }
+        .company-settings-dropdown {
+          display: none;
+        }
+      }
+    }
+
+    // COMPANY FEATURES CONTAINER
+    .company-features-container {
+      width: 100%;
+      @include kerbb-border-line-bottom();
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      @include media("<=m-phone") {
+        margin: 0rem 0rem;
+      }
+      .company-features {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 2rem;
+        .company-feature {
+          //   border-bottom: 1px solid $kerbb-color-logo;
+          color: $kerbb-color-dark;
+          opacity: 0.9;
+          padding: 0.3rem 0;
+          cursor: pointer;
+        }
+        .company-feature-active {
+          color: $kerbb-color-dark;
+          opacity: 0.9;
+          padding: 0.3rem 0;
+          border-bottom: 2px solid $kerbb-color-logo;
+          cursor: pointer;
+        }
+      }
+    }
+    // SEARCHBAR CONTAINER
+    .company-search-container {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      .company-search-inner-container {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 45%;
+        height: 3rem;
+        padding: 0 1rem;
+        @include kerbb-border();
+        border-radius: 5px;
+        input {
+          width: 60%;
+          border: none;
+          font-family: $kerbb-font-logo;
+          letter-spacing: 1px;
+          &:focus {
+            outline: none;
+          }
+        }
+        .company-search-input-icon-container {
+          color: $kerbb-color-dark;
+          opacity: 0.8;
+        }
+      }
+    }
+    .filter-icon-container {
+      transition: 0.1s ease-in-out;
+      @include media("<=m-phone") {
+        padding: 0 0rem;
+      }
+      cursor: pointer;
+      &:hover {
+        opacity: 0.7;
+      }
+      &:active {
+        opacity: 1;
+      }
+      .filter-icon {
+        transform: scale(0.8);
+        background-color: $kerbb-color-logo;
+        padding: 5px;
+        padding-bottom: 0;
+        border-radius: 5px;
+        color: white;
+      }
+    }
+  }
+  .company-skeleton-jobs-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  .company-jobs-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    @include media("<=m-table") {
+      grid-template-columns: 1fr;
+    }
+    @include media("<=m-phone") {
+      padding: 0 1rem;
+    }
+  }
+  .loader-container {
+    min-height: 80px;
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 0.5rem 0rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    .loader-active {
+      display: inline-block;
+    }
+    .loader {
+      display: none;
+    }
+    .seen-all-container {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      .seen-all {
+        color: $kerbb-color-logo;
+        opacity: 0.7;
+      }
+    }
+  }
+}

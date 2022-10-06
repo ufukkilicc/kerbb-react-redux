@@ -1,0 +1,6 @@
+make.exe --dry-run --always-make --keep-going --print-directory
+make.exe: Entering directory 'c:/Users/ufukk/Desktop/Coding Projects/Kerbb/kerbb-react-redux'
+docker build -t kerbb-main-dev -f Dockerfile.dev .
+ 
+make.exe: Leaving directory 'c:/Users/ufukk/Desktop/Coding Projects/Kerbb/kerbb-react-redux'
+ 

@@ -1,0 +1,367 @@
+@import "../../common/global";
+@import "../../common/colors";
+@import "../../common/fonts";
+@import "../../common/responsive";
+
+.side-info-bar-container {
+  height: 100vh;
+  width: 100%;
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 3rem;
+  padding-bottom: 1rem;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  .latest-news-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 1rem;
+    max-width: 100%;
+    .latest-news-header-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: flex-start;
+      .latest-news-icon-container {
+        transform: scale(0.5);
+        color: $kerbb-color-logo;
+        margin-top: -3px;
+      }
+      .latest-news-header {
+        opacity: 0.9;
+        color: $kerbb-color-dark;
+        font-size: 12px;
+      }
+    }
+    .latest-news-list {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      gap: 0.5rem;
+      a {
+        color: $kerbb-color-dark;
+      }
+      .latest-news-item {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 0.3rem;
+        .latest-news-item-publisher-container {
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-start;
+          align-items: center;
+          gap: 0.5rem;
+          .latest-news-item-publisher-image-container {
+            border-radius: 25px;
+            height: 30px;
+            width: 30px;
+            &:hover {
+              opacity: 0.7;
+            }
+            &:active {
+              opacity: 1;
+            }
+            img {
+              border-radius: 25px;
+              height: 30px;
+              width: 30px;
+            }
+          }
+          .latest-news-item-publisher-name-container {
+            .latest-news-item-publisher-name {
+              color: $kerbb-color-dark;
+              opacity: 0.9;
+              font-size: 12px;
+              &:hover {
+                opacity: 0.7;
+              }
+              &:active {
+                opacity: 1;
+              }
+            }
+          }
+        }
+        .latest-news-item-header {
+          font-size: 13px;
+          transition: 0.1s ease-in-out;
+          &:hover {
+            opacity: 0.7;
+          }
+          &:active {
+            opacity: 1;
+          }
+        }
+        .latest-news-item-info {
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-start;
+          align-items: center;
+          color: $kerbb-color-dark;
+          opacity: 0.5;
+          display: none;
+          .latest-news-item-icon-container {
+            transform: scale(0.3);
+          }
+        }
+      }
+    }
+    .latest-news-see-all-container {
+      opacity: 0.9;
+      .see-all {
+        color: $kerbb-color-logo;
+        font-size: 11px;
+        transition: 0.1s ease-in-out;
+        &:hover {
+          opacity: 0.7;
+        }
+        &:active {
+          opacity: 1;
+        }
+      }
+    }
+  }
+  .latest-news-container-display-none {
+    display: none;
+  }
+
+  .latest-jobs-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 1rem;
+    max-width: 100%;
+    .latest-jobs-header-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: flex-start;
+      .latest-jobs-icon-container {
+        transform: scale(0.5);
+        color: $kerbb-color-logo;
+        margin-top: -3px;
+      }
+      .latest-jobs-header {
+        opacity: 0.9;
+        color: $kerbb-color-dark;
+        font-size: 12px;
+      }
+    }
+    .latest-jobs-list {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      gap: 1.5rem;
+      .latest-jobs-item {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 5px;
+        .latest-jobs-item-company-container {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          gap: 0.5rem;
+          .latest-jobs-item-company-image-container {
+            height: 25px;
+            width: 25px;
+            border-radius: 20px;
+            transition: 0.1s ease-in-out;
+            &:hover {
+              opacity: 0.7;
+            }
+            &:active {
+              opacity: 1;
+            }
+            img {
+              height: 25px;
+              width: 25px;
+              border-radius: 20px;
+            }
+          }
+          .latest-jobs-item-company-header-container {
+            transition: 0.1s ease-in-out;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            &:hover {
+              opacity: 0.7;
+            }
+            &:active {
+              opacity: 1;
+            }
+            .latest-jobs-item-company-header {
+              opacity: 0.9;
+              color: $kerbb-color-dark;
+              font-size: 12px;
+            }
+            .latest-jobs-item-company-approve-container-active {
+              display: inline-block;
+              color: $kerbb-color-logo;
+              transform: scale(0.6);
+              font-size: 0.5rem;
+              margin-left: -2px;
+            }
+            .latest-jobs-item-company-approve-container {
+              display: none;
+            }
+          }
+        }
+        .latest-jobs-item-job-container {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: flex-end;
+          gap: 1rem;
+          .latest-jobs-item-header-container {
+            .latest-jobs-item-header {
+              font-size: 13px;
+            }
+          }
+          .latest-jobs-item-job-link-container {
+            transition: 0.1s ease-in-out;
+            &:hover {
+              opacity: 0.7;
+            }
+            &:active {
+              opacity: 1;
+            }
+            .latest-jobs-item-job-link-header {
+              opacity: 0.9;
+              color: $kerbb-color-logo;
+              font-size: 11px;
+            }
+          }
+        }
+      }
+    }
+    .latest-jobs-see-all-container {
+      opacity: 0.9;
+      .see-all {
+        color: $kerbb-color-logo;
+        font-size: 11px;
+      }
+    }
+  }
+  .latest-searches-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 1rem;
+    max-width: 100%;
+    .latest-searches-header-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: flex-start;
+      .latest-searches-icon-container {
+        transform: scale(0.5);
+        color: $kerbb-color-logo;
+        margin-top: -3px;
+      }
+      .latest-searches-header {
+        opacity: 0.9;
+        color: $kerbb-color-dark;
+        font-size: 12px;
+      }
+    }
+    .latest-searches-list {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      gap: 0.5rem;
+      padding-left: 1rem;
+      .latest-searches-item {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        opacity: 0.9;
+        .latest-searches-item-icon-container {
+          transform: scale(0.4);
+          color: $kerbb-color-dark;
+        }
+        .latest-searches-item-header-container {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          .latest-searches-item-what-header {
+            font-size: 12px;
+            cursor: pointer;
+            &:hover {
+              opacity: 0.7;
+            }
+            &:active {
+              opacity: 1;
+            }
+          }
+          .latest-searches-item-where-header {
+            font-size: 12px;
+            cursor: pointer;
+            &:hover {
+              opacity: 0.7;
+            }
+            &:active {
+              opacity: 1;
+            }
+          }
+        }
+        .latest-searches-item-link-container {
+          .latest-searches-item-header-search-link {
+            font-size: 11px;
+            color: $kerbb-color-logo;
+            cursor: pointer;
+            &:hover {
+              opacity: 0.7;
+            }
+            &:active {
+              opacity: 1;
+            }
+          }
+        }
+      }
+    }
+  }
+  .latest-searches-none-container {
+    display: none;
+  }
+  .side-info-bar-footer-container {
+    opacity: 0.8;
+    color: $kerbb-color-dark;
+    .footer-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 0.5rem;
+      .footer-item {
+        font-size: 1rem;
+        color: $kerbb-color-dark;
+        opacity: 0.8;
+        &:hover {
+          opacity: 0.5;
+        }
+        &:active {
+          opacity: 0.8;
+        }
+      }
+    }
+  }
+}
