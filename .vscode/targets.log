@@ -7,7 +7,7 @@ make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --quest
 # There is NO WARRANTY, to the extent permitted by law.
  
 
-# Make data base, printed on Thu Oct 06 17:29:29 2022
+# Make data base, printed on Thu Oct 06 18:00:11 2022
 
 # Variables
 
@@ -30,8 +30,7 @@ HOMEDRIVE = C:
 # automatic
 ^D = $(patsubst %/,%,$(patsubst %\,%,$(dir $^)))
 # makefile
-CURDIR := c:/Users/ufukk/Desktop/Coding Pro 
-jects/Kerbb/kerbb-react-redux
+CURDIR := c:/Users/ufukk/Desktop/Coding Projects/Kerbb/kerbb-react-redux
 # default
 SHELL := sh.exe
 # environment
@@ -73,7 +72,7 @@ ELECTRON_RUN_AS_NODE = 1
 # automatic
 %F = $(notdir $%)
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_22320_FNFJUSYNJLESMOLS
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_25776_ONAKHEBQWUFEESOJ
 # environment
 COMPUTERNAME = DESKTOP-7JP9R10
 # environment
@@ -137,6 +136,7 @@ VSCODE_IPC_HOOK = \\.\pipe\f756fc3d327b142fea6c07452d166730-1.71.2-main-sock
 # environment
 HOMEPATH = \Users\ufukk
 # environment
+ 
 COMMONPROGRAMFILES(X86) = C:\Program Files (x86)\Common Files
 # environment
 PROMPT = $P$G
@@ -183,7 +183,7 @@ PROCESSOR_LEVEL = 6
 # environment
 FPS_BROWSER_APP_PROFILE_STRING = Internet Explorer
 # environment
-VSCODE_PID = 22320
+VSCODE_PID = 25776
 # environment
 USERDOMAIN_ROAMINGPROFILE = DESKTOP-7JP9R10
 # variable set hash-table stats:
@@ -202,8 +202,7 @@ USERDOMAIN_ROAMINGPROFILE = DESKTOP-7JP9R10
 # C:\Users\ufukk\AppData\Roaming\npm (key C:/Users/ufukk/AppData/Roaming/npm, mtime 1662554638): 22 files, no impossibilities.
 # C:\Program Files\Docker\Docker\resources\bin (key C:/Program Files/Docker/Docker/resources/bin, mtime 1652439387): 13 files, no impossibilities.
 # C:\Program Files\Git\cmd (key C:/Program Files/Git/cmd, mtime 1653046097): 8 files, no impossibilities.
-# C:\Windows\Syste 
-m32\OpenSSH\: could not be stat'd.
+# C:\Windows\System32\OpenSSH\: could not be stat'd.
 # C:\MinGW\bin (key C:/MinGW/bin, mtime 1660157139): 53 files, no impossibilities.
 # C:\Users\ufukk\AppData\Local\Microsoft\WindowsApps (key C:/Users/ufukk/AppData/Local/Microsoft/WindowsApps, mtime 1664624454): 15 files, no impossibilities.
 # C:\Users\ufukk\AppData\Local\Programs\Microsoft VS Code\bin (key C:/Users/ufukk/AppData/Local/Programs/Microsoft VS Code/bin, mtime 1663265500): 4 files, no impossibilities.
@@ -211,7 +210,8 @@ m32\OpenSSH\: could not be stat'd.
 # C:\Users\ufukk\AppData\Local\Programs\Python\Python310\ (key C:/Users/ufukk/AppData/Local/Programs/Python/Python310/, mtime 1649688278): 18 files, no impossibilities.
 # C:\Users\ufukk\AppData\Local\Programs\Python\Python310\Scripts\ (key C:/Users/ufukk/AppData/Local/Programs/Python/Python310/Scripts/, mtime 1649866859): 9 files, no impossibilities.
 # C:\Windows\System32\Wbem (key C:/Windows/System32/Wbem, mtime 1657925746): 153 files, no impossibilities.
-# C:\Program Files\MongoDB\Tools\100\bin (key C:/Program Files/MongoDB/Tools/100/bin, mtime 1657367794): 11 files, no impossibilities.
+# C:\Program Files\MongoDB\Too 
+ls\100\bin (key C:/Program Files/MongoDB/Tools/100/bin, mtime 1657367794): 11 files, no impossibilities.
 # C:\Program Files\nodejs\ (key C:/Program Files/nodejs/, mtime 1652102013): 13 files, no impossibilities.
 # C:\Windows\system32 (key C:/Windows/system32, mtime 1663233862): 2870 files, no impossibilities.
 # C:\Program Files\nodejs (key C:/Program Files/nodejs, mtime 1652102013): 13 files, no impossibilities.
@@ -260,8 +260,7 @@ build-local:
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 5):
 	docker build \
-		- 
-t kerbb-main-production:local \
+		-t kerbb-main-production:local \
 		-f Dockerfile.production .
 
 build-dev:
@@ -293,8 +292,9 @@ build-dev:
 # strcache performance: lookups = 3404 / hit rate = 2%
 # hash-table stats:
 # Load=3330/8192=41%, Rehash=0, Collisions=1113/3404=33%
-# Finished Make data base on Thu Oct 06 17:29:29 2022
-
- 
+# Finished Make data base on Thu Oc 
 make.exe: *** No rule to make target 'all'.  Stop.
 
+t 06 18:00:11 2022
+
+ 
