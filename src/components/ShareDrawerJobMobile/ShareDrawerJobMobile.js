@@ -18,14 +18,13 @@ import {
 } from "react-share";
 import { useDispatch, useSelector } from "react-redux";
 import LinkIcon from "@mui/icons-material/Link";
-import CloseIcon from "@mui/icons-material/Close";
 import { updateSnackBar } from "../../features/snackbar/snackbarSlice";
 import {
   getShareDrawerJob,
-  updateShareDrawerJob,
   updateShareJobMobileOpen,
 } from "../../features/shareDrawerJob/shareDrawerJobSlice";
 import { ColorExtractor } from "react-color-extractor";
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const ShareDrawerJobMobile = () => {
   const dispatch = useDispatch();
@@ -67,7 +66,7 @@ const ShareDrawerJobMobile = () => {
           className="share-drawer-close-button-container"
           onClick={() => handleShareDrawerClose()}
         >
-          <CloseIcon fontSize="medium" />
+          <ExpandMoreIcon fontSize="medium" />
         </div>
       </div>
       <div className="share-drawer-first-section-container">

@@ -89,7 +89,8 @@ const SideNavbar = () => {
           <Link to="/dashboard/search">
             <li
               className={
-                currentRoute === "/dashboard/search"
+                currentRoute.startsWith("/dashboard/search") ||
+                currentRoute.startsWith("/dashboard/companies")
                   ? "navbar-side-item-active"
                   : "navbar-side-item"
               }

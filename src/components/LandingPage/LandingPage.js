@@ -1,8 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./LandingPage.scss";
-import SearchIcon from "@mui/icons-material/Search";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-// import { useDispatch } from "react-redux";
 import { fetchCompanies } from "../../features/companies/companiesAPI";
 import Company from "../Company/Company";
 import Job from "../Job/Job";
@@ -24,7 +21,6 @@ import CircleIcon from "@mui/icons-material/Circle";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import HandshakeIcon from "@mui/icons-material/Handshake";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import SkeletonJob from "../SkeletonJob/SkeletonJob";
@@ -38,13 +34,15 @@ import {
   updateScrolledPage,
 } from "../../features/scrolls/scrollsSlice";
 import { getUserSearchHistory } from "../../features/auth/authSlice";
-import CircularProgress from "@mui/material/CircularProgress";
-import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import { DateHelper } from "../../helpers/dateHelper";
 import { Link } from "react-router-dom";
 import { toDateHelper } from "../../helpers/toDateHelper";
 import { ReadHelper } from "../../helpers/readHelper";
-// import ScrollContainer from "react-indiana-drag-scroll";
+import CountUp from "react-countup";
+import { fetchTotal } from "../../features/total/totalAPI";
+import { updateMobileNaviObject } from "../../features/navigation/navigationSlice";
+import TopMobileNavi from "../TopMobileNavi/TopMobileNavi";
+import BottomMobileNavi from "../BottomMobileNavi/BottomMobileNavi";
 
 const HtmlTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} classes={{ popper: className }} />
@@ -117,91 +115,9 @@ const LandingPage = () => {
     useState([]);
   const [newsSliderCount, setNewsSliderCount] = useState(0);
   const [autoScroll, setAutoScroll] = useState(true);
-  // const [companyCount, setCompanyCount] = useState(0);
-  // const [jobCount, setJobCount] = useState(0);
-  const [turkeyStates, setTurkeyStates] = useState([
-    { _id: 1, name: "Adana" },
-    { _id: 2, name: "Adıyaman" },
-    { _id: 3, name: "Afyon" },
-    { _id: 4, name: "Ağrı" },
-    { _id: 5, name: "Amasya" },
-    { _id: 6, name: "Ankara" },
-    { _id: 7, name: "Antalya" },
-    { _id: 8, name: "Artvin" },
-    { _id: 9, name: "Aydın" },
-    { _id: 10, name: "Balıkesir" },
-    { _id: 11, name: "Bilecik" },
-    { _id: 12, name: "Bingöl" },
-    { _id: 13, name: "Bitlis" },
-    { _id: 14, name: "Bolu" },
-    { _id: 15, name: "Burdur" },
-    { _id: 16, name: "Bursa" },
-    { _id: 17, name: "Çanakkale" },
-    { _id: 18, name: "Çankırı" },
-    { _id: 19, name: "Çorum" },
-    { _id: 20, name: "Denizli" },
-    { _id: 21, name: "Diyarbakır" },
-    { _id: 22, name: "Edirne" },
-    { _id: 23, name: "Elazığ" },
-    { _id: 24, name: "Erzincan" },
-    { _id: 25, name: "Erzurum" },
-    { _id: 26, name: "Eskişehir" },
-    { _id: 27, name: "Gaziantep" },
-    { _id: 28, name: "Giresun" },
-    { _id: 29, name: "Gümüşhane" },
-    { _id: 30, name: "Hakkari" },
-    { _id: 31, name: "Hatay" },
-    { _id: 32, name: "Isparta" },
-    { _id: 33, name: "Mersin" },
-    { _id: 34, name: "İstanbul" },
-    { _id: 35, name: "İzmir" },
-    { _id: 36, name: "Kars" },
-    { _id: 37, name: "Kastamonu" },
-    { _id: 38, name: "Kayseri" },
-    { _id: 39, name: "Kırklareli" },
-    { _id: 40, name: "Kırkşehir" },
-    { _id: 41, name: "Kocaeli" },
-    { _id: 42, name: "Konya" },
-    { _id: 43, name: "Kütahya" },
-    { _id: 44, name: "Malatya" },
-    { _id: 45, name: "Manisa" },
-    { _id: 46, name: "Kahramanmaraş" },
-    { _id: 47, name: "Mardin" },
-    { _id: 48, name: "Muğla" },
-    { _id: 49, name: "Muş" },
-    { _id: 50, name: "Nevşehir" },
-    { _id: 51, name: "Niğde" },
-    { _id: 52, name: "Ordu" },
-    { _id: 53, name: "Rize" },
-    { _id: 54, name: "Sakarya" },
-    { _id: 55, name: "Samsun" },
-    { _id: 56, name: "Siirt" },
-    { _id: 57, name: "Sinop" },
-    { _id: 58, name: "Sivas" },
-    { _id: 59, name: "Tekirdağ" },
-    { _id: 60, name: "Tokat" },
-    { _id: 61, name: "Trabzon" },
-    { _id: 62, name: "Tunceli" },
-    { _id: 63, name: "Şanlıurfa" },
-    { _id: 64, name: "Uşak" },
-    { _id: 65, name: "Van" },
-    { _id: 66, name: "Yozgat" },
-    { _id: 67, name: "Zonguldak" },
-    { _id: 68, name: "Aksaray" },
-    { _id: 69, name: "Bayburt" },
-    { _id: 70, name: "Karaman" },
-    { _id: 71, name: "Kırıkkale" },
-    { _id: 72, name: "Batman" },
-    { _id: 73, name: "Şırnak" },
-    { _id: 74, name: "Bartın" },
-    { _id: 75, name: "Ardahan" },
-    { _id: 76, name: "Iğdır" },
-    { _id: 77, name: "Yalova" },
-    { _id: 78, name: "Karabük" },
-    { _id: 79, name: "Kilis" },
-    { _id: 80, name: "Osmaniye" },
-    { _id: 81, name: "Düzce" },
-  ]);
+  const [companyCount, setCompanyCount] = useState(0);
+  const [jobCount, setJobCount] = useState(0);
+  const [topNaviHeader, setTopNaviHeader] = useState(null);
   useEffect(() => {
     async function fetchData() {
       // const jobsResponse = await fetchJobs({
@@ -239,7 +155,10 @@ const LandingPage = () => {
         page: 1,
         size: 2,
       });
+      const totals = await fetchTotal();
       setElementsLoading(false);
+      setJobCount(totals.data["job"]);
+      setCompanyCount(slideCompaniesResponse.data.length);
       setHighlightedCompanies(companiesResponse.data);
       setSlideCompanies(slideCompaniesResponse.data);
       setIllustrationCompanies(illustrationCompaniesResponse.data);
@@ -251,6 +170,7 @@ const LandingPage = () => {
     }
     document.addEventListener("click", handleWhatClickCapture, true);
     document.addEventListener("click", handleWhereClickCapture, true);
+    dispatch(updateMobileNaviObject(null));
     fetchData();
 
     // const MINUTE_MS = 3000;
@@ -322,21 +242,6 @@ const LandingPage = () => {
       setAutoCompleteWhatDropdownJobs(jobsResponse.data);
     } else {
       setAutoCompleteWhatDropdown(false);
-    }
-  };
-  const onWhereChange = async (e) => {
-    const where = e.target.value;
-    setWhereInput(where);
-    if (where.length > 0) {
-      setAutoCompleteWhereDropdown(true);
-      setAutoCompleteWhereDropdownLoading(true);
-      const locations = await turkeyStates.filter((location) =>
-        location.name.includes(ucfirst(where))
-      );
-      setautoCompleteWhereDropdownLocations(locations.slice(0, 3));
-      setAutoCompleteWhatDropdownLoading(false);
-    } else {
-      setAutoCompleteWhereDropdown(false);
     }
   };
   const onWhatKeyUpCapture = (e) => {
@@ -493,328 +398,35 @@ const LandingPage = () => {
           content={`Yüzlerce kurumsal şirketin iş ilanını ve haberlerini Kerbb ile keşfedin! | Kerbb`}
         />
       </Helmet>
+      <div className="top-mobile-navbar-container">
+        <TopMobileNavi header={topNaviHeader} />
+      </div>
       <div className="landing-page-banner-container">
-        <div className="content-search-container">
-          <div className="content-search">
-            <div className="content-container">
-              <div className="content-header-container">
-                <h1 className="content-header">
-                  Tek tıkla yüzlerce sitede dolaş.
-                </h1>
-              </div>
-              <div className="content-content-container">
-                <p className="content-content">
-                  Şirketlerin kendi kariyer platformlarındaki ilanları tek tıkla
-                  takip et!
-                </p>
-              </div>
-            </div>
-            {/* <div className="search-container">
-              <form
-                // onSubmit={handleSubmit}
-                // onChange={onChangeHandler}
-                className="search-form"
-              >
-                <div className="search-form-what-container">
-                  <div className="search-form-what-header-container">
-                    <h3 className="search-form-what-header">Ne</h3>
-                  </div>
-                  <input
-                    type="text"
-                    className="search-form-what-input"
-                    placeholder="Pozisyon veya şirket adı"
-                    onChange={onWhatChange}
-                    value={whatInput}
-                    onKeyUpCapture={onWhatKeyUpCapture}
-                    // defaultValue={what}
-                  />
-                  <div className="search-form-what-icon-container">
-                    <SearchIcon fontSize="small" />
-                  </div>
-                  <div
-                    className={
-                      autoCompleteWhatDropdown
-                        ? "search-form-what-autocomplete-dropdown-container-active"
-                        : "search-form-what-autocomplete-dropdown-container"
-                    }
-                    ref={autoCompleteRef}
-                  >
-                    {autoCompleteWhatDropdownLoading ? (
-                      <div className="search-form-what-autocomplete-dropdown-loader">
-                        <CircularProgress
-                          size="30px"
-                          sx={{ color: "#4e21e7", opacity: 0.8 }}
-                        />
-                      </div>
-                    ) : (
-                      <div className="search-form-what-autocomplete-dropdown-inner-container">
-                        <div className="companies-dropdown-container">
-                          <div className="companies-dropdown-header-container">
-                            <h4 className="companies-dropdown-header">
-                              ŞİRKETLER
-                            </h4>
-                          </div>
-                          {autoCompleteWhatDropdownCompanies.length === 0 ? (
-                            <h5 className="companies-dropdown-none-list-header">
-                              Hiçbir sonuç bulunamadı.
-                            </h5>
-                          ) : (
-                            <ul className="companies-dropdown-list">
-                              {autoCompleteWhatDropdownCompanies.map(
-                                (company) => {
-                                  return (
-                                    <li
-                                      className="companies-dropdown-item"
-                                      key={company._id}
-                                      onClick={() =>
-                                        handleSetAutoCompleteWhatDropdown(
-                                          company.name
-                                        )
-                                      }
-                                    >
-                                      <div className="companies-dropdown-company">
-                                        <div className="companies-dropdown-company-image-container">
-                                          <img
-                                            src={
-                                              company
-                                                ? company.logo_image_url !== ""
-                                                  ? company.logo_image_url
-                                                  : process.env.PUBLIC_URL +
-                                                    "/no-image.png"
-                                                : process.env.PUBLIC_URL +
-                                                  "/no-image.png"
-                                            }
-                                            alt=""
-                                          />
-                                        </div>
-                                        <div className="companies-dropdown-company-name-container">
-                                          <h5 className="companies-dropdown-company-name">
-                                            {company.name}
-                                          </h5>
-                                        </div>
-                                      </div>
-                                    </li>
-                                  );
-                                }
-                              )}
-                            </ul>
-                          )}
-                        </div>
-                        <div className="jobs-dropdown-container">
-                          <div className="jobs-dropdown-header-container">
-                            <h4 className="jobs-dropdown-header">İLANLAR</h4>
-                          </div>
-                          {autoCompleteWhatDropdownJobs.length === 0 ? (
-                            <h5 className="jobs-dropdown-none-list-header">
-                              Hiçbir sonuç bulunamadı.
-                            </h5>
-                          ) : (
-                            <ul className="jobs-dropdown-list">
-                              {autoCompleteWhatDropdownJobs.map((job) => {
-                                return (
-                                  <li
-                                    className="jobs-dropdown-item"
-                                    key={job._id}
-                                    onClick={() =>
-                                      handleSetAutoCompleteWhatDropdown(
-                                        job.job_title
-                                      )
-                                    }
-                                  >
-                                    <div className="jobs-dropdown-job">
-                                      <div className="jobs-dropdown-job-image-container">
-                                        <img
-                                          src={
-                                            job
-                                              ? job.job_company &&
-                                                job.job_company
-                                                  .logo_image_url !== ""
-                                                ? job.job_company.logo_image_url
-                                                : process.env.PUBLIC_URL +
-                                                  "/no-image.png"
-                                              : process.env.PUBLIC_URL +
-                                                "/no-image.png"
-                                          }
-                                          alt=""
-                                        />
-                                      </div>
-                                      <div className="jobs-dropdown-job-name-container">
-                                        <h5 className="jobs-dropdown-job-name">
-                                          {job.job_title}
-                                        </h5>
-                                      </div>
-                                    </div>
-                                  </li>
-                                );
-                              })}
-                            </ul>
-                          )}
-                        </div>
-                        <div className="search-history-dropdown-container">
-                          <div className="search-history-dropdown-header-container">
-                            <h4 className="search-history-dropdown-header">
-                              SON ARANANLAR
-                            </h4>
-                          </div>
-                          {searchHistory && searchHistory.length === 0 ? (
-                            <div></div>
-                          ) : (
-                            <ul className="search-history-dropdown-list">
-                              {searchHistory ? (
-                                searchHistory.map((sh) => {
-                                  return (
-                                    <li
-                                      className="search-history-dropdown-item"
-                                      onClick={() =>
-                                        handleSetAutoCompleteWhatDropdown(
-                                          sh.what
-                                        )
-                                      }
-                                    >
-                                      <div className="search-history-dropdown-search-history">
-                                        <div className="search-history-dropdown-icon-container">
-                                          <SearchIcon fontSize="small" />
-                                        </div>
-                                        <div className="search-history-dropdown-name-container">
-                                          <h5 className="search-history-dropdown-name">
-                                            {sh.what}
-                                          </h5>
-                                        </div>
-                                      </div>
-                                    </li>
-                                  );
-                                })
-                              ) : (
-                                <div></div>
-                              )}
-                            </ul>
-                          )}
-                        </div>
-                        <div className="arrow-container">
-                          <PlayArrowIcon />
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </div>
-                <div className="search-form-where-container">
-                  <div className="search-form-where-header-container">
-                    <h3 className="search-form-where-header">Nerede</h3>
-                  </div>
-                  <input
-                    type="text"
-                    className="search-form-where-input"
-                    placeholder="İstanbul'da"
-                    onChange={onWhereChange}
-                    value={whereInput}
-                    onKeyUpCapture={onWhereKeyUpCapture}
-                    // defaultValue={where}
-                  />
-                  <div className="search-form-where-icon-container">
-                    <LocationOnIcon fontSize="small" />
-                  </div>
-                  <div
-                    className={
-                      autoCompleteWhereDropdown
-                        ? "search-form-where-autocomplete-dropdown-container-active"
-                        : "search-form-where-autocomplete-dropdown-container"
-                    }
-                    ref={autoCompleteWhereRef}
-                  >
-                    <div className="search-form-where-autocomplete-dropdown-inner-container">
-                      <div className="locations-dropdown-container">
-                        <div className="locations-dropdown-header-container">
-                          <h4 className="locations-dropdown-header">
-                            LOKASYON
-                          </h4>
-                        </div>
-                        {autoCompleteWhereDropdownLocations.length === 0 ? (
-                          <h5 className="locations-dropdown-none-list-header">
-                            Hiçbir sonuç bulunamadı.
-                          </h5>
-                        ) : (
-                          <ul className="locations-dropdown-list">
-                            {autoCompleteWhereDropdownLocations.map(
-                              (location) => {
-                                return (
-                                  <li
-                                    className="locations-dropdown-item"
-                                    key={location._id}
-                                    onClick={() =>
-                                      handleSetAutoCompleteWhereDropdown(
-                                        location.name
-                                      )
-                                    }
-                                  >
-                                    <div className="locations-dropdown-location">
-                                      <div className="locations-dropdown-location-icon-container">
-                                        <LocationOnIcon fontSize="small" />
-                                      </div>
-                                      <div className="locations-dropdown-location-name-container">
-                                        <h5 className="locations-dropdown-location-name">
-                                          {location.name}
-                                        </h5>
-                                      </div>
-                                    </div>
-                                  </li>
-                                );
-                              }
-                            )}
-                          </ul>
-                        )}
-                      </div>
-                      <div className="search-history-dropdown-container">
-                        <div className="search-history-dropdown-header-container">
-                          <h4 className="search-history-dropdown-header">
-                            SON ARANANLAR
-                          </h4>
-                        </div>
-                        {searchHistory && searchHistory.length === 0 ? (
-                          <div></div>
-                        ) : (
-                          <ul className="search-history-dropdown-list">
-                            {searchHistory ? (
-                              searchHistory.map((sh) => {
-                                return (
-                                  <li
-                                    className="search-history-dropdown-item"
-                                    onClick={() =>
-                                      handleSetAutoCompleteWhereDropdown(
-                                        sh.where
-                                      )
-                                    }
-                                  >
-                                    <div className="search-history-dropdown-search-history">
-                                      <div className="search-history-dropdown-icon-container">
-                                        <SearchIcon fontSize="small" />
-                                      </div>
-                                      <div className="search-history-dropdown-name-container">
-                                        <h5 className="search-history-dropdown-name">
-                                          {sh.where}
-                                        </h5>
-                                      </div>
-                                    </div>
-                                  </li>
-                                );
-                              })
-                            ) : (
-                              <div></div>
-                            )}
-                          </ul>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <button
-                  className="search-form-button"
-                  ref={submitButtonRef}
-                  onClick={handleSubmit}
-                >
-                  Ara
-                </button>
-              </form>
-            </div> */}
+        <div className="content-container">
+          <div className="content-header-container">
+            <h1 className="content-header">Tek tıkla yüzlerce sitede dolaş.</h1>
+          </div>
+          <div className="content-content-container">
+            <p className="content-content">
+              Şirketlerin kendi kariyer platformlarındaki ilanları tek tıkla
+              takip et!
+            </p>
+          </div>
+          <div className="job-company-container">
+            <ul className="job-company-list">
+              <li className="job-item">
+                <h2 className="job-count">
+                  <CountUp end={jobCount} duration={0.5} />
+                </h2>
+                <h2 className="job-header">İş İlanı</h2>
+              </li>
+              <li className="company-item">
+                <h2 className="company-count">
+                  <CountUp end={companyCount} duration={0.5} />
+                </h2>
+                <h2 className="company-header">Şirket</h2>
+              </li>
+            </ul>
           </div>
         </div>
         <div className="illustration-container">
@@ -1050,7 +662,7 @@ const LandingPage = () => {
                           </div>
                         </a>
                       </div>
-                      <a href={`/dashboard/news/${news._id}`}>
+                      <a href={`/dashboard/news/${news.news_title}`}>
                         <div className="news-image-container">
                           <img
                             src={
@@ -1064,12 +676,12 @@ const LandingPage = () => {
                       </a>
                       <div className="news-title-content-container">
                         <div className="news-title-content">
-                          <a href={`/dashboard/news/${news._id}`}>
+                          <a href={`/dashboard/news/${news.news_title}`}>
                             <div className="news-title-container">
                               <h4 className="news-title">{news.news_title}</h4>
                             </div>
                           </a>
-                          <a href={`/dashboard/news/${news._id}`}>
+                          <a href={`/dashboard/news/${news.news_title}`}>
                             <div className="news-content-container">
                               <p
                                 className="news-content"
@@ -1192,7 +804,7 @@ const LandingPage = () => {
             </div>
             <a
               href={`/dashboard/news/${
-                currentSliderNews ? currentSliderNews._id : ""
+                currentSliderNews ? currentSliderNews.news_title : ""
               }`}
             >
               <img
@@ -1340,15 +952,17 @@ const LandingPage = () => {
           </ul>
         </div>
       </div>
-      <div
+      <DoubleArrowIcon
+        fontSize="large"
         className={
           scrollTopButton
             ? "scroll-top-button-container-active"
             : "scroll-top-button-container"
         }
         onClick={scrollToTop}
-      >
-        <DoubleArrowIcon fontSize="large" />
+      />
+      <div className="bottom-mobile-navbar-container">
+        <BottomMobileNavi />
       </div>
     </div>
   );

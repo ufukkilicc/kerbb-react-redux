@@ -8,7 +8,7 @@ const Company = ({ company }) => {
     <div className="company">
       <div className="company-info-container">
         <div className="company-image-and-title-container">
-          <a href={`/dashboard/companies/${company._id}`}>
+          <a href={`/dashboard/companies/${company.name}`}>
             <div className="company-image-container">
               <img
                 src={`${
@@ -22,7 +22,7 @@ const Company = ({ company }) => {
               />
             </div>
           </a>
-          <a href={`/dashboard/companies/${company._id}`}>
+          <a href={`/dashboard/companies/${company.name}`}>
             <div className="company-title-container">
               <h2 className="company-title">{company.name}</h2>
               <div
@@ -38,7 +38,7 @@ const Company = ({ company }) => {
           </a>
         </div>
         <div className="company-job-count-container">
-          <a href={`/dashboard/companies/${company._id}`}>
+          <a href={`/dashboard/companies/${company.name}`}>
             <span className="company-job-count">+{company.job_count - 2}</span>
           </a>
         </div>

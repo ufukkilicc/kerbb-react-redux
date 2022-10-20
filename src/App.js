@@ -143,15 +143,6 @@ function App() {
         <div className="app-side-navbar-container">
           <SideNavbar />
         </div>
-        <div
-          className={
-            naviSticky
-              ? "app-top-mobile-navbar-container-active"
-              : "app-top-mobile-navbar-container"
-          }
-        >
-          <TopMobileNavi />
-        </div>
         <div className="app-content-container">
           <Routes>
             <Route index element={<LandingPage />} />
@@ -160,15 +151,6 @@ function App() {
             <Route path="dashboard/*" element={<Dashboard />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
-        </div>
-        <div
-          className={
-            naviSticky
-              ? "app-bottom-mobile-navbar-container-active"
-              : "app-bottom-mobile-navbar-container"
-          }
-        >
-          <BottomMobileNavi />
         </div>
       </BrowserRouter>
       <div className={snackbar.open ? "snackbar-active" : "snackbar"}>

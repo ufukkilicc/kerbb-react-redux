@@ -14,8 +14,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { DateHelper } from "../../helpers/dateHelper";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { toDateHelper } from "../../helpers/toDateHelper";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import "react-lazy-load-image-component/src/effects/blur.css";
 
 const SideInfoBar = () => {
   const dispatch = useDispatch();
@@ -82,50 +80,49 @@ const SideInfoBar = () => {
         <ul className="latest-news-list">
           {barNews.map((news) => {
             return (
-              <a href={`/dashboard/news/${news._id}`}>
-                <li className="latest-news-item" key={news._id}>
-                  <div className="latest-news-item-publisher-container">
-                    <a
-                      target="_blank"
-                      rel="noreferer"
-                      href={
-                        news.news_publisher
-                          ? news.news_publisher.publisher_redirect_link
-                          : ""
-                      }
-                    >
-                      <div className="latest-news-item-publisher-image-container">
-                        <LazyLoadImage
-                          effect="opacity"
-                          src={
-                            news.news_publisher
-                              ? news.news_publisher.logo_image_url === ""
-                                ? process.env.PUBLIC_URL + "/no-image.png"
-                                : news.news_publisher.logo_image_url
-                              : process.env.PUBLIC_URL + "/no-image.png"
-                          }
-                          alt=""
-                        />
-                      </div>
-                    </a>
-                    <a
-                      target="_blank"
-                      rel="noreferer"
-                      href={
-                        news.news_publisher
-                          ? news.news_publisher.publisher_redirect_link
-                          : ""
-                      }
-                    >
-                      <div className="latest-news-item-publisher-name-container">
-                        <h2 className="latest-news-item-publisher-name">
-                          {news.news_publisher
-                            ? news.news_publisher.publisher_name
-                            : ""}
-                        </h2>
-                      </div>
-                    </a>
-                  </div>
+              <li className="latest-news-item" key={news._id}>
+                <div className="latest-news-item-publisher-container">
+                  <a
+                    target="_blank"
+                    rel="noreferer"
+                    href={
+                      news.news_publisher
+                        ? news.news_publisher.publisher_redirect_link
+                        : ""
+                    }
+                  >
+                    <div className="latest-news-item-publisher-image-container">
+                      <img
+                        src={
+                          news.news_publisher
+                            ? news.news_publisher.logo_image_url === ""
+                              ? process.env.PUBLIC_URL + "/no-image.png"
+                              : news.news_publisher.logo_image_url
+                            : process.env.PUBLIC_URL + "/no-image.png"
+                        }
+                        alt=""
+                      />
+                    </div>
+                  </a>
+                  <a
+                    target="_blank"
+                    rel="noreferer"
+                    href={
+                      news.news_publisher
+                        ? news.news_publisher.publisher_redirect_link
+                        : ""
+                    }
+                  >
+                    <div className="latest-news-item-publisher-name-container">
+                      <h2 className="latest-news-item-publisher-name">
+                        {news.news_publisher
+                          ? news.news_publisher.publisher_name
+                          : ""}
+                      </h2>
+                    </div>
+                  </a>
+                </div>
+                <a href={`/dashboard/news/${news.news_title}`}>
                   <h4 className="latest-news-item-header">{news.news_title}</h4>
                   <div className="latest-news-item-info">
                     <h6 className="latest-news-item-date">
@@ -138,8 +135,8 @@ const SideInfoBar = () => {
                       {`${news.news_views} görüntülenme`}
                     </h6> */}
                   </div>
-                </li>
-              </a>
+                </a>
+              </li>
             );
           })}
         </ul>
@@ -163,12 +160,11 @@ const SideInfoBar = () => {
                 <div className="latest-jobs-item-company-container">
                   <a
                     href={`/dashboard/companies/${
-                      job ? (job.job_company ? job.job_company._id : "") : ""
+                      job ? (job.job_company ? job.job_company.name : "") : ""
                     }`}
                   >
                     <div className="latest-jobs-item-company-image-container">
-                      <LazyLoadImage
-                        effect="opacity"
+                      <img
                         src={
                           job.job_company.logo_image_url === ""
                             ? process.env.PUBLIC_URL + "/no-image.png"
@@ -178,7 +174,7 @@ const SideInfoBar = () => {
                       />
                     </div>
                   </a>
-                  <a href={`/dashboard/companies/${job.job_company._id}`}>
+                  <a href={`/dashboard/companies/${job.job_company.name}`}>
                     <div className="latest-jobs-item-company-header-container">
                       <h5 className="latest-jobs-item-company-header">
                         {job.job_company.name}

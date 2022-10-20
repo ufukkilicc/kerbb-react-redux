@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { fetchCompanies } from "../../features/companies/companiesAPI";
 import Illustration from "../Illustration/Illustration";
 import "./AboutPage.scss";
@@ -6,9 +6,14 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import TopMobileNavi from "../TopMobileNavi/TopMobileNavi";
+import BottomMobileNavi from "../BottomMobileNavi/BottomMobileNavi";
 
 const AboutPage = () => {
   const [illustrationCompanies, setIllustrationCompanies] = useState([]);
+  const [topNaviHeader, setTopNaviHeader] = useState(null);
+  const pageInnerRef = useRef();
+
   useEffect(() => {
     async function fetchData() {
       const illustrationCompaniesResponse = await fetchCompanies({
@@ -20,8 +25,20 @@ const AboutPage = () => {
     }
     fetchData();
   }, []);
+  const onScroll = () => {
+    const { scrollTop } = pageInnerRef.current;
+    if (scrollTop > 50 && topNaviHeader === null) {
+      setTopNaviHeader("Hakkımızda");
+    } else if (scrollTop < 50 && topNaviHeader !== null) {
+      setTopNaviHeader(null);
+    }
+  };
   return (
-    <div className="about-page-container">
+    <div
+      className="about-page-container"
+      ref={pageInnerRef}
+      onScroll={onScroll}
+    >
       <Helmet>
         <title>Kerbb nedir?</title>
         <meta property="og:title" content={`İletişim | Kerbb`} />
@@ -34,6 +51,9 @@ const AboutPage = () => {
           content={`Yüzlerce kurumsal şirketin iş ilanını ve haberlerini Kerbb ile keşfedin! | Kerbb`}
         />
       </Helmet>
+      <div className="top-mobile-navbar-container">
+        <TopMobileNavi header={topNaviHeader} />
+      </div>
       <div className="about-page">
         <div className="header-container">
           <h1 className="header">Hakkımızda</h1>
@@ -171,6 +191,9 @@ const AboutPage = () => {
             </li>
           </ul>
         </div>
+      </div>
+      <div className="bottom-mobile-navbar-container">
+        <BottomMobileNavi />
       </div>
     </div>
   );

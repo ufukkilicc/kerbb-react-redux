@@ -6,7 +6,7 @@ const SlideCompany = ({ company }) => {
   return (
     <div className="slide-company-container">
       <div className="slide-company-image-container">
-        <a href={`/dashboard/companies/${company._id}`}>
+        <a href={`/dashboard/companies/${company.name}`}>
           <img
             src={
               company.logo_image_url === ""
