@@ -4,6 +4,7 @@
 @import "../../common/responsive";
 
 .news-page {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -12,70 +13,40 @@
   transition: 0.1s ease-in-out;
   overflow-y: scroll;
   &::-webkit-scrollbar {
-    display: none;
-  }
-  @include media("<=tablet") {
-    padding-top: 50px;
-    padding-bottom: 50px;
-    padding: 0 1rem;
-  }
-  @include media("<=m-phone") {
-    padding: 50px 0rem;
+    @include media(">tablet") {
+      display: none;
+    }
   }
   scroll-behavior: smooth;
-  .news-page-navi-active {
-    padding-top: 1rem;
+  .top-mobile-navbar-container {
     position: sticky;
-    background-color: white;
     top: 0;
+    left: 0;
+    z-index: 5;
+    background-color: white;
     width: 100%;
-    z-index: 2;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    padding-bottom: 5px;
-    transition: 0.5s ease-in-out;
-    @include media("<=m-phone") {
-      padding: 0 1rem;
+    z-index: 99 !important;
+    transition: 0.1s ease-in-out;
+    @include media(">tablet") {
+      display: none;
     }
-    .news-page-header-container {
-      font-size: 12px;
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-start;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 1rem 0rem;
-      .news-page-header {
-        color: $kerbb-color-dark;
-        opacity: 0.9;
-      }
-      .sponsor {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        gap: 1px;
-        padding: 1px 15px;
-        background-color: $kerbb-purple-light;
-        border-radius: 20px;
-        .sponsor-icon {
-          transform: scale(0.9);
-          color: $kerbb-color-logo;
-        }
-        .sponsor-header {
-          font-size: 12px;
-          color: $kerbb-color-logo;
-        }
-      }
+  }
+  .bottom-mobile-navbar-container {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    z-index: 5;
+    background-color: white;
+    width: 100%;
+    z-index: 99 !important;
+    transition: 0.1s ease-in-out;
+    @include media(">tablet") {
+      display: none;
     }
   }
   .news-page-navi {
-    padding-top: 1rem;
+    margin-top: 1rem;
     position: sticky;
-    background-color: white;
-    top: -100%;
     width: 100%;
     z-index: 2;
     display: flex;
@@ -93,29 +64,10 @@
       flex-direction: row;
       justify-content: flex-start;
       align-items: center;
-      gap: 0.5rem;
-      padding: 1rem 0rem;
+      margin-bottom: 1rem;
       .news-page-header {
         color: $kerbb-color-dark;
         opacity: 0.9;
-      }
-      .sponsor {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        gap: 1px;
-        padding: 1px 15px;
-        background-color: $kerbb-purple-light;
-        border-radius: 20px;
-        .sponsor-icon {
-          transform: scale(0.9);
-          color: $kerbb-color-logo;
-        }
-        .sponsor-header {
-          font-size: 12px;
-          color: $kerbb-color-logo;
-        }
       }
     }
   }

@@ -23,9 +23,9 @@ import {
   updateShareMobileOpen,
 } from "../../features/shareDrawer/shareDrawerSlice";
 import LinkIcon from "@mui/icons-material/Link";
-import CloseIcon from "@mui/icons-material/Close";
 import { updateSnackBar } from "../../features/snackbar/snackbarSlice";
 import { ColorExtractor } from "react-color-extractor";
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const ShareDrawerMobile = () => {
   const dispatch = useDispatch();
@@ -67,7 +67,7 @@ const ShareDrawerMobile = () => {
           className="share-drawer-close-button-container"
           onClick={() => handleShareDrawerClose()}
         >
-          <CloseIcon fontSize="medium" />
+          <ExpandMoreIcon fontSize="medium" />
         </div>
       </div>
       <div className="share-drawer-first-section-container">

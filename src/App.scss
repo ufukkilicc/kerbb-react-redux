@@ -20,58 +20,10 @@
       display: none;
     }
   }
-  .app-top-mobile-navbar-container-active {
-    top: 0%;
-    position: fixed;
-    z-index: 1;
-    background-color: white;
-    width: 100%;
-    z-index: 99 !important;
-    transition: 0.1s ease-in-out;
-    @include media(">tablet") {
-      display: none;
-    }
-  }
-  .app-top-mobile-navbar-container {
-    top: -100%;
-    position: fixed;
-    z-index: 5;
-    background-color: white;
-    width: 100%;
-    z-index: 99 !important;
-    transition: 0.1s ease-in-out;
-    @include media(">tablet") {
-      display: none;
-    }
-  }
   .app-content-container {
     height: 100vh;
     width: 100%;
-    overflow: hidden;
-  }
-  .app-bottom-mobile-navbar-container-active {
-    bottom: 0%;
-    position: fixed;
-    z-index: 5;
-    background-color: white;
-    width: 100%;
-    z-index: 5;
-    transition: 0.1s ease-in-out;
-    @include media(">tablet") {
-      display: none;
-    }
-  }
-  .app-bottom-mobile-navbar-container {
-    bottom: -100%;
-    position: fixed;
-    z-index: 5;
-    background-color: white;
-    width: 100%;
-    z-index: 5;
-    transition: 0.1s ease-in-out;
-    @include media(">tablet") {
-      display: none;
-    }
+    overflow-y: hidden;
   }
   .snackbar-active {
     position: absolute;

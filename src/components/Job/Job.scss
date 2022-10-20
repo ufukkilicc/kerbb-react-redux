@@ -15,6 +15,7 @@
   @include kerbb-border();
   border-radius: 5px;
   color: $kerbb-color-dark;
+  background-color: white;
   &:hover {
     background-color: $kerbb-purple-light;
     border: 1px solid rgba(12, 8, 47, 0);

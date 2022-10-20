@@ -4,13 +4,18 @@ import CheckIcon from "@mui/icons-material/Check";
 import { useDispatch, useSelector } from "react-redux";
 import { updateMobileDialog } from "../../features/dialogs/dialogsSlice";
 import {
+  addJobs,
   getJobSearchObject,
+  updateElementsLoading,
+  updateJobsCount,
   updateJobSearchObject,
 } from "../../features/jobs/jobsSlice";
+import { fetchJobs } from "../../features/jobs/jobsAPI";
+import { updateScrolledPage } from "../../features/scrolls/scrollsSlice";
 
 const MobileFilter = () => {
   const [dateFilter, setDateFilter] = useState("whole");
-  const [orderFilter, setOrderFilter] = useState("ASC");
+  const [orderFilter, setOrderFilter] = useState("DESC");
   const [orderByFilter, setOrderByFilter] = useState("date");
 
   const dispatch = useDispatch();
@@ -36,15 +41,28 @@ const MobileFilter = () => {
   const handleMobileDialogClose = () => {
     dispatch(updateMobileDialog(false));
   };
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const newJobSearchObject = {
+      page: 1,
+      size: 20,
       sort_by: orderByFilter,
       sort: orderFilter,
       date: dateFilter,
-      query_text: "",
-      location_query_text: "",
+      what: jobSearchObject.what,
+      where: jobSearchObject.where,
     };
+    dispatch(updateScrolledPage(window.location.pathname));
     dispatch(updateJobSearchObject(newJobSearchObject));
+    dispatch(updateElementsLoading(true));
+    const jobsResponse = await fetchJobs(newJobSearchObject);
+    const jobsCountResponse = await fetchJobs({
+      what: jobSearchObject.what,
+      date: dateFilter,
+      document_count: true,
+    });
+    dispatch(updateJobsCount(jobsCountResponse.data));
+    dispatch(addJobs(jobsResponse.data));
+    dispatch(updateElementsLoading(false));
     handleMobileDialogClose();
   };
   const jobSearchObject = useSelector(getJobSearchObject);

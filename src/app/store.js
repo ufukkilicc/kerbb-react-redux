@@ -1,7 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import jobReducer from "../features/jobs/jobsSlice";
 import companyReducer from "../features/companies/companiesSlice";
-import newsReducer from "../features/news/newsSlice";
 import newsSlice from "../features/news/newsSlice";
 import totalSlice from "../features/total/totalSlice";
 import authSlice from "../features/auth/authSlice";
@@ -12,6 +11,7 @@ import routesSlice from "../features/routes/routesSlice";
 import companyDetailSlice from "../features/companyDetail/companyDetailSlice";
 import shareDrawerSlice from "../features/shareDrawer/shareDrawerSlice";
 import shareDrawerJobSlice from "../features/shareDrawerJob/shareDrawerJobSlice";
+import navigationSlice from "../features/navigation/navigationSlice";
 
 export const store = configureStore({
   reducer: {
@@ -27,5 +27,6 @@ export const store = configureStore({
     companyjobs: companyDetailSlice,
     sharedrawer: shareDrawerSlice,
     sharedrawerjob: shareDrawerJobSlice,
+    navigation: navigationSlice,
   },
 });

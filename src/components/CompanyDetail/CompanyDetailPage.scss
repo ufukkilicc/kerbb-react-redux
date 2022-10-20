@@ -15,12 +15,34 @@
   &::-webkit-scrollbar {
     display: none;
   }
-  @include media("<=tablet") {
-    padding-top: 50px;
-    padding-bottom: 50px;
-  }
-
   scroll-behavior: smooth;
+
+  .top-mobile-navbar-container {
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    background-color: white;
+    width: 100%;
+    z-index: 99 !important;
+    transition: 0.1s ease-in-out;
+    @include media(">tablet") {
+      display: none;
+    }
+  }
+  .bottom-mobile-navbar-container {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    z-index: 5;
+    background-color: white;
+    width: 100%;
+    z-index: 99 !important;
+    transition: 0.1s ease-in-out;
+    @include media(">tablet") {
+      display: none;
+    }
+  }
   .company-detail-page-navi-active {
     padding-top: 1rem;
     position: sticky;

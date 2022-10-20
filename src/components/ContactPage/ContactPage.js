@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./ContactPage.scss";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
@@ -6,10 +6,26 @@ import { Link } from "react-router-dom";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import EmailIcon from "@mui/icons-material/Email";
 import { Helmet } from "react-helmet";
+import TopMobileNavi from "../TopMobileNavi/TopMobileNavi";
+import BottomMobileNavi from "../BottomMobileNavi/BottomMobileNavi";
 
 const ContactPage = () => {
+  const [topNaviHeader, setTopNaviHeader] = useState(null);
+  const pageInnerRef = useRef();
+  const onScroll = () => {
+    const { scrollTop } = pageInnerRef.current;
+    if (scrollTop > 50 && topNaviHeader === null) {
+      setTopNaviHeader("İletişim");
+    } else if (scrollTop < 50 && topNaviHeader !== null) {
+      setTopNaviHeader(null);
+    }
+  };
   return (
-    <div className="contact-page-container">
+    <div
+      className="contact-page-container"
+      ref={pageInnerRef}
+      onScroll={onScroll}
+    >
       <Helmet>
         <title>İletişim</title>
         <meta property="og:title" content={`İletişim | Kerbb`} />
@@ -22,6 +38,9 @@ const ContactPage = () => {
           content={`Yüzlerce kurumsal şirketin iş ilanını ve haberlerini Kerbb ile keşfedin! | Kerbb`}
         />
       </Helmet>
+      <div className="top-mobile-navbar-container">
+        <TopMobileNavi header={topNaviHeader} />
+      </div>
       <div className="contact-page">
         <div className="header-container">
           <h1 className="header">İletişim</h1>
@@ -159,6 +178,9 @@ const ContactPage = () => {
             </li>
           </ul>
         </div>
+      </div>
+      <div className="bottom-mobile-navbar-container">
+        <BottomMobileNavi />
       </div>
     </div>
   );

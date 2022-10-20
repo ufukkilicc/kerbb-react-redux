@@ -67,7 +67,11 @@ const Job = ({ job }) => {
         <div className="job-company-and-image-container">
           <a
             href={`/dashboard/companies/${
-              job ? (job.job_company ? job.job_company._id : "") : ""
+              job
+                ? job.job_company
+                  ? job.job_company.name
+                  : ""
+                : ""
             }`}
           >
             <div className="company-image-container">
@@ -88,7 +92,11 @@ const Job = ({ job }) => {
           </a>
           <a
             href={`/dashboard/companies/${
-              job ? (job.job_company ? job.job_company._id : "") : ""
+              job
+                ? job.job_company
+                  ? job.job_company.name
+                  : ""
+                : ""
             }`}
           >
             <div className="job-company-container">

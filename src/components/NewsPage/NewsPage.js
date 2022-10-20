@@ -10,24 +10,22 @@ import News from "./News/News";
 import "./NewsPage.scss";
 import { Helmet } from "react-helmet";
 import SkeletonNewsForPage from "../SkeletonNewsForPage/SkeletonNewsForPage";
-import HandshakeIcon from "@mui/icons-material/Handshake";
 import CircularProgress from "@mui/material/CircularProgress";
 import {
   getScrolledPage,
   updateScrolledPage,
 } from "../../features/scrolls/scrollsSlice";
+import TopMobileNavi from "../TopMobileNavi/TopMobileNavi";
+import BottomMobileNavi from "../BottomMobileNavi/BottomMobileNavi";
 
 const NewsPage = () => {
-  // const [news, setNews] = useState([]);
   const dispatch = useDispatch();
   const newsListRef = useRef();
-  const loaderRef = useRef();
   const [pageCount, setPageCount] = useState(1);
   const [elementsLoading, setElementsLoading] = useState(false);
-  const [naviSticky, setNaviSticky] = useState(false);
   const [loader, setLoader] = useState(false);
-  const [scrolltop, setScrolltop] = useState(0);
   const [hasMore, setHasMore] = useState(true);
+  const [topNaviHeader, setTopNaviHeader] = useState(null);
   useEffect(() => {
     async function fetchData() {
       setElementsLoading(true);
@@ -48,12 +46,10 @@ const NewsPage = () => {
       if (newsReResponse.data.length === 0) {
         setLoader(false);
         setHasMore(false);
-        console.log("hey");
       }
       setLoader(false);
       dispatch(includeNews(newsReResponse.data));
     } else {
-      console.log("hey");
       setLoader(false);
       setHasMore(false);
     }
@@ -90,13 +86,6 @@ const NewsPage = () => {
       }
     };
   }, [element]);
-  const handleWheel = (e) => {
-    if (e.deltaY < 0) {
-      setNaviSticky(true);
-    } else {
-      setNaviSticky(false);
-    }
-  };
   const scrollToTop = () => {
     newsListRef.current.scrollTo(0, 0);
   };
@@ -110,26 +99,35 @@ const NewsPage = () => {
     }
   }, [scrolledPage]);
 
+  const onScroll = () => {
+    const { scrollTop } = newsListRef.current;
+    if (scrollTop > 50 && topNaviHeader === null) {
+      setTopNaviHeader("Şirket Haberleri");
+    } else if (scrollTop < 50 && topNaviHeader !== null) {
+      setTopNaviHeader(null);
+    }
+  };
+
   return (
-    <div className="news-page" ref={newsListRef} onWheel={handleWheel}>
+    <div className="news-page" ref={newsListRef} onScroll={onScroll}>
       <Helmet>
-        <title>Kurumsal Şirket Haberleri</title>
+        <title>Şirket Haberleri | Kerbb</title>
+        <meta property="og:title" content={`Şirket Haberleri | Kerbb`} />
+        <meta
+          property="og:image"
+          content={`https://res.cloudinary.com/kerbb/image/upload/v1664460395/local/website_photos/WhatsApp_Image_2022-09-29_at_00.17.34_mvym3a.jpg?w=800`}
+        />
+        <meta
+          name="description"
+          content={`Yüzlerce kurumsal şirketin iş ilanını ve haberlerini Kerbb ile keşfedin! | Kerbb`}
+        />
       </Helmet>
-      <div className={naviSticky ? "news-page-navi-active" : "news-page-navi"}>
+      <div className="top-mobile-navbar-container">
+        <TopMobileNavi header={topNaviHeader} path={window.location.pathname} />
+      </div>
+      <div className="news-page-navi">
         <div className="news-page-header-container">
-          <h1 className="news-page-header">Kurumsal İş Haberleri</h1>
-          {/* <a
-            href="https://www.linkedin.com/company/inbusinesstime"
-            rel="noreferrer"
-            target="_blank"
-          >
-            <div className="sponsor">
-              <div className="sponsor-icon">
-                <HandshakeIcon fontSize="small" />
-              </div>
-              <h1 className="sponsor-header">inbusinesstime</h1>
-            </div>
-          </a> */}
+          <h1 className="news-page-header">Şirket Haberleri</h1>
         </div>
       </div>
       {elementsLoading ? (
@@ -162,6 +160,9 @@ const NewsPage = () => {
                 )}
               </div>
             )}
+          </div>
+          <div className="bottom-mobile-navbar-container">
+            <BottomMobileNavi />
           </div>
         </div>
       )}

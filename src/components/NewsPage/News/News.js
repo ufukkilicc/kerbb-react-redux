@@ -61,12 +61,12 @@ const News = ({ news }) => {
         </div>
         <div className="news-info-container">
           <div className="news-title-and-content-container">
-            <a href={`/dashboard/news/${news._id}`}>
+            <a href={`/dashboard/news/${news.news_title.toLowerCase()}`}>
               <div className="news-title-container">
                 <h2 className="news-title">{news.news_title}</h2>
               </div>
             </a>
-            <a href={`/dashboard/news/${news._id}`}>
+            <a href={`/dashboard/news/${news.news_title.toLowerCase()}`}>
               <div className="news-content-container">
                 <p
                   className="news-content"
@@ -75,7 +75,7 @@ const News = ({ news }) => {
               </div>
             </a>
           </div>
-          <a href={`/dashboard/news/${news._id}`}>
+          <a href={`/dashboard/news/${news.news_title.toLowerCase()}`}>
             <div className="news-image-container">
               <LazyLoadImage
                 effect="opacity"

@@ -11,15 +11,41 @@
   height: 100vh;
   transition: 0.1s ease-in-out;
   overflow-y: scroll;
-  &::-webkit-scrollbar {
-    display: none;
-  }
-  @include media("<=tablet") {
-    padding-top: 50px;
-    padding-bottom: 50px;
-  }
   scroll-behavior: smooth;
+  background-color: $kerbb-color-background;
+  &::-webkit-scrollbar {
+    @include media(">tablet") {
+      display: none;
+    }
+  }
+  .top-mobile-navbar-container {
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    background-color: white;
+    width: 100%;
+    z-index: 99 !important;
+    transition: 0.1s ease-in-out;
+    @include media(">tablet") {
+      display: none;
+    }
+  }
+  .bottom-mobile-navbar-container {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    z-index: 5;
+    background-color: white;
+    width: 100%;
+    z-index: 99 !important;
+    transition: 0.1s ease-in-out;
+    @include media(">tablet") {
+      display: none;
+    }
+  }
   .landing-page-banner-container {
+    background: linear-gradient(to left, #e8e7ff 70%, #ffffff);
     @include media(">tablet") {
       padding-top: 50px;
     }
@@ -33,11 +59,12 @@
       padding-top: 50px;
     }
     // background-image: linear-gradient(to left, #ffffff, #4e21e7);
-    .content-search-container {
+    .content-container {
       width: 100%;
       display: flex;
-      justify-content: center;
-      align-items: center;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
       padding: 0 2rem;
       padding-bottom: 4rem;
       .content-search {
@@ -65,514 +92,49 @@
             }
           }
         }
-        .search-container {
-          width: 100%;
-          transition: 0.1s ease-in-out;
-          .search-form {
-            width: 100%;
+      }
+      .job-company-container {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+        .job-company-list {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          gap: 1rem;
+          li {
             display: flex;
             flex-direction: row;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
             gap: 0.5rem;
-            @include media("<=m-phone") {
-              flex-direction: column;
-              align-items: center;
-              margin-bottom: 1rem;
-            }
-            .search-form-what-container {
-              position: relative;
-              display: flex;
-              flex-direction: row;
-              justify-content: space-between;
-              align-items: center;
-              width: 100%;
-              height: auto;
-              padding: 0.5rem 1rem;
-              @include kerbb-border();
-              border-radius: 5px;
-
-              transition: 0.1s ease-in-out;
-              &:focus-within {
-                @include kerbb-border-active();
-                .search-form-what-header-container {
-                  color: $kerbb-color-logo;
-                  font-size: 12px;
-                  transition: 0.1s ease-in-out;
-                }
-              }
-              .search-form-what-header-container {
-                color: $kerbb-color-dark;
-                font-size: 12px;
-                transition: 0.1s ease-in-out;
-              }
-              input {
-                width: 80%;
-                border: none;
-                font-family: $kerbb-font-logo;
-                font-size: 12px;
-                letter-spacing: 1px;
-                &:focus {
-                  outline: none;
-                }
-                &:focus ~ .search-form-what-icon-container {
-                  color: $kerbb-color-logo;
-                  opacity: 0.8;
-                }
-              }
-              .search-form-what-icon-container {
-                transition: 0.1s ease-in-out;
-                color: $kerbb-color-dark;
-                opacity: 0.8;
-              }
-              .search-form-what-autocomplete-dropdown-container-active {
-                .search-form-what-autocomplete-dropdown-inner-container {
-                  display: flex;
-                  flex-direction: column;
-                  justify-content: flex-start;
-                  align-items: flex-start;
-                  gap: 0.5rem;
-                  padding: 1.5rem 0.5rem;
-                  position: absolute;
-                  top: 120%;
-                  left: 0;
-                  width: 100%;
-                  background-color: white;
-                  z-index: 15;
-                  border-radius: 5px;
-                  @include kerbb-border();
-                  box-shadow: rgb(0 0 0 / 15%) 0px 2px 10px 0px;
-                  transition: 0.1s ease-in-out;
-                  .companies-dropdown-container {
-                    width: 100%;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: flex-start;
-                    align-items: flex-start;
-                    gap: 0.5rem;
-                    .companies-dropdown-header-container {
-                      width: 100%;
-                      padding-bottom: 0.5rem;
-                      @include kerbb-border-line-bottom();
-                      .companies-dropdown-header {
-                        color: $kerbb-color-dark;
-                        opacity: 0.5;
-                        font-weight: 500;
-                      }
-                    }
-                    .companies-dropdown-none-list-header {
-                      color: $kerbb-color-dark;
-                      opacity: 0.6;
-                      font-weight: 500;
-                    }
-                    .companies-dropdown-list {
-                      width: 100%;
-                      display: flex;
-                      flex-direction: column;
-                      justify-content: flex-start;
-                      align-items: flex-start;
-                      .companies-dropdown-item {
-                        width: 100%;
-                        display: flex;
-                        justify-content: flex-start;
-                        align-items: flex-start;
-                        padding: 5px;
-                        cursor: pointer;
-                        &:hover {
-                          background-color: $kerbb-purple-light;
-                        }
-                        &:active {
-                          background-color: white;
-                        }
-                        .companies-dropdown-company {
-                          display: flex;
-                          flex-direction: row;
-                          justify-content: center;
-                          align-items: center;
-                          gap: 0.5rem;
-                          .companies-dropdown-company-image-container {
-                            border-radius: 20px;
-                            width: 25px;
-                            height: 25px;
-                            img {
-                              border-radius: 20px;
-                              width: 25px;
-                              height: 25px;
-                            }
-                          }
-                          .companies-dropdown-company-name-container {
-                            .companies-dropdown-company-name {
-                              color: $kerbb-color-dark;
-                              opacity: 0.9;
-                              font-weight: 500;
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                  .jobs-dropdown-container {
-                    width: 100%;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: flex-start;
-                    align-items: flex-start;
-                    gap: 0.5rem;
-                    .jobs-dropdown-header-container {
-                      width: 100%;
-                      padding-bottom: 0.5rem;
-                      @include kerbb-border-line-bottom();
-                      .jobs-dropdown-header {
-                        color: $kerbb-color-dark;
-                        opacity: 0.5;
-                        font-weight: 500;
-                      }
-                    }
-                    .jobs-dropdown-none-list-header {
-                      color: $kerbb-color-dark;
-                      opacity: 0.6;
-                      font-weight: 500;
-                    }
-                    .jobs-dropdown-list {
-                      width: 100%;
-                      display: flex;
-                      flex-direction: column;
-                      justify-content: flex-start;
-                      align-items: flex-start;
-                      .jobs-dropdown-item {
-                        width: 100%;
-                        display: flex;
-                        justify-content: flex-start;
-                        align-items: flex-start;
-                        padding: 5px;
-                        cursor: pointer;
-                        &:hover {
-                          background-color: $kerbb-purple-light;
-                        }
-                        &:active {
-                          background-color: white;
-                        }
-                        .jobs-dropdown-job {
-                          display: flex;
-                          flex-direction: row;
-                          justify-content: center;
-                          align-items: center;
-                          gap: 0.5rem;
-                          .jobs-dropdown-job-image-container {
-                            border-radius: 20px;
-                            width: 25px;
-                            height: 25px;
-                            img {
-                              border-radius: 20px;
-                              width: 25px;
-                              height: 25px;
-                            }
-                          }
-                          .jobs-dropdown-job-name-container {
-                            .jobs-dropdown-job-name {
-                              color: $kerbb-color-dark;
-                              opacity: 0.9;
-                              font-weight: 500;
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                  .search-history-dropdown-container {
-                    width: 100%;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: flex-start;
-                    align-items: flex-start;
-                    gap: 0.5rem;
-                    .search-history-dropdown-header-container {
-                      width: 100%;
-                      padding-bottom: 0.5rem;
-                      @include kerbb-border-line-bottom();
-                      .search-history-dropdown-header {
-                        color: $kerbb-color-dark;
-                        opacity: 0.5;
-                        font-weight: 500;
-                      }
-                    }
-                    .search-history-dropdown-list {
-                      width: 100%;
-                      display: flex;
-                      flex-direction: column;
-                      justify-content: flex-start;
-                      align-items: flex-start;
-                      .search-history-dropdown-item {
-                        width: 100%;
-                        display: flex;
-                        justify-content: flex-start;
-                        align-items: flex-start;
-                        padding: 5px;
-                        cursor: pointer;
-                        &:hover {
-                          background-color: $kerbb-purple-light;
-                        }
-                        &:active {
-                          background-color: white;
-                        }
-                        .search-history-dropdown-search-history {
-                          display: flex;
-                          flex-direction: row;
-                          justify-content: center;
-                          align-items: center;
-                          gap: 0.5rem;
-                          .search-history-dropdown-icon-container {
-                            color: $kerbb-color-dark;
-                            opacity: 0.9;
-                          }
-                          .search-history-dropdown-name-container {
-                            .search-history-dropdown-name {
-                              color: $kerbb-color-dark;
-                              opacity: 0.9;
-                              font-weight: 500;
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                  .arrow-container {
-                    display: none;
-                  }
-                }
-                .search-form-what-autocomplete-dropdown-loader {
-                  display: flex;
-                  flex-direction: row;
-                  justify-content: center;
-                  align-items: center;
-                  gap: 0.5rem;
-                  padding: 1.5rem 0.5rem;
-                  position: absolute;
-                  top: 120%;
-                  left: 0;
-                  width: 100%;
-                  background-color: white;
-                  z-index: 15;
-                  border-radius: 5px;
-                  @include kerbb-border();
-                  box-shadow: rgb(0 0 0 / 15%) 0px 2px 10px 0px;
-                }
-              }
-              .search-form-what-autocomplete-dropdown-container {
-                display: none;
-              }
-            }
-
-            .search-form-where-container {
-              position: relative;
-              display: flex;
-              flex-direction: row;
-              justify-content: space-between;
-              align-items: center;
-              gap: 1.5rem;
-              width: 100%;
-              height: auto;
-              padding: 0.5rem 1rem;
-              @include kerbb-border();
-              border-radius: 5px;
-
-              transition: 0.1s ease-in-out;
-              &:focus-within {
-                @include kerbb-border-active();
-                .search-form-where-header-container {
-                  color: $kerbb-color-logo;
-                  font-size: 12px;
-                  transition: 0.1s ease-in-out;
-                }
-              }
-              .search-form-where-header-container {
-                color: $kerbb-color-dark;
-                font-size: 12px;
-                transition: 0.1s ease-in-out;
-              }
-              input {
-                width: 80%;
-                border: none;
-                font-family: $kerbb-font-logo;
-                font-size: 12px;
-                letter-spacing: 1px;
-                &:focus {
-                  outline: none;
-                }
-                &:focus ~ .search-form-where-icon-container {
-                  color: $kerbb-color-logo;
-                  opacity: 0.8;
-                }
-              }
-              .search-form-where-icon-container {
-                transition: 0.1s ease-in-out;
-                color: $kerbb-color-dark;
-                opacity: 0.8;
-              }
-              .search-form-where-autocomplete-dropdown-container-active {
-                .search-form-where-autocomplete-dropdown-inner-container {
-                  display: flex;
-                  flex-direction: column;
-                  justify-content: flex-start;
-                  align-items: flex-start;
-                  gap: 0.5rem;
-                  padding: 1.5rem 0.5rem;
-                  position: absolute;
-                  top: 120%;
-                  left: 0;
-                  width: 100%;
-                  background-color: white;
-                  z-index: 15;
-                  border-radius: 5px;
-                  @include kerbb-border();
-                  box-shadow: rgb(0 0 0 / 15%) 0px 2px 10px 0px;
-                  transition: 0.1s ease-in-out;
-                  .locations-dropdown-container {
-                    width: 100%;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: flex-start;
-                    align-items: flex-start;
-                    gap: 0.5rem;
-                    .locations-dropdown-header-container {
-                      width: 100%;
-                      padding-bottom: 0.5rem;
-                      @include kerbb-border-line-bottom();
-                      .locations-dropdown-header {
-                        color: $kerbb-color-dark;
-                        opacity: 0.5;
-                        font-weight: 500;
-                      }
-                    }
-
-                    .locations-dropdown-none-list-header {
-                      color: $kerbb-color-dark;
-                      opacity: 0.6;
-                      font-weight: 500;
-                    }
-                    .locations-dropdown-list {
-                      width: 100%;
-                      display: flex;
-                      flex-direction: column;
-                      justify-content: flex-start;
-                      align-items: flex-start;
-                      .locations-dropdown-item {
-                        width: 100%;
-                        display: flex;
-                        justify-content: flex-start;
-                        align-items: flex-start;
-                        padding: 5px;
-                        cursor: pointer;
-                        &:hover {
-                          background-color: $kerbb-purple-light;
-                        }
-                        &:active {
-                          background-color: white;
-                        }
-                        .locations-dropdown-location {
-                          display: flex;
-                          flex-direction: row;
-                          justify-content: center;
-                          align-items: center;
-                          gap: 0.5rem;
-                          .locations-dropdown-location-icon-container {
-                            color: $kerbb-color-dark;
-                            opacity: 0.9;
-                          }
-                          .locations-dropdown-location-name-container {
-                            .locations-dropdown-location-name {
-                              color: $kerbb-color-dark;
-                              opacity: 0.9;
-                              font-weight: 500;
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                  .search-history-dropdown-container {
-                    width: 100%;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: flex-start;
-                    align-items: flex-start;
-                    gap: 0.5rem;
-                    .search-history-dropdown-header-container {
-                      width: 100%;
-                      padding-bottom: 0.5rem;
-                      @include kerbb-border-line-bottom();
-                      .search-history-dropdown-header {
-                        color: $kerbb-color-dark;
-                        opacity: 0.5;
-                        font-weight: 500;
-                      }
-                    }
-                    .search-history-dropdown-list {
-                      width: 100%;
-                      display: flex;
-                      flex-direction: column;
-                      justify-content: flex-start;
-                      align-items: flex-start;
-                      .search-history-dropdown-item {
-                        width: 100%;
-                        display: flex;
-                        justify-content: flex-start;
-                        align-items: flex-start;
-                        padding: 5px;
-                        cursor: pointer;
-                        &:hover {
-                          background-color: $kerbb-purple-light;
-                        }
-                        &:active {
-                          background-color: white;
-                        }
-                        .search-history-dropdown-search-history {
-                          display: flex;
-                          flex-direction: row;
-                          justify-content: center;
-                          align-items: center;
-                          gap: 0.5rem;
-                          .search-history-dropdown-icon-container {
-                            color: $kerbb-color-dark;
-                            opacity: 0.9;
-                          }
-                          .search-history-dropdown-name-container {
-                            .search-history-dropdown-name {
-                              color: $kerbb-color-dark;
-                              opacity: 0.9;
-                              font-weight: 500;
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-              .search-form-where-autocomplete-dropdown-container {
-                display: none;
-              }
-            }
-            .search-form-button {
+            font-size: 14px;
+            color: $kerbb-color-dark;
+            .job-count {
               background-color: $kerbb-color-logo;
+              border-radius: 20px;
+              padding: 5px 15px;
+              font-size: 14px;
+              font-weight: 500;
               color: white;
-              width: 10%;
-              height: 2.5rem;
-              border: none;
-              border-radius: 5px;
-              font-family: $kerbb-font-logo;
-              font-size: 12px;
-              transition: 0.1s ease-in-out;
-              cursor: pointer;
-              &:hover {
-                opacity: 0.7;
-              }
-              &:active {
-                opacity: 1;
-              }
-              @include media("<=m-phone") {
-                width: 20%;
-              }
+            }
+            .job-header {
+              font-size: 16px;
+            }
+            .company-count {
+              background-color: $kerbb-color-logo;
+              border-radius: 20px;
+              padding: 5px 15px;
+              font-size: 14px;
+              font-weight: 500;
+              color: white;
+            }
+            .company-header {
+              font-size: 16px;
             }
           }
         }
@@ -641,8 +203,8 @@
           position: absolute;
           top: 0;
           right: 101%;
-          color: $kerbb-purple-light;
-          opacity: 1;
+          color: $kerbb-color-logo;
+          opacity: 0.5;
           line-height: 2rem;
         }
       }

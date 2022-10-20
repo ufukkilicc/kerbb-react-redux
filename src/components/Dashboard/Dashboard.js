@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import CompanyDetailPage from "../CompanyDetail/CompanyDetailPage";
 import NewsDetailPage from "../NewsDetailPage/NewsDetailPage";
@@ -14,9 +14,9 @@ const Dashboard = () => {
       <div className="dashboard-content-container">
         <Routes>
           <Route path="search" element={<SearchPage />} />
-          <Route path="companies/:id" element={<CompanyDetailPage />} />
+          <Route path="companies/:title" element={<CompanyDetailPage />} />
           <Route path="news" element={<NewsPage />} />
-          <Route path="news/:id" element={<NewsDetailPage />} />
+          <Route path="news/:title" element={<NewsDetailPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>

@@ -3,13 +3,17 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 const initialState = {
   jobs: [],
   jobSearchObject: {
+    page: 1,
+    size: 20,
     sort_by: "date",
-    sort: "ASC",
+    sort: "DESC",
     date: "whole",
-    query_text: "",
-    location_query_text: "",
+    what: "",
+    where: "",
   },
   jobSettingsDropdown: "",
+  elementsLoading: false,
+  jobsCount: 0,
 };
 
 export const jobsSlice = createSlice({
@@ -30,6 +34,12 @@ export const jobsSlice = createSlice({
     updateJobSettingsDropdown: (state, { payload }) => {
       state.jobSettingsDropdown = payload;
     },
+    updateElementsLoading: (state, { payload }) => {
+      state.elementsLoading = payload;
+    },
+    updateJobsCount: (state, { payload }) => {
+      state.jobsCount = payload;
+    },
   },
 });
 export const {
@@ -37,9 +47,13 @@ export const {
   includeJobs,
   updateJobSearchObject,
   updateJobSettingsDropdown,
+  updateElementsLoading,
+  updateJobsCount,
 } = jobsSlice.actions;
 export const getAllJobs = (state) => state.jobs.jobs;
 export const getJobSearchObject = (state) => state.jobs.jobSearchObject;
 export const getJobSettingsDropdown = (state) => state.jobs.jobSettingsDropdown;
+export const getElementsLoading = (state) => state.jobs.elementsLoading;
+export const getJobsCount = (state) => state.jobs.jobsCount;
 
 export default jobsSlice.reducer;

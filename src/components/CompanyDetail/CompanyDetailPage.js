@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchJobs } from "../../features/jobs/jobsAPI";
 import { useParams } from "react-router-dom";
 import {
+  fetchCompanies,
   fetchCompany,
   incrementCompanyView,
 } from "../../features/companies/companiesAPI";
@@ -44,8 +45,12 @@ import {
   updateShareOpen,
 } from "../../features/shareDrawer/shareDrawerSlice";
 import { ColorExtractor } from "react-color-extractor";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import "react-lazy-load-image-component/src/effects/blur.css";
+import TopMobileNavi from "../TopMobileNavi/TopMobileNavi";
+import BottomMobileNavi from "../BottomMobileNavi/BottomMobileNavi";
+import {
+  getScrolledPage,
+  updateScrolledPage,
+} from "../../features/scrolls/scrollsSlice";
 
 const HtmlTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} classes={{ popper: className }} />
@@ -66,7 +71,7 @@ const HtmlTooltip = styled(({ className, ...props }) => (
 
 const CompanyDetailPage = () => {
   const dispatch = useDispatch();
-  let { id } = useParams();
+  let { title } = useParams();
   const [infoSection, setInfoSection] = useState("isilanlari");
   const companyDetailInnerRef = useRef();
   const loaderRef = useRef();
@@ -81,12 +86,16 @@ const CompanyDetailPage = () => {
   const [loaderVisible, setLoaderVisible] = useState(true);
   const [colors, setColors] = useState(null);
 
+  const [topNaviHeader, setTopNaviHeader] = useState("");
+
   useEffect(() => {
     async function fetchData() {
-      await incrementCompanyView(id);
       setElementsLoading(true);
-      const companyDetailResponse = await fetchCompany(id);
-      const what = companyDetailResponse.data.scrape_name;
+      const companyDetailResponse = await fetchCompanies({
+        page: 1,
+        query_text: title,
+      });
+      const what = companyDetailResponse.data[0].scrape_name;
       const response = await fetchJobs({
         what,
         page: 1,
@@ -96,8 +105,9 @@ const CompanyDetailPage = () => {
         date: companyDetailJobSearchObject.date,
       });
       setElementsLoading(false);
-      setCompany(companyDetailResponse.data);
+      setCompany(companyDetailResponse.data[0]);
       dispatch(addCompanyDetailJobs(response.data));
+      await incrementCompanyView(company._id);
     }
     fetchData();
   }, []);
@@ -169,9 +179,6 @@ const CompanyDetailPage = () => {
     setInfoSection(e.target.id);
     scrollToTop();
   };
-  const scrollToTop = () => {
-    companyDetailInnerRef.current.scrollTo(0, 0);
-  };
   const handleWheel = (e) => {
     if (e.deltaY < 0) {
       setNaviSticky(true);
@@ -203,6 +210,7 @@ const CompanyDetailPage = () => {
     getCompanyDetailSettingsDropdown
   );
   const companyDetailThemeColor = useSelector(getCompanyDetailThemeColor);
+  const scrolledPage = useSelector(getScrolledPage);
 
   useEffect(() => {
     async function fetchData() {
@@ -232,9 +240,13 @@ const CompanyDetailPage = () => {
     }
     fetchData();
   }, [companyDetailJobSearchObject]);
+
   const onScroll = () => {
-    if (!loaderVisible) {
-      setLoaderVisible(true);
+    const { scrollTop } = companyDetailInnerRef.current;
+    if (scrollTop > 300 && topNaviHeader === null) {
+      setTopNaviHeader(`${company.name}`);
+    } else if (scrollTop < 300 && topNaviHeader !== null) {
+      setTopNaviHeader(null);
     }
   };
   const handleDropDown = () => {
@@ -254,6 +266,16 @@ const CompanyDetailPage = () => {
     }
     dispatch(updateCompanyDetailSettingsDropdown(false));
   };
+
+  const scrollToTop = () => {
+    companyDetailInnerRef.current.scrollTo(0, 0);
+  };
+  useEffect(() => {
+    if (scrolledPage === window.location.pathname) {
+      scrollToTop();
+      dispatch(updateScrolledPage(""));
+    }
+  }, [scrolledPage]);
   return (
     <div
       className="company-detail-page-container"
@@ -280,6 +302,9 @@ const CompanyDetailPage = () => {
           content={`Yüzlerce kurumsal şirketin iş ilanını ve haberlerini Kerbb ile keşfedin! | Kerbb`}
         />
       </Helmet>
+      <div className="top-mobile-navbar-container">
+        <TopMobileNavi header={topNaviHeader} path={window.location.pathname} />
+      </div>
       <div
         className={
           naviSticky
@@ -452,9 +477,14 @@ const CompanyDetailPage = () => {
         </div>
       ) : (
         <div className="company-jobs-container">
-          {companyDetailJobs.map((job) => {
-            return <Job job={job} key={job._id} />;
-          })}
+          {companyDetailJobs.length > 0 &&
+          companyDetailJobs[0].scrape_name === company.scrape_name ? (
+            companyDetailJobs.map((job) => {
+              return <Job job={job} key={job._id} />;
+            })
+          ) : (
+            <div></div>
+          )}
         </div>
       )}
       <Dialog open={companyDialog} onClose={handleDialogClose}>
@@ -490,6 +520,10 @@ const CompanyDetailPage = () => {
       ) : (
         <div></div>
       )}
+
+      <div className="bottom-mobile-navbar-container">
+        <BottomMobileNavi />
+      </div>
     </div>
   );
 };

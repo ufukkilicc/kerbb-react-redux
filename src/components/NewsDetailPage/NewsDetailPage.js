@@ -1,25 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
-import { fetchNewsOne, incrementNewsView } from "../../features/news/newsAPI";
-import "./NewsDetailPage.scss";
-import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
-import { styled } from "@mui/material/styles";
-import { Box } from "@mui/system";
-import ClickAwayListener from "@mui/material/ClickAwayListener";
-import DoNotDisturbIcon from "@mui/icons-material/DoNotDisturb";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-// import CircleIcon from "@mui/icons-material/Circle";
-import { useSelector, useDispatch } from "react-redux";
 import {
-  getSnackBar,
-  updateSnackBar,
-} from "../../features/snackbar/snackbarSlice";
+  fetchNews,
+  fetchNewsOne,
+  incrementNewsView,
+} from "../../features/news/newsAPI";
+import "./NewsDetailPage.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { updateSnackBar } from "../../features/snackbar/snackbarSlice";
 import { Helmet } from "react-helmet";
-import { DateHelper } from "../../helpers/dateHelper";
 import CircleIcon from "@mui/icons-material/Circle";
 import { ReadHelper } from "../../helpers/readHelper";
-import IosShareIcon from "@mui/icons-material/IosShare";
-import { updateShareOpen } from "../../features/shareDrawer/shareDrawerSlice";
 import { toDateHelper } from "../../helpers/toDateHelper";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import FacebookIcon from "@mui/icons-material/Facebook";
@@ -27,6 +18,7 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import LinkIcon from "@mui/icons-material/Link";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import TelegramIcon from "@mui/icons-material/Telegram";
+import EmailIcon from "@mui/icons-material/Email";
 import {
   EmailShareButton,
   FacebookShareButton,
@@ -35,30 +27,36 @@ import {
   WhatsappShareButton,
   LinkedinShareButton,
 } from "react-share";
+import {
+  updateMobileNaviHeader,
+  updateMobileNaviObject,
+} from "../../features/navigation/navigationSlice";
+import TopMobileNavi from "../TopMobileNavi/TopMobileNavi";
+import BottomMobileNavi from "../BottomMobileNavi/BottomMobileNavi";
+import {
+  getScrolledPage,
+  updateScrolledPage,
+} from "../../features/scrolls/scrollsSlice";
 
 const NewsDetailPage = () => {
   const dispatch = useDispatch();
   const newsDetailInnerRef = useRef();
-  let { id } = useParams();
+  let { title } = useParams();
   const [news, setNews] = useState({});
-  const [tooltip, setTooltip] = useState(false);
-  const [scrolltop, setScrolltop] = useState(0);
-  const [naviSticky, setNaviSticky] = useState(false);
+  const [topNaviHeader, setTopNaviHeader] = useState(null);
   useEffect(() => {
     async function fetchData() {
-      await incrementNewsView(id);
-      const newsResponseDetail = await fetchNewsOne(id);
-      setNews(newsResponseDetail.data);
-      console.log(newsResponseDetail.data.news_content);
+      const newsResponseDetail = await fetchNews({
+        page: 1,
+        size: 10,
+        query_text: title,
+      });
+      setNews(newsResponseDetail.data[0]);
+      dispatch(updateMobileNaviObject(null));
+      await incrementNewsView(news._id);
     }
     fetchData();
   }, []);
-  const handleTooltipOpen = () => {
-    setTooltip(true);
-  };
-  const handleTooltipClose = () => {
-    setTooltip(false);
-  };
   const handleCopyClipboard = (link) => {
     navigator.clipboard.writeText(link);
     dispatch(
@@ -69,42 +67,40 @@ const NewsDetailPage = () => {
       })
     );
   };
-  const DateHandler = (date) => {
-    return DateHelper(date);
-  };
   const toDateHandler = (date) => {
     return toDateHelper(date);
   };
-  const handleWheel = (e) => {
-    if (e.deltaY < 0) {
-      setNaviSticky(true);
-    } else {
-      setNaviSticky(false);
+  const onScroll = () => {
+    const { scrollTop } = newsDetailInnerRef.current;
+    if (scrollTop > 50 && topNaviHeader === null) {
+      setTopNaviHeader(
+        `${toDateHandler(news.news_date)} - ${
+          news.news_content
+            ? ReadHelper(news.news_content) === "0"
+              ? `${1} dakikalık okuma`
+              : `${ReadHelper(news.news_content)} dakikalık okuma`
+            : ""
+        }`
+      );
+    } else if (scrollTop < 50 && topNaviHeader !== null) {
+      setTopNaviHeader(null);
     }
   };
-  const openShareDrawer = () => {
-    dispatch(updateShareOpen(true));
+  const scrollToTop = () => {
+    newsDetailInnerRef.current.scrollTo(0, 0);
   };
-  const onScroll = (event) => {
-    // if (naviSticky) {
-    //   if (naviSticky) {
-    //     console.log("made no")
-    //     setNaviSticky(false);
-    //   }
-    // } else {
-    //   if (!naviSticky) {
-    //     console.log("made yes")
-    //     setNaviSticky(true);
-    //   }
-    // }
-  };
-  const snackbar = useSelector(getSnackBar);
+  const scrolledPage = useSelector(getScrolledPage);
+  useEffect(() => {
+    if (scrolledPage.startsWith(window.location.pathname)) {
+      scrollToTop();
+      dispatch(updateScrolledPage(""));
+    }
+  }, [scrolledPage]);
   return (
     <div
       className="news-detail-page"
-      onWheel={handleWheel}
-      onScroll={onScroll}
       ref={newsDetailInnerRef}
+      onScroll={onScroll}
     >
       <Helmet>
         <title>{news.news_title}</title>
@@ -112,13 +108,10 @@ const NewsDetailPage = () => {
         <meta property="og:image" content={`${news.image_url}?w=800`} />
         <meta name="description" content={news.news_content} />
       </Helmet>
-      <div
-        className={
-          naviSticky
-            ? "news-detail-navi-container-active"
-            : "news-detail-navi-container"
-        }
-      >
+      <div className="top-mobile-navbar-container">
+        <TopMobileNavi header={topNaviHeader} path={window.location.pathname} />
+      </div>
+      <div className="news-detail-navi-container">
         <div className="news-detail-publisher-container">
           <a
             target="_blank"
@@ -234,6 +227,15 @@ const NewsDetailPage = () => {
               </div>
             </li>
             <li className="news-detail-social-item">
+              <div className="email-icon-container">
+                <EmailShareButton
+                  url={`https://kerbb.com/dashboard/news/${news._id}`}
+                >
+                  <EmailIcon fontSize="small" />
+                </EmailShareButton>
+              </div>
+            </li>
+            <li className="news-detail-social-item">
               <div
                 className="copy-link-icon-container"
                 onClick={() =>
@@ -274,6 +276,9 @@ const NewsDetailPage = () => {
             }}
           ></p>
         </div>
+      </div>
+      <div className="bottom-mobile-navbar-container">
+        <BottomMobileNavi />
       </div>
     </div>
   );
