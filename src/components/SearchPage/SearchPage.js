@@ -19,6 +19,14 @@ import {
   updateMobileDialog,
 } from "../../features/dialogs/dialogsSlice";
 import ClearIcon from "@mui/icons-material/Clear";
+import {
+  addJobs,
+  getJobSearchObject,
+  updateElementsLoading,
+  updateJobsCount,
+  updateJobSearchObject,
+} from "../../features/jobs/jobsSlice";
+import { fetchJobs } from "../../features/jobs/jobsAPI";
 
 const SearchPage = () => {
   const dispatch = useDispatch();
@@ -75,7 +83,29 @@ const SearchPage = () => {
       setTopNaviHeader(null);
     }
   };
-  const handleSubmit = async () => {};
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    let newJobSearchObject = {
+      page: 1,
+      size: jobSearchObject.size,
+      sort_by: jobSearchObject.sort_by,
+      sort: jobSearchObject.sort,
+      date: jobSearchObject.date,
+      what: inputValue,
+      where: jobSearchObject.where,
+    };
+    dispatch(updateElementsLoading(true));
+    const jobsCountResponse = await fetchJobs({
+      what: inputValue,
+      date: jobSearchObject.date,
+      document_count: true,
+    });
+    const jobsResponse = await fetchJobs(newJobSearchObject);
+    dispatch(updateJobsCount(jobsCountResponse.data));
+    dispatch(addJobs(jobsResponse.data));
+    dispatch(updateJobSearchObject(newJobSearchObject));
+    dispatch(updateElementsLoading(false));
+  };
   const handleInputChange = (e) => {
     const inputValue = e.target.value;
     setInputValue(inputValue);
@@ -91,6 +121,7 @@ const SearchPage = () => {
   const handleInputFocus = () => {
     setCloseIcon(true);
   };
+  const jobSearchObject = useSelector(getJobSearchObject);
   return (
     <div
       className="search-page-container"
@@ -109,9 +140,6 @@ const SearchPage = () => {
           content={`Yüzlerce kurumsal şirketin iş ilanını ve haberlerini Kerbb ile keşfedin! | Kerbb`}
         />
       </Helmet>
-      <div className="top-mobile-navbar-container">
-        <TopMobileNavi header={topNaviHeader} path={window.location.pathname} />
-      </div>
       <div className="search-page-header-container">
         <h1 className="search-page-header">Arama</h1>
       </div>
@@ -167,8 +195,11 @@ const SearchPage = () => {
               <ClearIcon
                 fontSize="small"
                 className={
-                  closeIcon ? "search-clear-icon-active" : "search-clear-icon"
+                  inputValue.length > 0
+                    ? "search-clear-icon-active"
+                    : "search-clear-icon"
                 }
+                onClick={() => setInputValue("")}
               />
             </div>
             <div
@@ -201,9 +232,6 @@ const SearchPage = () => {
       </div>
       <div className="jobs-and-companies-page-container">
         {section === "company" ? <CompaniesPage /> : <JobsPage />}
-      </div>
-      <div className="bottom-mobile-navbar-container">
-        <BottomMobileNavi />
       </div>
     </div>
   );

@@ -120,6 +120,7 @@ const CompanyDetailPage = () => {
     }
   }, [colors]);
   let load = async () => {
+    console.log("hey");
     if (companyDetailJobs.length % 10 === 0 && hasMore) {
       setPageCount(pageCount + 1);
       setLoader(true);
@@ -214,7 +215,6 @@ const CompanyDetailPage = () => {
 
   useEffect(() => {
     async function fetchData() {
-      setLoaderVisible(false);
       setHasMore(true);
       scrollToTop();
       setPageCount(1);
@@ -302,9 +302,6 @@ const CompanyDetailPage = () => {
           content={`Yüzlerce kurumsal şirketin iş ilanını ve haberlerini Kerbb ile keşfedin! | Kerbb`}
         />
       </Helmet>
-      <div className="top-mobile-navbar-container">
-        <TopMobileNavi header={topNaviHeader} path={window.location.pathname} />
-      </div>
       <div
         className={
           naviSticky
@@ -520,10 +517,6 @@ const CompanyDetailPage = () => {
       ) : (
         <div></div>
       )}
-
-      <div className="bottom-mobile-navbar-container">
-        <BottomMobileNavi />
-      </div>
     </div>
   );
 };

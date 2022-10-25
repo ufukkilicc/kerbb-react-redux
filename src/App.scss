@@ -13,17 +13,38 @@
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
   .app-side-navbar-container {
-    height: 100vh;
     padding: 0 1rem;
+    position: sticky;
+    left: 0;
+    top: 0;
+    height: 100%;
     @include kerbb-border-line-right();
     @include media("<=tablet") {
       display: none;
     }
   }
   .app-content-container {
-    height: 100vh;
     width: 100%;
-    overflow-y: hidden;
+    .top-mobile-navbar-container {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      z-index: 99 !important;
+      background-color: white;
+      @include media(">tablet") {
+        display: none;
+      }
+    }
+    .bottom-mobile-navbar-container {
+      position: sticky;
+      bottom: 0;
+      width: 100%;
+      z-index: 99 !important;
+      background-color: white;
+      @include media(">tablet") {
+        display: none;
+      }
+    }
   }
   .snackbar-active {
     position: absolute;

@@ -196,7 +196,9 @@ const JobsPage = () => {
           )}
         </div>
       ) : (
-        <div> yok</div>
+        <div className="no-result-container">
+          <h5 className="no-result-header">Sonuç bulunamadı</h5>
+        </div>
       )}
       <Dialog open={dialog} onClose={handleDialogClose}>
         <Filter />

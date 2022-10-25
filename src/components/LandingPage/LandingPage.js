@@ -398,9 +398,6 @@ const LandingPage = () => {
           content={`Yüzlerce kurumsal şirketin iş ilanını ve haberlerini Kerbb ile keşfedin! | Kerbb`}
         />
       </Helmet>
-      <div className="top-mobile-navbar-container">
-        <TopMobileNavi header={topNaviHeader} />
-      </div>
       <div className="landing-page-banner-container">
         <div className="content-container">
           <div className="content-header-container">
@@ -961,9 +958,6 @@ const LandingPage = () => {
         }
         onClick={scrollToTop}
       />
-      <div className="bottom-mobile-navbar-container">
-        <BottomMobileNavi />
-      </div>
     </div>
   );
 };
