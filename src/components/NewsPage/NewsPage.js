@@ -15,8 +15,6 @@ import {
   getScrolledPage,
   updateScrolledPage,
 } from "../../features/scrolls/scrollsSlice";
-import TopMobileNavi from "../TopMobileNavi/TopMobileNavi";
-import BottomMobileNavi from "../BottomMobileNavi/BottomMobileNavi";
 
 const NewsPage = () => {
   const dispatch = useDispatch();
@@ -122,9 +120,6 @@ const NewsPage = () => {
           content={`Yüzlerce kurumsal şirketin iş ilanını ve haberlerini Kerbb ile keşfedin! | Kerbb`}
         />
       </Helmet>
-      <div className="top-mobile-navbar-container">
-        <TopMobileNavi header={topNaviHeader} path={window.location.pathname} />
-      </div>
       <div className="news-page-navi">
         <div className="news-page-header-container">
           <h1 className="news-page-header">Şirket Haberleri</h1>
@@ -160,9 +155,6 @@ const NewsPage = () => {
                 )}
               </div>
             )}
-          </div>
-          <div className="bottom-mobile-navbar-container">
-            <BottomMobileNavi />
           </div>
         </div>
       )}

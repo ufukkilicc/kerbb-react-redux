@@ -144,6 +144,9 @@ function App() {
           <SideNavbar />
         </div>
         <div className="app-content-container">
+          <div className="top-mobile-navbar-container">
+            <TopMobileNavi />
+          </div>
           <Routes>
             <Route index element={<LandingPage />} />
             <Route path="about" element={<AboutPage />} />
@@ -151,6 +154,9 @@ function App() {
             <Route path="dashboard/*" element={<Dashboard />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
+          <div className="bottom-mobile-navbar-container">
+            <BottomMobileNavi />
+          </div>
         </div>
       </BrowserRouter>
       <div className={snackbar.open ? "snackbar-active" : "snackbar"}>

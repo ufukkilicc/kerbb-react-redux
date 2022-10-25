@@ -4,12 +4,11 @@
 @import "../../common/responsive";
 
 .news-page {
-  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  height: 100vh;
+  width: 100%;
   transition: 0.1s ease-in-out;
   overflow-y: scroll;
   &::-webkit-scrollbar {
@@ -18,32 +17,6 @@
     }
   }
   scroll-behavior: smooth;
-  .top-mobile-navbar-container {
-    position: sticky;
-    top: 0;
-    left: 0;
-    z-index: 5;
-    background-color: white;
-    width: 100%;
-    z-index: 99 !important;
-    transition: 0.1s ease-in-out;
-    @include media(">tablet") {
-      display: none;
-    }
-  }
-  .bottom-mobile-navbar-container {
-    position: sticky;
-    bottom: 0;
-    left: 0;
-    z-index: 5;
-    background-color: white;
-    width: 100%;
-    z-index: 99 !important;
-    transition: 0.1s ease-in-out;
-    @include media(">tablet") {
-      display: none;
-    }
-  }
   .news-page-navi {
     margin-top: 1rem;
     position: sticky;

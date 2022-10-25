@@ -108,9 +108,6 @@ const NewsDetailPage = () => {
         <meta property="og:image" content={`${news.image_url}?w=800`} />
         <meta name="description" content={news.news_content} />
       </Helmet>
-      <div className="top-mobile-navbar-container">
-        <TopMobileNavi header={topNaviHeader} path={window.location.pathname} />
-      </div>
       <div className="news-detail-navi-container">
         <div className="news-detail-publisher-container">
           <a
@@ -276,9 +273,6 @@ const NewsDetailPage = () => {
             }}
           ></p>
         </div>
-      </div>
-      <div className="bottom-mobile-navbar-container">
-        <BottomMobileNavi />
       </div>
     </div>
   );

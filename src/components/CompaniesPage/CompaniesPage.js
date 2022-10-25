@@ -28,6 +28,7 @@ const CompaniesPage = () => {
       const companiesResponse = await fetchCompanies({
         page: 1,
         size: 10,
+        is_active: true,
       });
       // const companiesCountResponse = await fetchCompanies({
       //   what: "",
@@ -51,6 +52,7 @@ const CompaniesPage = () => {
       let newCompaniesSearchObject = {
         page: companiesSearchObject.page + 1,
         size: companiesSearchObject.size,
+        is_active: true,
       };
       dispatch(updateCompaniesSearchObject(newCompaniesSearchObject));
       setLoader(true);
@@ -104,7 +106,7 @@ const CompaniesPage = () => {
   const companies = useSelector(getAllCompanies);
   return (
     <div className="companies-page">
-      <div className="companies-page-navi-container">
+      {/* <div className="companies-page-navi-container">
         <div className="search-container"></div>
         <div className="search-result-count-container">
           <h4 className="search-result-count">
@@ -112,7 +114,7 @@ const CompaniesPage = () => {
           </h4>
           <h4 className="search-result-count-header">sonuç bulundu</h4>
         </div>
-      </div>
+      </div> */}
       <div className="companies-container">
         {elementsLoading ? (
           <div className="companies-skeleton-container">
