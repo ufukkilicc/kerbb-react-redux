@@ -15,6 +15,7 @@ import {
   getScrolledPage,
   updateScrolledPage,
 } from "../../features/scrolls/scrollsSlice";
+import { getMobileNaviObject, updateMobileNaviObject } from "../../features/navigation/navigationSlice";
 
 const NewsPage = () => {
   const dispatch = useDispatch();
@@ -99,13 +100,19 @@ const NewsPage = () => {
 
   const onScroll = () => {
     const { scrollTop } = newsListRef.current;
-    if (scrollTop > 50 && topNaviHeader === null) {
-      setTopNaviHeader("Şirket Haberleri");
-    } else if (scrollTop < 50 && topNaviHeader !== null) {
-      setTopNaviHeader(null);
+    if (scrollTop > 50 && mobileNaviObject === null) {
+      dispatch(
+        updateMobileNaviObject({
+          type: "header",
+          header: "Şirket Haberleri",
+          path: window.location.pathname,
+        })
+      );
+    } else if (scrollTop < 50 && mobileNaviObject !== null) {
+      dispatch(updateMobileNaviObject(null));
     }
   };
-
+  const mobileNaviObject = useSelector(getMobileNaviObject)
   return (
     <div className="news-page" ref={newsListRef} onScroll={onScroll}>
       <Helmet>

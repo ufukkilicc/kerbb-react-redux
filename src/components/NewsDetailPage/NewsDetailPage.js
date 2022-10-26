@@ -28,6 +28,7 @@ import {
   LinkedinShareButton,
 } from "react-share";
 import {
+  getMobileNaviObject,
   updateMobileNaviHeader,
   updateMobileNaviObject,
 } from "../../features/navigation/navigationSlice";
@@ -72,24 +73,29 @@ const NewsDetailPage = () => {
   };
   const onScroll = () => {
     const { scrollTop } = newsDetailInnerRef.current;
-    if (scrollTop > 50 && topNaviHeader === null) {
-      setTopNaviHeader(
-        `${toDateHandler(news.news_date)} - ${
-          news.news_content
-            ? ReadHelper(news.news_content) === "0"
-              ? `${1} dakikalık okuma`
-              : `${ReadHelper(news.news_content)} dakikalık okuma`
-            : ""
-        }`
+    if (scrollTop > 50 && mobileNaviObject === null) {
+      dispatch(
+        updateMobileNaviObject({
+          type: "header",
+          header: `${toDateHandler(news.news_date)} - ${
+            news.news_content
+              ? ReadHelper(news.news_content) === "0"
+                ? `${1} dakikalık okuma`
+                : `${ReadHelper(news.news_content)} dakikalık okuma`
+              : ""
+          }`,
+          path: window.location.pathname,
+        })
       );
-    } else if (scrollTop < 50 && topNaviHeader !== null) {
-      setTopNaviHeader(null);
+    } else if (scrollTop < 50 && mobileNaviObject !== null) {
+      dispatch(updateMobileNaviObject(null));
     }
   };
   const scrollToTop = () => {
     newsDetailInnerRef.current.scrollTo(0, 0);
   };
   const scrolledPage = useSelector(getScrolledPage);
+  const mobileNaviObject = useSelector(getMobileNaviObject);
   useEffect(() => {
     if (scrolledPage.startsWith(window.location.pathname)) {
       scrollToTop();

@@ -9,9 +9,16 @@
   justify-content: flex-start;
   align-items: center;
   width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    @include media(">tablet") {
+      display: none;
+    }
+  }
+  overflow: hidden;
   transition: 0.1s ease-in-out;
   scroll-behavior: smooth;
-  background-color: $kerbb-color-background;
   .landing-page-banner-container {
     // background: linear-gradient(to left, #e8e7ff 70%, #ffffff);
     @include media(">tablet") {

@@ -140,13 +140,13 @@ function App() {
         <meta name="theme-color" content="#ffffff" />
       </Helmet>
       <BrowserRouter>
+        <div className="top-mobile-navbar-container">
+          <TopMobileNavi />
+        </div>
         <div className="app-side-navbar-container">
           <SideNavbar />
         </div>
         <div className="app-content-container">
-          <div className="top-mobile-navbar-container">
-            <TopMobileNavi />
-          </div>
           <Routes>
             <Route index element={<LandingPage />} />
             <Route path="about" element={<AboutPage />} />
@@ -154,9 +154,9 @@ function App() {
             <Route path="dashboard/*" element={<Dashboard />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
-          <div className="bottom-mobile-navbar-container">
-            <BottomMobileNavi />
-          </div>
+        </div>
+        <div className="bottom-mobile-navbar-container">
+          <BottomMobileNavi />
         </div>
       </BrowserRouter>
       <div className={snackbar.open ? "snackbar-active" : "snackbar"}>

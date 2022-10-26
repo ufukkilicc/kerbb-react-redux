@@ -73,7 +73,7 @@ const Illustration = ({ companies }) => {
         <ul className="companies-list">
           {currentCompanies.map((company) => {
             return (
-              <a href={`/dashboard/companies/${company._id}`} key={company._id}>
+              <a href={`/dashboard/companies/${company.name}`} key={company._id}>
                 <li
                   className="companies-item"
                   key={company._id}

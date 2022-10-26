@@ -12,7 +12,7 @@ import "./TopMobileNavi.scss";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { useNavigate } from "react-router-dom";
 
-const TopMobileNavi = ({ header, path }) => {
+const TopMobileNavi = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleScrollToTop = (path) => {
@@ -24,25 +24,35 @@ const TopMobileNavi = ({ header, path }) => {
     dispatch(updateMobileNaviObject(null));
     navigate(-1);
   };
-  useEffect(() => {
-    console.log("hey");
-  }, [header]);
-
+  const mobileNaviObject = useSelector(getMobileNaviObject);
   return (
     <div
       className={
-        header !== null
+        mobileNaviObject !== null
           ? "top-mobile-navi-container-center"
           : "top-mobile-navi-container-start"
       }
     >
-      {header !== null ? (
-        <div
-          className="top-mobile-navi-header-container"
-          onClick={() => handleScrollToTop(path)}
-        >
-          <h2 className="top-mobile-navi-header">{header}</h2>
-        </div>
+      {mobileNaviObject !== null ? (
+        mobileNaviObject.type === "header" ? (
+          <div
+            className="top-mobile-navi-header-container"
+            onClick={() => handleScrollToTop(mobileNaviObject.path)}
+          >
+            <h2 className="top-mobile-navi-header">
+              {mobileNaviObject.header}
+            </h2>
+          </div>
+        ) : (
+          <div
+            className="top-mobile-navi-header-container"
+            onClick={() => handleScrollToTop(mobileNaviObject.path)}
+          >
+            <h2 className="top-mobile-navi-header">
+              {mobileNaviObject.company.name}
+            </h2>
+          </div>
+        )
       ) : (
         <Link to="/">
           <div

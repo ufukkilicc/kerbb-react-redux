@@ -27,6 +27,10 @@ import {
   updateJobSearchObject,
 } from "../../features/jobs/jobsSlice";
 import { fetchJobs } from "../../features/jobs/jobsAPI";
+import {
+  getMobileNaviObject,
+  updateMobileNaviObject,
+} from "../../features/navigation/navigationSlice";
 
 const SearchPage = () => {
   const dispatch = useDispatch();
@@ -77,10 +81,16 @@ const SearchPage = () => {
 
   const onScroll = () => {
     const { scrollTop } = pageInnerRef.current;
-    if (scrollTop > 50 && topNaviHeader === null) {
-      setTopNaviHeader("Arama");
-    } else if (scrollTop < 50 && topNaviHeader !== null) {
-      setTopNaviHeader(null);
+    if (scrollTop > 50 && mobileNaviObject === null) {
+      dispatch(
+        updateMobileNaviObject({
+          type: "header",
+          header: "Arama",
+          path: window.location.pathname,
+        })
+      );
+    } else if (scrollTop < 50 && mobileNaviObject !== null) {
+      dispatch(updateMobileNaviObject(null));
     }
   };
   const handleSubmit = async (e) => {
@@ -122,6 +132,7 @@ const SearchPage = () => {
     setCloseIcon(true);
   };
   const jobSearchObject = useSelector(getJobSearchObject);
+  const mobileNaviObject = useSelector(getMobileNaviObject);
   return (
     <div
       className="search-page-container"

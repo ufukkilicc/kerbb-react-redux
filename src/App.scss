@@ -6,17 +6,41 @@
 .app {
   position: relative;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  @include media(">tablet") {
+    flex-direction: row;
+  }
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
+  .top-mobile-navbar-container {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 99 !important;
+    background-color: white;
+    @include media(">tablet") {
+      display: none;
+    }
+  }
+  .bottom-mobile-navbar-container {
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    z-index: 99 !important;
+    background-color: white;
+    @include media(">tablet") {
+      display: none;
+    }
+  }
   .app-side-navbar-container {
     padding: 0 1rem;
     position: sticky;
     left: 0;
     top: 0;
+    width: fit-content;
     height: 100%;
     @include kerbb-border-line-right();
     @include media("<=tablet") {
@@ -25,26 +49,7 @@
   }
   .app-content-container {
     width: 100%;
-    .top-mobile-navbar-container {
-      position: sticky;
-      top: 0;
-      width: 100%;
-      z-index: 99 !important;
-      background-color: white;
-      @include media(">tablet") {
-        display: none;
-      }
-    }
-    .bottom-mobile-navbar-container {
-      position: sticky;
-      bottom: 0;
-      width: 100%;
-      z-index: 99 !important;
-      background-color: white;
-      @include media(">tablet") {
-        display: none;
-      }
-    }
+    overflow-x: hidden;
   }
   .snackbar-active {
     position: absolute;
