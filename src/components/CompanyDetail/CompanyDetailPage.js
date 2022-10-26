@@ -51,6 +51,7 @@ import {
   getScrolledPage,
   updateScrolledPage,
 } from "../../features/scrolls/scrollsSlice";
+import { getMobileNaviObject, updateMobileNaviObject } from "../../features/navigation/navigationSlice";
 
 const HtmlTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} classes={{ popper: className }} />
@@ -213,6 +214,8 @@ const CompanyDetailPage = () => {
   const companyDetailThemeColor = useSelector(getCompanyDetailThemeColor);
   const scrolledPage = useSelector(getScrolledPage);
 
+  const mobileNaviObject = useSelector(getMobileNaviObject);
+
   useEffect(() => {
     async function fetchData() {
       setHasMore(true);
@@ -243,10 +246,16 @@ const CompanyDetailPage = () => {
 
   const onScroll = () => {
     const { scrollTop } = companyDetailInnerRef.current;
-    if (scrollTop > 300 && topNaviHeader === null) {
-      setTopNaviHeader(`${company.name}`);
-    } else if (scrollTop < 300 && topNaviHeader !== null) {
-      setTopNaviHeader(null);
+    if (scrollTop > 300 && mobileNaviObject === null) {
+      dispatch(
+        updateMobileNaviObject({
+          type: "header",
+          header: company.name,
+          path: window.location.pathname,
+        })
+      );
+    } else if (scrollTop < 300 && mobileNaviObject !== null) {
+      dispatch(updateMobileNaviObject(null));
     }
   };
   const handleDropDown = () => {

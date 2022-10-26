@@ -13,6 +13,10 @@
   align-items: flex-start;
   gap: 3rem;
   padding-bottom: 1rem;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
   .latest-news-container {
     display: flex;
     flex-direction: column;

@@ -19,6 +19,9 @@
     }
   }
   .side-info-container {
+    position: sticky;
+    left: 0;
+    top: 0;
     padding: 0 1rem;
     @include kerbb-border-line-left();
     @include media("<=tablet") {
