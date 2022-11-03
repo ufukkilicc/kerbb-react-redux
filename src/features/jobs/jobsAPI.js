@@ -16,7 +16,7 @@ export const fetchJobs = async (paramObject) => {
     const response = await axios
       .get(`${BASE_URL}/jobs`, {
         params: {
-          query_text: paramObject.what,
+          company_query_text: paramObject.company,
           date: paramObject.date,
           document_count: paramObject.document_count,
         },
@@ -29,6 +29,7 @@ export const fetchJobs = async (paramObject) => {
         params: {
           query_text: paramObject.what,
           location_query_text: paramObject.where,
+          company_query_text: paramObject.company,
           page: paramObject.page,
           sort_by: paramObject.sort_by,
           sort: paramObject.sort,

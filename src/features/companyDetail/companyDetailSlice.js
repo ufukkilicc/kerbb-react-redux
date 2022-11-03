@@ -1,22 +1,30 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+  companyDetailObject: null,
   companyDetailJobs: [],
   companyDetailJobsSearchObject: {
+    page: 1,
+    size: 20,
     sort_by: "date",
     sort: "ASC",
     date: "whole",
     what: "",
     where: "",
+    company: "",
   },
   companyDetailSettingsDropdown: false,
   companyDetailThemeColor: "",
+  companyDetailElementsLoading: false,
 };
 
 export const companyDetailSlice = createSlice({
   name: "companyjobs",
   initialState,
   reducers: {
+    addCompanyDetailObject: (state, { payload }) => {
+      state.companyDetailObject = payload;
+    },
     addCompanyDetailJobs: (state, { payload }) => {
       state.companyDetailJobs = payload;
     },
@@ -34,6 +42,9 @@ export const companyDetailSlice = createSlice({
     updateCompanyDetailThemeColor: (state, { payload }) => {
       state.companyDetailThemeColor = payload;
     },
+    updateCompanyDetailElementsLoading: (state, { payload }) => {
+      state.companyDetailElementsLoading = payload;
+    },
   },
 });
 export const {
@@ -42,6 +53,8 @@ export const {
   updateCompanyDetailJobSearchObject,
   updateCompanyDetailSettingsDropdown,
   updateCompanyDetailThemeColor,
+  updateCompanyDetailElementsLoading,
+  addCompanyDetailObject,
 } = companyDetailSlice.actions;
 export const getAllCompanyDetailJobs = (state) =>
   state.companyjobs.companyDetailJobs;
@@ -51,5 +64,9 @@ export const getCompanyDetailSettingsDropdown = (state) =>
   state.companyjobs.companyDetailSettingsDropdown;
 export const getCompanyDetailThemeColor = (state) =>
   state.companyjobs.companyDetailThemeColor;
+export const getCompanyDetailElementsLoading = (state) =>
+  state.companyjobs.companyDetailElementsLoading;
+export const getCompanyDetailObject = (state) =>
+  state.companyjobs.companyDetailObject;
 
 export default companyDetailSlice.reducer;

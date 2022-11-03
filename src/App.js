@@ -37,6 +37,14 @@ import {
 } from "./features/shareDrawerJob/shareDrawerJobSlice";
 import ShareDrawerJob from "./components/ShareDrawerJob/ShareDrawerJob";
 import ShareDrawerJobMobile from "./components/ShareDrawerJobMobile/ShareDrawerJobMobile";
+import {
+  getCompanyDialog,
+  getCompanyMobileDialog,
+  updateCompanyDialog,
+  updateCompanyMobileDialog,
+} from "./features/dialogs/dialogsSlice";
+import CompanyFilter from "./components/CompanyFilter/CompanyFilter";
+import CompanyMobileFilter from "./components/CompanyMobileFilter/CompanyMobileFilter";
 
 function App() {
   const dispatch = useDispatch();
@@ -99,11 +107,19 @@ function App() {
     //   dispatch(updateShareDrawerJob({}));
     // }, 800);
   };
+  const handleCompanyDialogClose = () => {
+    dispatch(updateCompanyDialog(false));
+  };
+  const handleCompanyMobileDialogClose = () => {
+    dispatch(updateCompanyMobileDialog(false));
+  };
   const shareDrawerOpen = useSelector(getShareOpen);
   const shareDrawerMobileOpen = useSelector(getShareMobileOpen);
   const shareDrawerJobOpen = useSelector(getShareJobOpen);
   const shareDrawerJobMobileOpen = useSelector(getShareJobMobileOpen);
   const snackbar = useSelector(getSnackBar);
+  const companyDialog = useSelector(getCompanyDialog);
+  const companyMobileDialog = useSelector(getCompanyMobileDialog);
   useEffect(() => {
     if (snackbar.open) {
       setTimeout(() => {
@@ -190,6 +206,17 @@ function App() {
         transitionDuration={{ enter: 500, exit: 500 }}
       >
         <ShareDrawerJobMobile />
+      </Drawer>
+      <Dialog open={companyDialog} onClose={handleCompanyDialogClose}>
+        <CompanyFilter />
+      </Dialog>
+      <Drawer
+        open={companyMobileDialog}
+        anchor="bottom"
+        onClose={handleCompanyMobileDialogClose}
+        transitionDuration={{ enter: 500, exit: 500 }}
+      >
+        <CompanyMobileFilter />
       </Drawer>
     </div>
   );

@@ -4,9 +4,13 @@ import CheckIcon from "@mui/icons-material/Check";
 import { useDispatch, useSelector } from "react-redux";
 import { updateCompanyMobileDialog } from "../../features/dialogs/dialogsSlice";
 import {
+  addCompanyDetailJobs,
   getCompanyDetailJobSearchObject,
+  getCompanyDetailObject,
+  updateCompanyDetailElementsLoading,
   updateCompanyDetailJobSearchObject,
 } from "../../features/companyDetail/companyDetailSlice";
+import { fetchJobs } from "../../features/jobs/jobsAPI";
 
 const CompanyMobileFilter = () => {
   const [dateFilter, setDateFilter] = useState("whole");
@@ -36,20 +40,30 @@ const CompanyMobileFilter = () => {
   const handleMobileDialogClose = () => {
     dispatch(updateCompanyMobileDialog(false));
   };
-  const handleSubmit = () => {
-    const newJobSearchObject = {
+  const handleSubmit = async () => {
+    dispatch(updateCompanyDetailElementsLoading(true));
+    const newCompanyDetailJobSearchObject = {
+      page: 1,
+      size: 20,
       sort_by: orderByFilter,
       sort: orderFilter,
       date: dateFilter,
-      query_text: "",
-      location_query_text: "",
+      what: companyDetailJobSearchObject.what,
+      where: companyDetailJobSearchObject.where,
+      company: companyDetailObject.name,
     };
-    dispatch(updateCompanyDetailJobSearchObject(newJobSearchObject));
+    const jobsResponse = await fetchJobs(newCompanyDetailJobSearchObject);
+    dispatch(addCompanyDetailJobs(jobsResponse.data));
+    dispatch(
+      updateCompanyDetailJobSearchObject(newCompanyDetailJobSearchObject)
+    );
     handleMobileDialogClose();
+    dispatch(updateCompanyDetailElementsLoading(false));
   };
   const companyDetailJobSearchObject = useSelector(
     getCompanyDetailJobSearchObject
   );
+  const companyDetailObject = useSelector(getCompanyDetailObject);
   return (
     <div className="mobile-filter">
       <div className="date-filter-container">

@@ -1,12 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  addCompanyDetailJobs,
   getCompanyDetailJobSearchObject,
+  getCompanyDetailObject,
+  updateCompanyDetailElementsLoading,
   updateCompanyDetailJobSearchObject,
 } from "../../features/companyDetail/companyDetailSlice";
 import { updateCompanyDialog } from "../../features/dialogs/dialogsSlice";
 import "./CompanyFilter.scss";
 import CheckIcon from "@mui/icons-material/Check";
+import { fetchJobs } from "../../features/jobs/jobsAPI";
 
 const CompanyFilter = () => {
   const [dateFilter, setDateFilter] = useState("whole");
@@ -47,22 +51,30 @@ const CompanyFilter = () => {
   const handleDialogClose = () => {
     dispatch(updateCompanyDialog(false));
   };
-  const handleSubmit = () => {
-    console.log("asd");
-    const newJobSearchObject = {
+  const handleSubmit = async () => {
+    dispatch(updateCompanyDetailElementsLoading(true));
+    const newCompanyDetailJobSearchObject = {
+      page: 1,
+      size: 20,
       sort_by: orderByFilter,
       sort: orderFilter,
       date: dateFilter,
-      query_text: "",
-      location_query_text: "",
-      from: "companyFilter",
+      what: companyDetailJobSearchObject.what,
+      where: companyDetailJobSearchObject.where,
+      company: companyDetailObject.name,
     };
-    dispatch(updateCompanyDetailJobSearchObject(newJobSearchObject));
+    const jobsResponse = await fetchJobs(newCompanyDetailJobSearchObject);
+    dispatch(addCompanyDetailJobs(jobsResponse.data));
+    dispatch(
+      updateCompanyDetailJobSearchObject(newCompanyDetailJobSearchObject)
+    );
     handleDialogClose();
+    dispatch(updateCompanyDetailElementsLoading(false));
   };
   const companyDetailJobSearchObject = useSelector(
     getCompanyDetailJobSearchObject
   );
+  const companyDetailObject = useSelector(getCompanyDetailObject);
   return (
     <div
       className="company-filter"

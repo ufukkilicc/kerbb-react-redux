@@ -21,12 +21,18 @@ import MobileFilter from "../MobileFilter/MobileFilter";
 import Drawer from "@mui/material/Drawer";
 import Dialog from "@mui/material/Dialog";
 import {
+  getCompanyDialog,
+  getCompanyMobileDialog,
   getDialog,
   getMobileDialog,
+  updateCompanyDialog,
+  updateCompanyMobileDialog,
   updateDialog,
   updateMobileDialog,
 } from "../../features/dialogs/dialogsSlice";
 import CountUp from "react-countup";
+import CompanyFilter from "../CompanyFilter/CompanyFilter";
+import CompanyMobileFilter from "../CompanyMobileFilter/CompanyMobileFilter";
 
 const JobsPage = () => {
   const dispatch = useDispatch();

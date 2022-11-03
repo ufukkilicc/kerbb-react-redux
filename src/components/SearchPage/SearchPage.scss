@@ -231,27 +231,56 @@
       flex-direction: row;
       justify-content: center;
       align-items: center;
+      gap: 1rem;
+      @include media("<=m-phone") {
+        padding: 0 1rem;
+      }
       .search-container {
         width: 85%;
-        height: 30px;
+        height: 40px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        @include kerbb-border();
+        border-radius: 5px;
+        padding: 0 1rem;
+        .search-search-icon {
+          color: $kerbb-color-dark;
+          opacity: 0.5;
+        }
+        .search-clear-icon-active {
+          display: none;
+          display: inline-block;
+          color: $kerbb-color-dark;
+          opacity: 0.5;
+          cursor: pointer;
+          &:hover {
+            opacity: 0.4;
+          }
+          &:active {
+            opacity: 0.5;
+          }
+        }
+        .search-clear-icon {
+          display: none;
+        }
         .search-form {
           width: 100%;
           height: 100%;
           .search-input {
             width: 100%;
             height: 100%;
+            border: none;
+            outline: none;
+            padding: 0 0.5rem;
+            line-height: 16px;
+            font-size: 16px;
+            color: $kerbb-color-dark;
+            font-weight: 700;
+            letter-spacing: 1px;
           }
         }
-      }
-      .filter-container {
-        width: 30px;
-        height: 30px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: $kerbb-color-logo;
-        border-radius: 5px;
-        color: white;
       }
     }
   }

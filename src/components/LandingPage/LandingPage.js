@@ -937,7 +937,7 @@ const LandingPage = () => {
             </li>
             <li className="socials-item">
               <a
-                href="https://www.linkedin.com/company/inbusinesstime"
+                href="https://www.linkedin.com/company/kerbbcom/"
                 rel="noreferrer"
                 target="_blank"
               >

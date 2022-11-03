@@ -1,0 +1,68 @@
+@import "../../common/global";
+@import "../../common/fonts";
+@import "../../common/responsive";
+
+.company-detail-jobs-page-container {
+  width: 100%;
+  background-color: $kerbb-color-background;
+  .jobs-none-container {
+    height: 50vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .header {
+      color: $kerbb-color-dark;
+      opacity: 0.9;
+    }
+  }
+  .jobs-skeleton-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    @include media("<=m-table") {
+      grid-template-columns: 1fr;
+    }
+    @include media("<=m-phone") {
+      padding: 0 1rem;
+    }
+  }
+  .jobs-inner-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    @include media("<=m-table") {
+      grid-template-columns: 1fr;
+    }
+    @include media("<=m-phone") {
+      padding: 0 1rem;
+    }
+  }
+  .loader-container {
+    min-height: 80px;
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 0.5rem 0rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    .loader-active {
+      display: inline-block;
+    }
+    .loader {
+      display: none;
+    }
+    .seen-all-container {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      .seen-all {
+        color: $kerbb-color-logo;
+        opacity: 0.7;
+      }
+    }
+  }
+}
