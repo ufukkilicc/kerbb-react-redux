@@ -41,6 +41,7 @@ const CompaniesPage = () => {
         updateCompaniesSearchObject({
           page: 1,
           size: 10,
+          is_active: true,
         })
       );
       dispatch(updateElementsLoadingCompany(false));

@@ -14,11 +14,15 @@ import SkeletonJob from "../SkeletonJob/SkeletonJob";
 import CircularProgress from "@mui/material/CircularProgress";
 import {
   addCompanyDetailJobs,
+  addCompanyDetailObject,
   getAllCompanyDetailJobs,
   getCompanyDetailJobSearchObject,
+  getCompanyDetailObject,
   getCompanyDetailSettingsDropdown,
   getCompanyDetailThemeColor,
   includeCompanyDetailJobs,
+  updateCompanyDetailElementsLoading,
+  updateCompanyDetailJobSearchObject,
   updateCompanyDetailSettingsDropdown,
   updateCompanyDetailThemeColor,
 } from "../../features/companyDetail/companyDetailSlice";
@@ -51,144 +55,92 @@ import {
   getScrolledPage,
   updateScrolledPage,
 } from "../../features/scrolls/scrollsSlice";
-import { getMobileNaviObject, updateMobileNaviObject } from "../../features/navigation/navigationSlice";
-
-const HtmlTooltip = styled(({ className, ...props }) => (
-  <Tooltip {...props} classes={{ popper: className }} />
-))(({ theme }) => ({
-  [`& .${tooltipClasses.tooltip}`]: {
-    backgroundColor: "#e8e7ff",
-    color: "#4e21e7",
-    maxWidth: 220,
-    padding: "5px",
-    fontSize: theme.typography.pxToRem(12),
-    fontFamily: "'Poppins', sans-serif",
-    border: "1px solid #dadde9",
-    display: "flex",
-    flexDirection: "column",
-    gap: "10px",
-  },
-}));
+import {
+  getMobileNaviObject,
+  updateMobileNaviObject,
+} from "../../features/navigation/navigationSlice";
+import CountUp from "react-countup";
+import ClearIcon from "@mui/icons-material/Clear";
+import SearchIcon from "@mui/icons-material/Search";
+import CompanyDetailJobsPage from "../CompanyDetailJobsPage/CompanyDetailJobsPage";
+import CompanyDetailNewsPage from "../CompanyDetailNewsPage/CompanyDetailNewsPage";
 
 const CompanyDetailPage = () => {
   const dispatch = useDispatch();
-  let { title } = useParams();
-  const [infoSection, setInfoSection] = useState("isilanlari");
-  const companyDetailInnerRef = useRef();
-  const loaderRef = useRef();
-  const [loader, setLoader] = useState(false);
-  const [pageCount, setPageCount] = useState(1);
-  const [company, setCompany] = useState([]);
-  const [jobs, setJobs] = useState([]);
-  const [naviSticky, setNaviSticky] = useState(false);
-  const [elementsLoading, setElementsLoading] = useState(true);
-  const [scrolltop, setScrolltop] = useState(0);
-  const [hasMore, setHasMore] = useState(true);
-  const [loaderVisible, setLoaderVisible] = useState(true);
+  const { title } = useParams();
+  const pageInnerRef = useRef(null);
+  const headerRef = useRef(null);
   const [colors, setColors] = useState(null);
-
-  const [topNaviHeader, setTopNaviHeader] = useState("");
+  const [section, setSection] = useState("jobs");
+  const [closeIcon, setCloseIcon] = useState(false);
+  const [inputValue, setInputValue] = useState("");
+  const [jobCount, setJobCount] = useState(0);
 
   useEffect(() => {
     async function fetchData() {
-      setElementsLoading(true);
-      const companyDetailResponse = await fetchCompanies({
-        page: 1,
+      const jobsCountResponse = await fetchJobs({
+        company: title,
+        date: companyDetailJobsSearchObject.date,
+        document_count: true,
+      });
+      setJobCount(jobsCountResponse.data);
+      const companyResponse = await fetchCompanies({
         query_text: title,
       });
-      const what = companyDetailResponse.data[0].scrape_name;
-      const response = await fetchJobs({
-        what,
-        page: 1,
-        size: 20,
-        sort_by: companyDetailJobSearchObject.sort_by,
-        sort: companyDetailJobSearchObject.sort,
-        date: companyDetailJobSearchObject.date,
-      });
-      setElementsLoading(false);
-      setCompany(companyDetailResponse.data[0]);
-      dispatch(addCompanyDetailJobs(response.data));
-      await incrementCompanyView(company._id);
+      dispatch(addCompanyDetailObject(companyResponse.data[0]));
     }
     fetchData();
   }, []);
   useEffect(() => {
     if (colors !== null && colors.length > 0) {
       dispatch(updateCompanyDetailThemeColor(colors[0]));
-      // document.getElementById(
-      //   "logo-container"
-      // ).style.backgroundImage = `radial-gradient( circle farthest-corner at 22.4% 21.7%, #ffffff 0%, ${colors[0]} 100.2%`;
     }
   }, [colors]);
-  let load = async () => {
-    console.log("hey");
-    if (companyDetailJobs.length % 10 === 0 && hasMore) {
-      setPageCount(pageCount + 1);
-      setLoader(true);
-      const jobsResponse = await fetchJobs({
-        what: company.scrape_name,
-        page: pageCount + 1,
-        size: 20,
-        sort_by: companyDetailJobSearchObject.sort_by,
-        sort: companyDetailJobSearchObject.sort,
-        date: companyDetailJobSearchObject.date,
-      });
-      if (jobsResponse.data.length === 0) {
-        setLoader(false);
-        setHasMore(false);
-      }
-      setLoader(false);
-      dispatch(includeCompanyDetailJobs(jobsResponse.data));
-    } else {
-      setLoader(false);
-      setHasMore(false);
+  const handleJobsSection = () => {
+    if (section === "jobs") {
+      scrollToTop();
     }
+    setSection("jobs");
   };
-  const loaderr = useRef(load);
-  const observer = useRef(
-    new IntersectionObserver(
-      (entries) => {
-        const first = entries[0];
-        if (first.isIntersecting) {
-          loaderr.current();
-        }
-      },
-      { threshold: 0.2 }
-    )
-  );
-  const [element, setElement] = useState(null);
-
-  useEffect(() => {
-    loaderr.current = load;
-  }, [load]);
-
-  useEffect(() => {
-    const currentElement = element;
-    const currentObserver = observer.current;
-
-    if (currentElement) {
-      currentObserver.observe(currentElement);
+  const handleNewsSection = () => {
+    if (section === "news") {
+      scrollToTop();
     }
+    setSection("news");
+  };
 
-    return () => {
-      if (currentElement) {
-        currentObserver.unobserve(currentElement);
-      }
+  const scrollToTop = () => {
+    pageInnerRef.current.scrollTo(0, 0);
+  };
+  const handleInputChange = (e) => {
+    const inputValue = e.target.value;
+    setInputValue(inputValue);
+  };
+  const handleInputFocus = () => {
+    setCloseIcon(true);
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    dispatch(updateCompanyDetailElementsLoading(true));
+    let newCompanyDetailJobSearchObject = {
+      page: 1,
+      size: 20,
+      sort_by: "date",
+      sort: "ASC",
+      date: "whole",
+      what: inputValue,
+      where: "",
+      company: title,
     };
-  }, [element]);
-
-  const handleSectionChange = async (e) => {
-    setInfoSection(e.target.id);
-    scrollToTop();
-  };
-  const handleWheel = (e) => {
-    if (e.deltaY < 0) {
-      setNaviSticky(true);
-    } else {
-      setNaviSticky(false);
-    }
+    const jobsResponse = await fetchJobs(newCompanyDetailJobSearchObject);
+    dispatch(addCompanyDetailJobs(jobsResponse.data));
+    dispatch(
+      updateCompanyDetailJobSearchObject(newCompanyDetailJobSearchObject)
+    );
+    dispatch(updateCompanyDetailElementsLoading(false));
   };
   const handleFilterClick = async () => {
+    console.log("hey");
     const width = window.innerWidth;
     if (width <= 1120) {
       dispatch(updateCompanyMobileDialog(true));
@@ -196,89 +148,63 @@ const CompanyDetailPage = () => {
       dispatch(updateCompanyDialog(true));
     }
   };
-  const handleDialogClose = async () => {
-    dispatch(updateCompanyDialog(false));
-  };
-  const handleMobilDialogClose = async () => {
-    dispatch(updateCompanyMobileDialog(false));
-  };
-  const companyDetailJobs = useSelector(getAllCompanyDetailJobs);
-  const companyDialog = useSelector(getCompanyDialog);
-  const companyMobileDialog = useSelector(getCompanyMobileDialog);
-  const companyDetailJobSearchObject = useSelector(
-    getCompanyDetailJobSearchObject
-  );
-  const companyDetailSettingsDropdown = useSelector(
-    getCompanyDetailSettingsDropdown
-  );
-  const companyDetailThemeColor = useSelector(getCompanyDetailThemeColor);
-  const scrolledPage = useSelector(getScrolledPage);
-
-  const mobileNaviObject = useSelector(getMobileNaviObject);
-
-  useEffect(() => {
-    async function fetchData() {
-      setHasMore(true);
-      scrollToTop();
-      setPageCount(1);
-      setElementsLoading(true);
-      const jobsResponse = await fetchJobs({
-        what: company.scrape_name,
-        page: 1,
-        size: 20,
-        sort_by: companyDetailJobSearchObject.sort_by,
-        sort: companyDetailJobSearchObject.sort,
-        date: companyDetailJobSearchObject.date,
-      });
-      console.log({
-        what: company.scrape_name,
-        page: 1,
-        size: 20,
-        sort_by: companyDetailJobSearchObject.sort_by,
-        sort: companyDetailJobSearchObject.sort,
-        date: companyDetailJobSearchObject.date,
-      });
-      setElementsLoading(false);
-      dispatch(addCompanyDetailJobs(jobsResponse.data));
-    }
-    fetchData();
-  }, [companyDetailJobSearchObject]);
-
   const onScroll = () => {
-    const { scrollTop } = companyDetailInnerRef.current;
-    if (scrollTop > 300 && mobileNaviObject === null) {
+    const { scrollTop } = pageInnerRef.current;
+    if (scrollTop > 265 && mobileNaviObject === null) {
       dispatch(
         updateMobileNaviObject({
-          type: "header",
-          header: company.name,
+          type: "object",
+          company: companyDetailObject,
           path: window.location.pathname,
         })
       );
-    } else if (scrollTop < 300 && mobileNaviObject !== null) {
+    } else if (scrollTop < 50 && mobileNaviObject !== null) {
       dispatch(updateMobileNaviObject(null));
     }
   };
-  const handleDropDown = () => {
+  const handleClear = async () => {
+    setInputValue("");
+    dispatch(updateCompanyDetailElementsLoading(true));
+    let newCompanyDetailJobSearchObject = {
+      page: 1,
+      size: 20,
+      sort_by: "date",
+      sort: "ASC",
+      date: "whole",
+      what: "",
+      where: "",
+      company: title,
+    };
+    const jobsResponse = await fetchJobs(newCompanyDetailJobSearchObject);
+    dispatch(addCompanyDetailJobs(jobsResponse.data));
+    dispatch(updateCompanyDetailElementsLoading(false));
+  };
+  const handleShareDrawerCompanyOpen = () => {
+    const width = window.innerWidth;
+    dispatch(updateShareDrawerCompany(companyDetailObject));
+    if (width <= 1120) {
+      dispatch(updateShareMobileOpen(true));
+    } else {
+      dispatch(updateShareOpen(true));
+    }
+    dispatch(updateCompanyDetailSettingsDropdown(""));
+  };
+  const handleDropdown = () => {
     if (companyDetailSettingsDropdown) {
       dispatch(updateCompanyDetailSettingsDropdown(false));
     } else {
       dispatch(updateCompanyDetailSettingsDropdown(true));
     }
   };
-  const handleShareDrawerOpen = () => {
-    const width = window.innerWidth;
-    dispatch(updateShareDrawerCompany(company));
-    if (width <= 1120) {
-      dispatch(updateShareMobileOpen(true));
-    } else {
-      dispatch(updateShareOpen(true));
-    }
-    dispatch(updateCompanyDetailSettingsDropdown(false));
-  };
-
-  const scrollToTop = () => {
-    companyDetailInnerRef.current.scrollTo(0, 0);
-  };
+  const companyDetailJobsSearchObject = useSelector(
+    getCompanyDetailJobSearchObject
+  );
+  const companyDetailObject = useSelector(getCompanyDetailObject);
+  const mobileNaviObject = useSelector(getMobileNaviObject);
+  const scrolledPage = useSelector(getScrolledPage);
+  const companyDetailSettingsDropdown = useSelector(
+    getCompanyDetailSettingsDropdown
+  );
   useEffect(() => {
     if (scrolledPage === window.location.pathname) {
       scrollToTop();
@@ -288,244 +214,209 @@ const CompanyDetailPage = () => {
   return (
     <div
       className="company-detail-page-container"
-      ref={companyDetailInnerRef}
       onScroll={onScroll}
-      onWheel={handleWheel}
+      ref={pageInnerRef}
     >
       <Helmet>
         <title>{`(${
-          company ? (company.job_count ? company.job_count : 0) : 0
+          companyDetailObject
+            ? companyDetailObject.job_count
+              ? companyDetailObject.job_count
+              : 0
+            : 0
         }) ${
-          company ? (company.name ? company.name : "") : ""
+          companyDetailObject
+            ? companyDetailObject.name
+              ? companyDetailObject.name
+              : ""
+            : ""
         } İş İlanları`}</title>
         <meta
           property="og:title"
-          content={`${company.name} İş İlanları  | Kerbb`}
+          content={`${
+            companyDetailObject ? companyDetailObject.name : ""
+          } İş İlanları  | Kerbb`}
         />
         <meta
           property="og:image"
-          content={`${company.cover_image_url}?w=800`}
+          content={`${
+            companyDetailObject ? companyDetailObject.cover_image_url : ""
+          }?w=800`}
         />
         <meta
           name="description"
           content={`Yüzlerce kurumsal şirketin iş ilanını ve haberlerini Kerbb ile keşfedin! | Kerbb`}
         />
       </Helmet>
-      <div
-        className={
-          naviSticky
-            ? "company-detail-page-navi-active"
-            : "company-detail-page-navi"
-        }
-      >
-        <div className="company-info-container">
-          <div className="company-title-and-logo-image-container">
-            <div className="company-info-logo-image-container">
-              <ColorExtractor getColors={setColors}>
-                <img
-                  src={
-                    company
-                      ? company.logo_image_url === ""
-                        ? process.env.PUBLIC_URL + "/no-image.png"
-                        : company.logo_image_url
-                      : company.logo_image_url
-                  }
-                  alt=""
-                />
-              </ColorExtractor>
-            </div>
-            <div className="company-info-title-container">
-              <h1 className="company-title">
-                {company ? company.name : ""}
-                <sup
-                  className={
-                    company
-                      ? company.is_approved
-                        ? "company-approve-container-active"
-                        : "company-approve-container"
-                      : ""
-                  }
-                >
-                  <CheckCircleIcon fontSize="small" />
-                </sup>
-                {/* <sup className="company-job-count">+{company.job_count}</sup> */}
-              </h1>
-            </div>
-          </div>
-          <div className="company-info-cover-image-container">
+      <div className="company-detail-page-navi-container">
+        <div className="company-cover-image-and-info-container">
+          <img
+            className="company-cover-image"
+            src={
+              companyDetailObject
+                ? companyDetailObject.cover_image_url === ""
+                  ? process.env.PUBLIC_URL + "/no-image.png"
+                  : companyDetailObject.cover_image_url
+                : process.env.PUBLIC_URL + "/no-image.png"
+            }
+            alt=""
+          />
+          <ColorExtractor getColors={setColors}>
             <img
+              className="company-cover-image"
+              style={{ display: "none" }}
               src={
-                company
-                  ? company.cover_image_url === ""
-                    ? process.env.PUBLIC_URL + "/no-image-cover.jpg"
-                    : company.cover_image_url
-                  : process.env.PUBLIC_URL + "/no-image-cover.jpg"
+                companyDetailObject
+                  ? companyDetailObject.logo_image_url === ""
+                    ? process.env.PUBLIC_URL + "/no-image.png"
+                    : companyDetailObject.logo_image_url
+                  : process.env.PUBLIC_URL + "/no-image.png"
               }
               alt=""
             />
-          </div>
-          <div className="company-settings-container">
+          </ColorExtractor>
+          <div className="company-info-container">
             <div
-              className="company-settings-icon-container"
-              onClick={handleDropDown}
+              className="company-header-container"
+              ref={headerRef}
+              style={{ borderLeftColor: colors ? colors[0] : "#4e21e7" }}
             >
-              <MoreHorizIcon fontSize="medium" />
-            </div>
-            <div
-              className={
-                companyDetailSettingsDropdown
-                  ? "company-settings-dropdown-active"
-                  : "company-settings-dropdown"
-              }
-            >
-              <ul className="company-settings-dropdown-list">
-                <li
-                  className="company-settings-dropdown-item"
-                  onClick={handleShareDrawerOpen}
-                >
-                  <div className="company-settings-dropdown-item-icon-container">
-                    <IosShareIcon fontSize="small" />
-                  </div>
-                  <div className="company-settings-dropdown-item-header-container">
-                    <h6 className="company-settings-dropdown-item-header">
-                      Paylaş
-                    </h6>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div className="company-features-container">
-          <ul className="company-features">
-            <li
-              className={
-                infoSection === "isilanlari"
-                  ? "company-feature-active"
-                  : "company-feature"
-              }
-              style={{
-                borderBottomColor:
-                  infoSection === "isilanlari" &&
-                  window.location.pathname.includes("/companies/") &&
-                  companyDetailThemeColor !== ""
-                    ? companyDetailThemeColor
-                    : "#4e21e7",
-              }}
-            >
-              <h4
-                className="company-feature-title"
-                id="isilanlari"
-                onClick={handleSectionChange}
-              >
-                {`İş İlanları (${company ? company.job_count : 0})`}
-              </h4>
-            </li>
-            {/* <li
-              className={
-                infoSection == "haberler"
-                  ? "company-feature-active"
-                  : "company-feature"
-              }
-            >
-              <h4
-                className="company-feature-title"
-                id="haberler"
-                onClick={handleSectionChange}
-              >
-                Haberler
-              </h4>
-            </li> */}
-          </ul>
-          <div className="filter-icon-container">
-            <HtmlTooltip
-              title="filtre"
-              placement="bottom"
-              TransitionComponent={Zoom}
-            >
-              <div
-                className="filter-icon"
-                style={{
-                  backgroundColor:
-                    window.location.pathname.includes("/companies/") &&
-                    companyDetailThemeColor !== ""
-                      ? companyDetailThemeColor
-                      : "#4e21e7",
-                }}
-                onClick={handleFilterClick}
-              >
-                <TuneIcon fontSize="medium" />
-              </div>
-            </HtmlTooltip>
-          </div>
-        </div>
-        {/* <div className="company-search-container">
-          <div className="company-search-inner-container">
-            <input
-              type="text"
-              className="company-search-input"
-              placeholder="Pozisyon adı veya lokasyon"
-            />
-            <div className="company-search-input-icon-container">
-              <FontAwesomeIcon icon={faSearch} size="lg" />
-            </div>
-          </div>
-        </div> */}
-      </div>
-      {elementsLoading ? (
-        <div className="company-skeleton-jobs-container">
-          <SkeletonJob />
-          <SkeletonJob />
-          <SkeletonJob />
-          <SkeletonJob />
-          <SkeletonJob />
-          <SkeletonJob />
-        </div>
-      ) : (
-        <div className="company-jobs-container">
-          {companyDetailJobs.length > 0 &&
-          companyDetailJobs[0].scrape_name === company.scrape_name ? (
-            companyDetailJobs.map((job) => {
-              return <Job job={job} key={job._id} />;
-            })
-          ) : (
-            <div></div>
-          )}
-        </div>
-      )}
-      <Dialog open={companyDialog} onClose={handleDialogClose}>
-        <CompanyFilter />
-      </Dialog>
-      <Drawer
-        open={companyMobileDialog}
-        anchor="bottom"
-        onClose={handleMobilDialogClose}
-        transitionDuration={{ enter: 500, exit: 500 }}
-      >
-        <CompanyMobileFilter />
-      </Drawer>
-      {loaderVisible ? (
-        <div className="loader-container" ref={setElement}>
-          {hasMore ? (
-            <div className={loader ? "loader-active" : "loader"}>
-              <CircularProgress
-                size="30px"
-                sx={{ color: "#4e21e7", opacity: 0.8 }}
+              <h1 className="company-header">
+                {companyDetailObject ? companyDetailObject.name : ""}
+              </h1>
+              <CheckCircleIcon
+                className={
+                  companyDetailObject
+                    ? companyDetailObject.is_approved
+                      ? "company-header-approved-container-active"
+                      : "company-header-approved-container"
+                    : "company-header-approved-container"
+                }
+                fontSize="small"
               />
             </div>
-          ) : (
-            <div className="seen-all-container">
-              {companyDetailJobs.length > 20 ? (
-                <h5 className="seen-all">Tümünü gördün</h5>
-              ) : (
-                <div></div>
-              )}
+            <div className="company-interaction-container">
+              <div className="company-settings-container">
+                <MoreHorizIcon
+                  className="company-settings"
+                  fontSize="medium"
+                  onClick={() => handleDropdown()}
+                />
+                <div
+                  className={
+                    companyDetailSettingsDropdown
+                      ? "company-settings-dropdown-active"
+                      : "company-settings-dropdown"
+                  }
+                >
+                  <ul className="company-settings-dropdown-list">
+                    <li
+                      className="company-settings-dropdown-item"
+                      onClick={() => handleShareDrawerCompanyOpen()}
+                    >
+                      <div className="job-settings-dropdown-item-icon-container">
+                        <IosShareIcon fontSize="small" />
+                      </div>
+                      <div className="company-settings-dropdown-item-header-container">
+                        <h6 className="company-settings-dropdown-item-header">
+                          Paylaş
+                        </h6>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
-          )}
+          </div>
         </div>
-      ) : (
-        <div></div>
-      )}
+      </div>
+
+      <div
+        className="company-detail-page-other-navi-container"
+        style={{ borderTopColor: colors ? colors[0] : "#4e21e7" }}
+      >
+        <div className="tabs-container">
+          <ul className="tabs-list">
+            <li
+              className={
+                section === "jobs" ? "tabs-item-jobs-active" : "tabs-item-jobs"
+              }
+              onClick={() => handleJobsSection()}
+            >
+              <h2 className="tabs-item-header">İŞ İLANLARI</h2>
+              <h2 className="tabs-item-paranthese">(</h2>
+              <h2 className="tabs-item-count">
+                <CountUp end={jobCount} duration={0.5} />
+              </h2>
+              <h2 className="tabs-item-paranthese">)</h2>
+            </li>
+            <li
+              className={
+                section === "news" ? "tabs-item-news-active" : "tabs-item-news"
+              }
+              onClick={() => handleNewsSection()}
+            >
+              <div className="tabs-item-header-container">
+                <h2 className="tabs-item-header">HABERLER</h2>
+                <h3 className="tabs-item-beta">BETA</h3>
+              </div>
+            </li>
+          </ul>
+          <div
+            className={
+              section === "news"
+                ? "tabs-container-cover-news"
+                : "tabs-container-cover-jobs"
+            }
+            style={{
+              backgroundColor: colors ? colors[0] : "#4e21e7",
+            }}
+          ></div>
+        </div>
+        <div
+          className={
+            section === "jobs"
+              ? "job-search-and-filter-container-active"
+              : "job-search-and-filter-container"
+          }
+        >
+          <div className="search-container">
+            <SearchIcon fontSize="small" className="search-search-icon" />
+            <form onSubmit={handleSubmit} className="search-form">
+              <input
+                type="text"
+                value={inputValue}
+                onChange={handleInputChange}
+                onFocus={handleInputFocus}
+                className="search-input"
+              />
+            </form>
+            <ClearIcon
+              fontSize="small"
+              className={
+                inputValue.length > 0
+                  ? "search-clear-icon-active"
+                  : "search-clear-icon"
+              }
+              onClick={() => handleClear()}
+            />
+          </div>
+          <div
+            className="filter-container"
+            style={{ backgroundColor: colors ? colors[0] : "#4e21e7" }}
+            onClick={() => handleFilterClick()}
+          >
+            <TuneIcon fontSize="medium" />
+          </div>
+        </div>
+      </div>
+      <div className="jobs-and-news-page-container">
+        {section === "jobs" ? (
+          <CompanyDetailJobsPage />
+        ) : (
+          <CompanyDetailNewsPage />
+        )}
+      </div>
     </div>
   );
 };

@@ -5,11 +5,11 @@
 .company {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   position: relative;
   width: 100%;
-  height: auto;
+  min-height: 305px;
   padding: 1rem;
   @include kerbb-border();
   border-radius: 5px;
@@ -95,6 +95,7 @@
   }
   .company-highlighted-jobs-container {
     width: 100%;
+    height: 100%;
     display: grid;
     grid-template-rows: 1fr 1fr;
   }

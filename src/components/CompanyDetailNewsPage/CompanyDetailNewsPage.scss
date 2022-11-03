@@ -1,0 +1,15 @@
+@import "../../common/global";
+@import "../../common/fonts";
+@import "../../common/responsive";
+
+.company-detail-news-page-container {
+  height: 50vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .header {
+    color: $kerbb-color-dark;
+    opacity: 0.9;
+  }
+}

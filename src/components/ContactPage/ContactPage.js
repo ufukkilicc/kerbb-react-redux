@@ -38,9 +38,6 @@ const ContactPage = () => {
           content={`Yüzlerce kurumsal şirketin iş ilanını ve haberlerini Kerbb ile keşfedin! | Kerbb`}
         />
       </Helmet>
-      <div className="top-mobile-navbar-container">
-        <TopMobileNavi header={topNaviHeader} />
-      </div>
       <div className="contact-page">
         <div className="header-container">
           <h1 className="header">İletişim</h1>
@@ -167,7 +164,7 @@ const ContactPage = () => {
             </li>
             <li className="socials-item">
               <a
-                href="https://www.linkedin.com/company/inbusinesstime"
+                href="https://www.linkedin.com/company/kerbbcom"
                 rel="noreferrer"
                 target="_blank"
               >
@@ -178,9 +175,6 @@ const ContactPage = () => {
             </li>
           </ul>
         </div>
-      </div>
-      <div className="bottom-mobile-navbar-container">
-        <BottomMobileNavi />
       </div>
     </div>
   );

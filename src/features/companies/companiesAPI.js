@@ -18,19 +18,32 @@ export const fetchCompanies = async (paramObject) => {
       .catch((err) => console.log(err));
     return response;
   } else if (paramObject.is_active) {
-    const response = await axios
-      .get(`${BASE_URL}/companies`, {
-        params: {
-          query_text: paramObject.query_text || "",
-          page: paramObject.page,
-          size: paramObject.size,
-          sort_by: paramObject.sort_by,
-          sort: paramObject.sort,
-          is_active: paramObject.is_active,
-        },
-      })
-      .catch((err) => console.log(err));
-    return response;
+    if (paramObject.document_count) {
+      const response = await axios
+        .get(`${BASE_URL}/companies`, {
+          params: {
+            query_text: paramObject.query_text || "",
+            is_active: paramObject.is_active,
+            document_count: paramObject.document_count,
+          },
+        })
+        .catch((err) => console.log(err));
+      return response;
+    } else {
+      const response = await axios
+        .get(`${BASE_URL}/companies`, {
+          params: {
+            query_text: paramObject.query_text || "",
+            page: paramObject.page,
+            size: paramObject.size,
+            sort_by: paramObject.sort_by,
+            sort: paramObject.sort,
+            is_active: paramObject.is_active,
+          },
+        })
+        .catch((err) => console.log(err));
+      return response;
+    }
   } else if (paramObject.state) {
     const response = await axios
       .get(`${BASE_URL}/companies`, {

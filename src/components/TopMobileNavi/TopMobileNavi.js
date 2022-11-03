@@ -11,6 +11,7 @@ import { updateScrolledPage } from "../../features/scrolls/scrollsSlice";
 import "./TopMobileNavi.scss";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { useNavigate } from "react-router-dom";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 const TopMobileNavi = () => {
   const dispatch = useDispatch();
@@ -51,6 +52,14 @@ const TopMobileNavi = () => {
             <h2 className="top-mobile-navi-header">
               {mobileNaviObject.company.name}
             </h2>
+            <CheckCircleIcon
+              fontSize="small"
+              className={
+                mobileNaviObject.company.is_approved
+                  ? "top-mobile-navi-header-approve-container-active"
+                  : "top-mobile-navi-header-approve-container"
+              }
+            />
           </div>
         )
       ) : (

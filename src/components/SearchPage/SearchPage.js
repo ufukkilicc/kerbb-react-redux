@@ -31,6 +31,8 @@ import {
   getMobileNaviObject,
   updateMobileNaviObject,
 } from "../../features/navigation/navigationSlice";
+import { fetchCompanies } from "../../features/companies/companiesAPI";
+import { addCompanies, updateCompaniesCount, updateCompaniesSearchObject, updateElementsLoadingCompany } from "../../features/companies/companiesSlice";
 
 const SearchPage = () => {
   const dispatch = useDispatch();
@@ -42,16 +44,19 @@ const SearchPage = () => {
   const [topNaviHeader, setTopNaviHeader] = useState(null);
 
   const [inputValue, setInputValue] = useState("");
-
-  const [closeIcon, setCloseIcon] = useState(false);
+  const [companyInputValue, setCompanyInputValue] = useState("");
 
   const [section, setSection] = useState("company");
 
   useEffect(() => {
     async function fetchData() {
       const totals = await fetchTotal();
+      const companiesCount = await fetchCompanies({
+        is_active: true,
+        document_count: true,
+      });
       setJobCount(totals.data["job"]);
-      setCompanyCount(totals.data["company"]);
+      setCompanyCount(companiesCount.data[0]);
     }
     fetchData();
   }, []);
@@ -116,9 +121,35 @@ const SearchPage = () => {
     dispatch(updateJobSearchObject(newJobSearchObject));
     dispatch(updateElementsLoading(false));
   };
+  const handleCompanySubmit = async (e) => {
+    e.preventDefault();
+    let newCompanySearchObject = {
+      page: 1,
+      size: jobSearchObject.size,
+      sort_by: jobSearchObject.sort_by,
+      sort: jobSearchObject.sort,
+      date: jobSearchObject.date,
+      what: inputValue,
+      where: jobSearchObject.where,
+    };
+    dispatch(updateElementsLoadingCompany(true));
+    const companiesCountResponse = await fetchJobs({
+      query_text: companyInputValue,
+      document_count: true,
+    });
+    const companiesResponse = await fetchCompanies(newCompanySearchObject);
+    dispatch(updateCompaniesCount(companiesCountResponse.data));
+    dispatch(addCompanies(companiesResponse.data));
+    dispatch(updateCompaniesSearchObject(newCompanySearchObject));
+    dispatch(updateElementsLoadingCompany(false));
+  };
   const handleInputChange = (e) => {
     const inputValue = e.target.value;
     setInputValue(inputValue);
+  };
+  const handleCompanyInputChange = (e) => {
+    const inputValue = e.target.value;
+    setCompanyInputValue(inputValue);
   };
   const handleFilterClick = async () => {
     const width = window.innerWidth;
@@ -127,9 +158,6 @@ const SearchPage = () => {
     } else {
       dispatch(updateDialog(true));
     }
-  };
-  const handleInputFocus = () => {
-    setCloseIcon(true);
   };
   const jobSearchObject = useSelector(getJobSearchObject);
   const mobileNaviObject = useSelector(getMobileNaviObject);
@@ -199,7 +227,6 @@ const SearchPage = () => {
                   type="text"
                   value={inputValue}
                   onChange={handleInputChange}
-                  onFocus={handleInputFocus}
                   className="search-input"
                 />
               </form>
@@ -223,20 +250,24 @@ const SearchPage = () => {
         ) : (
           <div className="company-search-and-filter-container">
             {/* <div className="search-container">
-              <form onSubmit={handleSubmit} className="search-form">
+              <SearchIcon fontSize="small" className="search-search-icon" />
+              <form onSubmit={handleCompanySubmit} className="search-form">
                 <input
                   type="text"
-                  value={inputValue}
-                  onChange={handleInputChange}
+                  value={companyInputValue}
+                  onChange={handleCompanyInputChange}
                   className="search-input"
                 />
               </form>
-            </div>
-            <div
-              className="filter-container"
-              onClick={() => handleFilterClick()}
-            >
-              <TuneIcon fontSize="small" />
+              <ClearIcon
+                fontSize="small"
+                className={
+                  companyInputValue.length > 0
+                    ? "search-clear-icon-active"
+                    : "search-clear-icon"
+                }
+                onClick={() => setCompanyInputValue("")}
+              />
             </div> */}
           </div>
         )}

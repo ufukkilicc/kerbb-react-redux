@@ -61,10 +61,10 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    &:hover{
+    &:hover {
       opacity: 0.6;
     }
-    &:active{
+    &:active {
       opacity: 0.9;
     }
     .top-mobile-navi-header {
@@ -81,6 +81,14 @@
         }
       }
     }
+    .top-mobile-navi-header-approve-container-active {
+      display: block;
+      color: $kerbb-color-logo;
+      transform: scale(0.7);
+    }
+    .top-mobile-navi-header-approve-container {
+      display: none;
+    }
   }
   .navigation-icon-container {
     position: absolute;
@@ -92,10 +100,10 @@
     text-align: center;
     margin-top: 5px;
     cursor: pointer;
-    &:hover{
+    &:hover {
       opacity: 0.2;
     }
-    &:active{
+    &:active {
       opacity: 0.6;
     }
     @keyframes back {

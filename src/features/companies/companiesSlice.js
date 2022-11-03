@@ -6,6 +6,8 @@ const initialState = {
   companiesSearchObject: {
     page: 1,
     size: 10,
+    query_text: "",
+    is_active: true,
   },
   elementsLoading: false,
   companiesCount: 0,
