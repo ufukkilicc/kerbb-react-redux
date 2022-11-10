@@ -3,6 +3,7 @@ import axios from "axios";
 import BASE_URL from "../../common/apis/Api";
 
 export const fetchJobs = async (paramObject) => {
+  console.log(paramObject);
   if (paramObject.is_highlighted) {
     const response = await axios
       .get(`${BASE_URL}/jobs`, {
@@ -17,6 +18,7 @@ export const fetchJobs = async (paramObject) => {
       .get(`${BASE_URL}/jobs`, {
         params: {
           company_query_text: paramObject.company,
+          query_text: paramObject.what,
           date: paramObject.date,
           document_count: paramObject.document_count,
         },

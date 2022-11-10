@@ -11,6 +11,7 @@ const initialState = {
   },
   elementsLoading: false,
   companiesCount: 0,
+  companySettingsDropdown: "",
 };
 
 export const companiesSlice = createSlice({
@@ -37,6 +38,9 @@ export const companiesSlice = createSlice({
     updateCompaniesSearchObject: (state, { payload }) => {
       state.companiesSearchObject = payload;
     },
+    updateCompanySettingsDropdown: (state, { payload }) => {
+      state.companySettingsDropdown = payload;
+    },
   },
 });
 export const {
@@ -46,6 +50,7 @@ export const {
   updateElementsLoadingCompany,
   updateCompaniesCount,
   updateCompaniesSearchObject,
+  updateCompanySettingsDropdown,
 } = companiesSlice.actions;
 export const getCompany = (state) => state.companies.company;
 export const getAllCompanies = (state) => state.companies.companies;
@@ -54,5 +59,7 @@ export const getElementsLoadingCompany = (state) =>
 export const getCompaniesCount = (state) => state.companies.companiesCount;
 export const getCompaniesSearchObject = (state) =>
   state.companies.companiesSearchObject;
+export const getCompanySettingsDropdown = (state) =>
+  state.companies.companySettingsDropdown;
 
 export default companiesSlice.reducer;

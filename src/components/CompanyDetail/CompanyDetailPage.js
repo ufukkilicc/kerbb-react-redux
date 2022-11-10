@@ -16,12 +16,14 @@ import {
   addCompanyDetailJobs,
   addCompanyDetailObject,
   getAllCompanyDetailJobs,
+  getCompanyDetailJobsCount,
   getCompanyDetailJobSearchObject,
   getCompanyDetailObject,
   getCompanyDetailSettingsDropdown,
   getCompanyDetailThemeColor,
   includeCompanyDetailJobs,
   updateCompanyDetailElementsLoading,
+  updateCompanyDetailJobsCount,
   updateCompanyDetailJobSearchObject,
   updateCompanyDetailSettingsDropdown,
   updateCompanyDetailThemeColor,
@@ -83,7 +85,7 @@ const CompanyDetailPage = () => {
         date: companyDetailJobsSearchObject.date,
         document_count: true,
       });
-      setJobCount(jobsCountResponse.data);
+      dispatch(updateCompanyDetailJobsCount(jobsCountResponse.data));
       const companyResponse = await fetchCompanies({
         query_text: title,
       });
@@ -132,7 +134,14 @@ const CompanyDetailPage = () => {
       where: "",
       company: title,
     };
+    const jobsCountResponse = await fetchJobs({
+      what: inputValue,
+      company: title,
+      date: companyDetailJobsSearchObject.date,
+      document_count: true,
+    });
     const jobsResponse = await fetchJobs(newCompanyDetailJobSearchObject);
+    dispatch(updateCompanyDetailJobsCount(jobsCountResponse.data));
     dispatch(addCompanyDetailJobs(jobsResponse.data));
     dispatch(
       updateCompanyDetailJobSearchObject(newCompanyDetailJobSearchObject)
@@ -175,7 +184,14 @@ const CompanyDetailPage = () => {
       where: "",
       company: title,
     };
+    const jobsCountResponse = await fetchJobs({
+      what: "",
+      company: title,
+      date: companyDetailJobsSearchObject.date,
+      document_count: true,
+    });
     const jobsResponse = await fetchJobs(newCompanyDetailJobSearchObject);
+    dispatch(updateCompanyDetailJobsCount(jobsCountResponse.data));
     dispatch(addCompanyDetailJobs(jobsResponse.data));
     dispatch(updateCompanyDetailElementsLoading(false));
   };
@@ -205,6 +221,7 @@ const CompanyDetailPage = () => {
   const companyDetailSettingsDropdown = useSelector(
     getCompanyDetailSettingsDropdown
   );
+  const companyDetailJobsCount = useSelector(getCompanyDetailJobsCount);
   useEffect(() => {
     if (scrolledPage === window.location.pathname) {
       scrollToTop();
@@ -346,7 +363,7 @@ const CompanyDetailPage = () => {
               <h2 className="tabs-item-header">İŞ İLANLARI</h2>
               <h2 className="tabs-item-paranthese">(</h2>
               <h2 className="tabs-item-count">
-                <CountUp end={jobCount} duration={0.5} />
+                <CountUp end={companyDetailJobsCount} duration={0.5} />
               </h2>
               <h2 className="tabs-item-paranthese">)</h2>
             </li>

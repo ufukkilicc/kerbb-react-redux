@@ -43,6 +43,7 @@ import { fetchTotal } from "../../features/total/totalAPI";
 import { updateMobileNaviObject } from "../../features/navigation/navigationSlice";
 import TopMobileNavi from "../TopMobileNavi/TopMobileNavi";
 import BottomMobileNavi from "../BottomMobileNavi/BottomMobileNavi";
+import { Cursor, useTypewriter } from "react-simple-typewriter";
 
 const HtmlTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} classes={{ popper: className }} />
@@ -70,6 +71,28 @@ const HtmlTooltip = styled(({ className, ...props }) => (
 }));
 
 const LandingPage = () => {
+  const [text, count] = useTypewriter({
+    words: ["Tek tıkla yüzlerce sitede dolaş."],
+    delaySpeed: 2000,
+    deleteSpeed: 30,
+    loop: 1,
+    onLoopDone: () => {
+      setNextLine(true);
+    },
+    typeSpeed: 30,
+  });
+  const [textNextLine, countNextLine] = useTypewriter({
+    words: [
+      "Şirketlerin kendi kariyer platformlarındaki ilanları tek tıkla keşfet!",
+    ],
+    delaySpeed: 5000,
+    deleteSpeed: 30,
+    loop: 1,
+    onLoopDone: () => {
+      setLineEnd(true);
+    },
+    typeSpeed: 30,
+  });
   const dispatch = useDispatch();
   const companiesSlideRef = useRef();
   const landingPageRef = useRef();
@@ -78,6 +101,8 @@ const LandingPage = () => {
   const submitButtonRef = useRef();
   const newsSliderRef = useRef();
   const navigate = useNavigate();
+  const [nextLine, setNextLine] = useState(false);
+  const [lineEnd, setLineEnd] = useState(false);
   const [whatInput, setWhatInput] = useState("");
   const [whereInput, setWhereInput] = useState("");
   const [highlightedCompanies, setHighlightedCompanies] = useState([]);
@@ -401,12 +426,15 @@ const LandingPage = () => {
       <div className="landing-page-banner-container">
         <div className="content-container">
           <div className="content-header-container">
-            <h1 className="content-header">Tek tıkla yüzlerce sitede dolaş.</h1>
+            <h1 className="content-header">
+              {text}
+              {!nextLine ? <Cursor cursorColor="#4e21e7" /> : <div></div>}
+            </h1>
           </div>
           <div className="content-content-container">
             <p className="content-content">
-              Şirketlerin kendi kariyer platformlarındaki ilanları tek tıkla
-              takip et!
+              {nextLine ? textNextLine : ""}
+              {!lineEnd ? <Cursor cursorColor="#4e21e7" /> : <div></div>}
             </p>
           </div>
           <div className="job-company-container">

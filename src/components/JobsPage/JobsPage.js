@@ -5,7 +5,6 @@ import {
   addJobs,
   getAllJobs,
   getElementsLoading,
-  getJobsCount,
   getJobSearchObject,
   includeJobs,
   updateElementsLoading,
@@ -21,47 +20,16 @@ import MobileFilter from "../MobileFilter/MobileFilter";
 import Drawer from "@mui/material/Drawer";
 import Dialog from "@mui/material/Dialog";
 import {
-  getCompanyDialog,
-  getCompanyMobileDialog,
   getDialog,
   getMobileDialog,
-  updateCompanyDialog,
-  updateCompanyMobileDialog,
   updateDialog,
   updateMobileDialog,
 } from "../../features/dialogs/dialogsSlice";
-import CountUp from "react-countup";
-import CompanyFilter from "../CompanyFilter/CompanyFilter";
-import CompanyMobileFilter from "../CompanyMobileFilter/CompanyMobileFilter";
 
 const JobsPage = () => {
   const dispatch = useDispatch();
   const [loader, setLoader] = useState(false);
   const [hasMore, setHasMore] = useState(true);
-  const [searchInput, setSearchInput] = useState("");
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    let newJobSearchObject = {
-      page: 1,
-      size: jobSearchObject.size,
-      sort_by: jobSearchObject.sort_by,
-      sort: jobSearchObject.sort,
-      date: jobSearchObject.date,
-      what: searchInput,
-      where: jobSearchObject.where,
-    };
-    dispatch(updateElementsLoading(true));
-    const jobsCountResponse = await fetchJobs({
-      what: searchInput,
-      date: jobSearchObject.date,
-      document_count: true,
-    });
-    const jobsResponse = await fetchJobs(newJobSearchObject);
-    dispatch(updateJobsCount(jobsCountResponse.data));
-    dispatch(addJobs(jobsResponse.data));
-    dispatch(updateJobSearchObject(newJobSearchObject));
-    dispatch(updateElementsLoading(false));
-  };
   const handleDialogClose = () => {
     dispatch(updateDialog(false));
   };
@@ -140,26 +108,13 @@ const JobsPage = () => {
       }
     };
   }, [element]);
-  const onChangeSearchInput = (e) => {
-    const value = e.target.value;
-    setSearchInput(value);
-  };
   const jobSearchObject = useSelector(getJobSearchObject);
   const jobs = useSelector(getAllJobs);
   const elementsLoading = useSelector(getElementsLoading);
   const dialog = useSelector(getDialog);
   const mobileDialog = useSelector(getMobileDialog);
-  const jobsCount = useSelector(getJobsCount);
   return (
     <div className="jobs-page">
-      <div className="jobs-page-navi-container">
-        <div className="search-result-count-container">
-          <h4 className="search-result-count">
-            <CountUp end={jobsCount} duration={0.5} />
-          </h4>
-          <h4 className="search-result-count-header">sonuç bulundu</h4>
-        </div>
-      </div>
       <div className="jobs-container">
         {elementsLoading ? (
           <div className="jobs-skeleton-container">

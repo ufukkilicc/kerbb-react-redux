@@ -45,6 +45,7 @@ import {
 } from "./features/dialogs/dialogsSlice";
 import CompanyFilter from "./components/CompanyFilter/CompanyFilter";
 import CompanyMobileFilter from "./components/CompanyMobileFilter/CompanyMobileFilter";
+import { updateCompanySettingsDropdown } from "./features/companies/companiesSlice";
 
 function App() {
   const dispatch = useDispatch();
@@ -63,11 +64,13 @@ function App() {
   }, [gaActive]);
   useEffect(() => {
     let handler = (event) => {
+      console.log(event.target.className);
       if (
         event.target.className !== "company-settings-dropdown-item-header" &&
         event.target.className !== "company-settings-dropdown-active"
       ) {
         dispatch(updateCompanyDetailSettingsDropdown(false));
+        dispatch(updateCompanySettingsDropdown(""));
       }
       if (
         event.target.className !== "job-settings-dropdown-item-header" &&

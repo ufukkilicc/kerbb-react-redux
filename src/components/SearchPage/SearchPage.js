@@ -10,8 +10,6 @@ import {
   updateScrolledPage,
 } from "../../features/scrolls/scrollsSlice";
 import CompaniesPage from "../CompaniesPage/CompaniesPage";
-import TopMobileNavi from "../TopMobileNavi/TopMobileNavi";
-import BottomMobileNavi from "../BottomMobileNavi/BottomMobileNavi";
 import TuneIcon from "@mui/icons-material/Tune";
 import SearchIcon from "@mui/icons-material/Search";
 import {
@@ -21,6 +19,7 @@ import {
 import ClearIcon from "@mui/icons-material/Clear";
 import {
   addJobs,
+  getJobsCount,
   getJobSearchObject,
   updateElementsLoading,
   updateJobsCount,
@@ -32,16 +31,18 @@ import {
   updateMobileNaviObject,
 } from "../../features/navigation/navigationSlice";
 import { fetchCompanies } from "../../features/companies/companiesAPI";
-import { addCompanies, updateCompaniesCount, updateCompaniesSearchObject, updateElementsLoadingCompany } from "../../features/companies/companiesSlice";
+import {
+  addCompanies,
+  getCompaniesCount,
+  updateCompaniesCount,
+  updateCompaniesSearchObject,
+  updateElementsLoadingCompany,
+} from "../../features/companies/companiesSlice";
 
 const SearchPage = () => {
   const dispatch = useDispatch();
 
   const pageInnerRef = useRef();
-
-  const [jobCount, setJobCount] = useState(0);
-  const [companyCount, setCompanyCount] = useState(0);
-  const [topNaviHeader, setTopNaviHeader] = useState(null);
 
   const [inputValue, setInputValue] = useState("");
   const [companyInputValue, setCompanyInputValue] = useState("");
@@ -55,8 +56,8 @@ const SearchPage = () => {
         is_active: true,
         document_count: true,
       });
-      setJobCount(totals.data["job"]);
-      setCompanyCount(companiesCount.data[0]);
+      dispatch(updateJobsCount(totals.data["job"]));
+      dispatch(updateCompaniesCount(companiesCount.data[0]));
     }
     fetchData();
   }, []);
@@ -115,6 +116,7 @@ const SearchPage = () => {
       date: jobSearchObject.date,
       document_count: true,
     });
+    console.log(jobsCountResponse);
     const jobsResponse = await fetchJobs(newJobSearchObject);
     dispatch(updateJobsCount(jobsCountResponse.data));
     dispatch(addJobs(jobsResponse.data));
@@ -126,19 +128,17 @@ const SearchPage = () => {
     let newCompanySearchObject = {
       page: 1,
       size: jobSearchObject.size,
-      sort_by: jobSearchObject.sort_by,
-      sort: jobSearchObject.sort,
-      date: jobSearchObject.date,
-      what: inputValue,
-      where: jobSearchObject.where,
+      query_text: companyInputValue,
+      is_active: true,
     };
     dispatch(updateElementsLoadingCompany(true));
-    const companiesCountResponse = await fetchJobs({
+    const companiesCountResponse = await fetchCompanies({
       query_text: companyInputValue,
       document_count: true,
+      is_active: true,
     });
     const companiesResponse = await fetchCompanies(newCompanySearchObject);
-    dispatch(updateCompaniesCount(companiesCountResponse.data));
+    dispatch(updateCompaniesCount(companiesCountResponse.data[0]));
     dispatch(addCompanies(companiesResponse.data));
     dispatch(updateCompaniesSearchObject(newCompanySearchObject));
     dispatch(updateElementsLoadingCompany(false));
@@ -159,8 +159,61 @@ const SearchPage = () => {
       dispatch(updateDialog(true));
     }
   };
+  const handleCompanyFilterClick = async () => {
+    // const width = window.innerWidth;
+    // if (width <= 1120) {
+    //   dispatch(updateMobileDialog(true));
+    // } else {
+    //   dispatch(updateDialog(true));
+    // }
+  };
+  const handleJobClear = async () => {
+    setInputValue("");
+    let newJobSearchObject = {
+      page: 1,
+      size: jobSearchObject.size,
+      sort_by: jobSearchObject.sort_by,
+      sort: jobSearchObject.sort,
+      date: jobSearchObject.date,
+      what: "",
+      where: jobSearchObject.where,
+    };
+    dispatch(updateElementsLoading(true));
+    const jobsCountResponse = await fetchJobs({
+      what: "",
+      date: jobSearchObject.date,
+      document_count: true,
+    });
+    const jobsResponse = await fetchJobs(newJobSearchObject);
+    dispatch(updateJobsCount(jobsCountResponse.data));
+    dispatch(addJobs(jobsResponse.data));
+    dispatch(updateJobSearchObject(newJobSearchObject));
+    dispatch(updateElementsLoading(false));
+  };
+  const handleCompanyClear = async () => {
+    setCompanyInputValue("");
+    let newCompanySearchObject = {
+      page: 1,
+      size: jobSearchObject.size,
+      query_text: "",
+      is_active: true,
+    };
+    dispatch(updateElementsLoadingCompany(true));
+    const companiesCountResponse = await fetchCompanies({
+      query_text: "",
+      document_count: true,
+      is_active: true,
+    });
+    const companiesResponse = await fetchCompanies(newCompanySearchObject);
+    dispatch(updateCompaniesCount(companiesCountResponse.data[0]));
+    dispatch(addCompanies(companiesResponse.data));
+    dispatch(updateCompaniesSearchObject(newCompanySearchObject));
+    dispatch(updateElementsLoadingCompany(false));
+  };
   const jobSearchObject = useSelector(getJobSearchObject);
   const mobileNaviObject = useSelector(getMobileNaviObject);
+  const companyCount = useSelector(getCompaniesCount);
+  const jobCount = useSelector(getJobsCount);
   return (
     <div
       className="search-page-container"
@@ -237,7 +290,7 @@ const SearchPage = () => {
                     ? "search-clear-icon-active"
                     : "search-clear-icon"
                 }
-                onClick={() => setInputValue("")}
+                onClick={() => handleJobClear()}
               />
             </div>
             <div
@@ -249,7 +302,7 @@ const SearchPage = () => {
           </div>
         ) : (
           <div className="company-search-and-filter-container">
-            {/* <div className="search-container">
+            <div className="search-container">
               <SearchIcon fontSize="small" className="search-search-icon" />
               <form onSubmit={handleCompanySubmit} className="search-form">
                 <input
@@ -266,8 +319,14 @@ const SearchPage = () => {
                     ? "search-clear-icon-active"
                     : "search-clear-icon"
                 }
-                onClick={() => setCompanyInputValue("")}
+                onClick={() => handleCompanyClear()}
               />
+            </div>
+            {/* <div
+              className="filter-container"
+              onClick={() => handleCompanyFilterClick()}
+            >
+              <TuneIcon fontSize="medium" />
             </div> */}
           </div>
         )}

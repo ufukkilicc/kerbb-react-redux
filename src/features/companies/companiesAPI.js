@@ -3,6 +3,7 @@ import axios from "axios";
 import BASE_URL from "../../common/apis/Api";
 
 export const fetchCompanies = async (paramObject) => {
+  console.log(paramObject);
   if (paramObject.is_highlighted) {
     const response = await axios
       .get(`${BASE_URL}/companies`, {

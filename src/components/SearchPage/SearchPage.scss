@@ -2,20 +2,24 @@
 @import "../../common/fonts";
 @import "../../common/responsive";
 
+$height: calc(100vh + 100px);
+
 .search-page-container {
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  height: 100vh;
+  height: calc(100vh - 100px);
   width: 100%;
   scroll-behavior: smooth;
   overflow-y: scroll;
-  &::-webkit-scrollbar {
-    @include media(">tablet") {
+
+  @include media(">tablet") {
+    &::-webkit-scrollbar {
       display: none;
     }
+    height: 100vh;
   }
   .search-page-header-container {
     width: 100%;
@@ -280,6 +284,23 @@
             font-weight: 700;
             letter-spacing: 1px;
           }
+        }
+      }
+      .filter-container {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $kerbb-color-logo;
+        border-radius: 5px;
+        color: white;
+        cursor: pointer;
+        &:hover {
+          opacity: 0.8;
+        }
+        &:active {
+          opacity: 1;
         }
       }
     }
