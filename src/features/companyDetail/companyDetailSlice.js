@@ -16,6 +16,7 @@ const initialState = {
   companyDetailSettingsDropdown: false,
   companyDetailThemeColor: "",
   companyDetailElementsLoading: false,
+  companyDetailJobsCount: 0,
 };
 
 export const companyDetailSlice = createSlice({
@@ -45,6 +46,9 @@ export const companyDetailSlice = createSlice({
     updateCompanyDetailElementsLoading: (state, { payload }) => {
       state.companyDetailElementsLoading = payload;
     },
+    updateCompanyDetailJobsCount: (state, { payload }) => {
+      state.companyDetailJobsCount = payload;
+    },
   },
 });
 export const {
@@ -55,6 +59,7 @@ export const {
   updateCompanyDetailThemeColor,
   updateCompanyDetailElementsLoading,
   addCompanyDetailObject,
+  updateCompanyDetailJobsCount,
 } = companyDetailSlice.actions;
 export const getAllCompanyDetailJobs = (state) =>
   state.companyjobs.companyDetailJobs;
@@ -68,5 +73,7 @@ export const getCompanyDetailElementsLoading = (state) =>
   state.companyjobs.companyDetailElementsLoading;
 export const getCompanyDetailObject = (state) =>
   state.companyjobs.companyDetailObject;
+export const getCompanyDetailJobsCount = (state) =>
+  state.companyjobs.companyDetailJobsCount;
 
 export default companyDetailSlice.reducer;

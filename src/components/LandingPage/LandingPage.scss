@@ -42,30 +42,21 @@
       align-items: flex-start;
       padding: 0 2rem;
       padding-bottom: 4rem;
-      .content-search {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-        gap: 1rem;
-        .content-container {
-          display: flex;
-          flex-direction: column;
-          justify-content: flex-start;
-          align-items: flex-start;
-          .content-header-container {
-            .content-header {
-              color: $kerbb-color-dark;
-              opacity: 0.9;
-            }
-          }
-          .content-content-container {
-            .content-content {
-              color: $kerbb-color-dark;
-              opacity: 0.9;
-            }
-          }
+      .cursor{
+        display: none;
+      }
+      .content-header-container {
+        min-height: 50px;
+        .content-header {
+          color: $kerbb-color-dark;
+          opacity: 0.9;
+        }
+      }
+      .content-content-container {
+        min-height: 25px;
+        .content-content {
+          color: $kerbb-color-dark;
+          opacity: 0.9;
         }
       }
       .job-company-container {
