@@ -11,6 +11,8 @@
   align-items: center;
   @include media(">tablet") {
     flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
   }
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */

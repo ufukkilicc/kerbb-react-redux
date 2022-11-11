@@ -17,6 +17,7 @@ import {
   updateShareJobOpen,
 } from "../../features/shareDrawerJob/shareDrawerJobSlice";
 import { getCompanyDetailThemeColor } from "../../features/companyDetail/companyDetailSlice";
+import Img from "react-cloudinary-lazy-image";
 
 const Job = ({ job }) => {
   const dispatch = useDispatch();
@@ -67,15 +68,35 @@ const Job = ({ job }) => {
         <div className="job-company-and-image-container">
           <a
             href={`/dashboard/companies/${
-              job
-                ? job.job_company
-                  ? job.job_company.name
-                  : ""
-                : ""
+              job ? (job.job_company ? job.job_company.name : "") : ""
             }`}
           >
             <div className="company-image-container">
-              <img
+              {job &&
+              job.job_company &&
+              job.job_company.logo_image_url !== "" ? (
+                <Img
+                  loading="lazy"
+                  cloudName={"kerbb"}
+                  quality="best"
+                  imageName={job.job_company.logo_image_public_id}
+                  fluid={{
+                    maxWidth: 300,
+                    height: 150,
+                  }}
+                  style={{
+                    width: "40px",
+                    height: "40px",
+                  }}
+                />
+              ) : (
+                <img
+                  src={process.env.PUBLIC_URL + "/no-image.png"}
+                  className="company-cover-image"
+                  alt=""
+                />
+              )}
+              {/* <img
                 src={`${
                   job
                     ? job.job_company
@@ -87,16 +108,12 @@ const Job = ({ job }) => {
                 }`}
                 alt=""
                 className="job_image"
-              />
+              /> */}
             </div>
           </a>
           <a
             href={`/dashboard/companies/${
-              job
-                ? job.job_company
-                  ? job.job_company.name
-                  : ""
-                : ""
+              job ? (job.job_company ? job.job_company.name : "") : ""
             }`}
           >
             <div className="job-company-container">

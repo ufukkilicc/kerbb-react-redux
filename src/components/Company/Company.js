@@ -14,8 +14,10 @@ import {
   updateShareMobileOpen,
   updateShareOpen,
 } from "../../features/shareDrawer/shareDrawerSlice";
+import Img from "react-cloudinary-lazy-image";
 
 const Company = ({ company }) => {
+  console.log(company);
   const dispatch = useDispatch();
   const handleDropdown = () => {
     if (companySettingsDropdown) {
@@ -38,17 +40,28 @@ const Company = ({ company }) => {
   return (
     <div className="company">
       <div className="company-info-container">
-        <img
-          className="company-cover-image"
-          src={`${
-            company
-              ? company.cover_image_url === ""
-                ? process.env.PUBLIC_URL + "/no-image.png"
-                : company.cover_image_url
-              : process.env.PUBLIC_URL + "/no-image.png"
-          }`}
-          alt=""
-        />
+        {company && company.cover_image_url !== "" ? (
+          <Img
+            loading="lazy"
+            cloudName={"kerbb"}
+            quality="best"
+            imageName={company.cover_image_public_id}
+            fluid={{
+              maxWidth: 300,
+              height: 150,
+            }}
+            style={{
+              width: "100%",
+              height: "150px",
+            }}
+          />
+        ) : (
+          <img
+            src={process.env.PUBLIC_URL + "/no-image.png"}
+            className="company-cover-image"
+            alt=""
+          />
+        )}
         <div className="company-job-count-container">
           <a href={`/dashboard/companies/${company.name}`}>
             <span className="company-job-count">+{company.job_count - 2}</span>

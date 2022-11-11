@@ -1,20 +1,43 @@
 import React from "react";
 import "./SlideCompany.scss";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import Img from "react-cloudinary-lazy-image";
 
 const SlideCompany = ({ company }) => {
   return (
     <div className="slide-company-container">
       <div className="slide-company-image-container">
         <a href={`/dashboard/companies/${company.name}`}>
-          <img
+          {company && company.logo_image_url !== "" ? (
+            <Img
+              loading="lazy"
+              cloudName={"kerbb"}
+              quality="best"
+              imageName={company.logo_image_public_id}
+              fluid={{
+                maxWidth: 300,
+                height: 150,
+              }}
+              style={{
+                width: "100px",
+                height: "100px",
+              }}
+            />
+          ) : (
+            <img
+              src={process.env.PUBLIC_URL + "/no-image.png"}
+              className="company-cover-image"
+              alt=""
+            />
+          )}
+          {/* <img
             src={
               company.logo_image_url === ""
                 ? process.env.PUBLIC_URL + "/no-image.png"
                 : company.logo_image_url
             }
             alt=""
-          />
+          /> */}
         </a>
       </div>
       <div className="slide-company-title-container">
