@@ -66,6 +66,7 @@ import ClearIcon from "@mui/icons-material/Clear";
 import SearchIcon from "@mui/icons-material/Search";
 import CompanyDetailJobsPage from "../CompanyDetailJobsPage/CompanyDetailJobsPage";
 import CompanyDetailNewsPage from "../CompanyDetailNewsPage/CompanyDetailNewsPage";
+import Img from "react-cloudinary-lazy-image";
 
 const CompanyDetailPage = () => {
   const dispatch = useDispatch();
@@ -267,17 +268,28 @@ const CompanyDetailPage = () => {
       </Helmet>
       <div className="company-detail-page-navi-container">
         <div className="company-cover-image-and-info-container">
-          <img
-            className="company-cover-image"
-            src={
-              companyDetailObject
-                ? companyDetailObject.cover_image_url === ""
-                  ? process.env.PUBLIC_URL + "/no-image.png"
-                  : companyDetailObject.cover_image_url
-                : process.env.PUBLIC_URL + "/no-image.png"
-            }
-            alt=""
-          />
+          {companyDetailObject && companyDetailObject.cover_image_url !== "" ? (
+            <Img
+              loading="lazy"
+              cloudName={"kerbb"}
+              quality="best"
+              imageName={companyDetailObject.cover_image_public_id}
+              fluid={{
+                maxWidth: 300,
+                height: 150,
+              }}
+              style={{
+                width: "100%",
+                height: "250px",
+              }}
+            />
+          ) : (
+            <img
+              src={process.env.PUBLIC_URL + "/no-image.png"}
+              className="company-cover-image"
+              alt=""
+            />
+          )}
           <ColorExtractor getColors={setColors}>
             <img
               className="company-cover-image"

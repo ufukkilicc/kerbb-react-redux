@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import "./Illustration.scss";
+import Img from "react-cloudinary-lazy-image";
 
 const Illustration = ({ companies }) => {
   const [currentCompanies, setCurrentCompanies] = useState([]);
@@ -73,7 +74,10 @@ const Illustration = ({ companies }) => {
         <ul className="companies-list">
           {currentCompanies.map((company) => {
             return (
-              <a href={`/dashboard/companies/${company.name}`} key={company._id}>
+              <a
+                href={`/dashboard/companies/${company.name}`}
+                key={company._id}
+              >
                 <li
                   className="companies-item"
                   key={company._id}
@@ -83,14 +87,28 @@ const Illustration = ({ companies }) => {
                     left: `${generateRandom(0, 75)}%`,
                   }}
                 >
-                  <img
-                    src={
-                      company.logo_image_url === ""
-                        ? process.env.PUBLIC_URL + "/no-image.png"
-                        : company.logo_image_url
-                    }
-                    alt=""
-                  />
+                  {company && company.logo_image_url !== "" ? (
+                    <Img
+                      loading="lazy"
+                      cloudName={"kerbb"}
+                      quality="best"
+                      imageName={company.logo_image_public_id}
+                      fluid={{
+                        maxWidth: 300,
+                        height: 150,
+                      }}
+                      style={{
+                        width: "50px",
+                        height: "50px",
+                      }}
+                    />
+                  ) : (
+                    <img
+                      src={process.env.PUBLIC_URL + "/no-image.png"}
+                      className="company-cover-image"
+                      alt=""
+                    />
+                  )}
                 </li>
               </a>
             );

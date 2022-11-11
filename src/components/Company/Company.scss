@@ -19,6 +19,9 @@
     width: 100%;
     position: relative;
     @include kerbb-border-line-bottom();
+    display: flex;
+    justify-content: center;
+    align-items: center;
     .company-cover-image {
       width: 100%;
       height: 150px;
