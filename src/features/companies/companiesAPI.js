@@ -3,7 +3,6 @@ import axios from "axios";
 import BASE_URL from "../../common/apis/Api";
 
 export const fetchCompanies = async (paramObject) => {
-  console.log(paramObject);
   if (paramObject.is_highlighted) {
     const response = await axios
       .get(`${BASE_URL}/companies`, {
@@ -16,7 +15,9 @@ export const fetchCompanies = async (paramObject) => {
           is_highlighted: paramObject.is_highlighted,
         },
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        return err;
+      });
     return response;
   } else if (paramObject.is_active) {
     if (paramObject.document_count) {
@@ -28,7 +29,9 @@ export const fetchCompanies = async (paramObject) => {
             document_count: paramObject.document_count,
           },
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          return err;
+        });
       return response;
     } else {
       const response = await axios
@@ -42,7 +45,9 @@ export const fetchCompanies = async (paramObject) => {
             is_active: paramObject.is_active,
           },
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          return err;
+        });
       return response;
     }
   } else if (paramObject.state) {
@@ -52,7 +57,9 @@ export const fetchCompanies = async (paramObject) => {
           state: paramObject.state,
         },
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        return err;
+      });
     return response;
   } else {
     const response = await axios
@@ -65,26 +72,28 @@ export const fetchCompanies = async (paramObject) => {
           sort: paramObject.sort,
         },
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        return err;
+      });
     return response;
   }
 };
 export const fetchCompany = async (id) => {
-  const response = await companiesApi
-    .get(`/${id}`)
-    .catch((err) => console.log(err));
+  const response = await companiesApi.get(`/${id}`).catch((err) => {
+    return err;
+  });
   return response;
 };
 export const fetchCompanyImage = async (id) => {
-  const response = await companiesApi
-    .get(`/${id}/download`)
-    .catch((err) => console.log(err));
+  const response = await companiesApi.get(`/${id}/download`).catch((err) => {
+    return err;
+  });
   return response;
 };
 
 export const incrementCompanyView = async (id) => {
-  const response = await companiesApi
-    .patch(`/${id}/inc-view`)
-    .catch((err) => console.log(err));
+  const response = await companiesApi.patch(`/${id}/inc-view`).catch((err) => {
+    return err;
+  });
   return response;
 };

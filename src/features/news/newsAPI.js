@@ -11,7 +11,7 @@ export const fetchNews = async (paramObject) => {
           query_text: paramObject.query_text,
         },
       })
-      .catch((err) => console.log(err));
+      .catch((err) => (err));
     return response;
   } else {
     const response = await axios
@@ -21,19 +21,19 @@ export const fetchNews = async (paramObject) => {
           size: paramObject.size,
         },
       })
-      .catch((err) => console.log(err));
+      .catch((err) => (err));
     return response;
   }
 };
 export const fetchNewsOne = async (id) => {
   const response = await axios
     .get(`${BASE_URL}/news/${id}`)
-    .catch((err) => console.log(err));
+    .catch((err) => (err));
   return response;
 };
 export const incrementNewsView = async (id) => {
   const response = await axios
     .patch(`${BASE_URL}/news/${id}/inc-view`)
-    .catch((err) => console.log(err));
+    .catch((err) => (err));
   return response;
 };

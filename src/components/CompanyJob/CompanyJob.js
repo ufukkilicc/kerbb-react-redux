@@ -8,31 +8,24 @@ const CompanyJobs = ({ companyJob }) => {
     return DateHelper(date);
   };
   return (
-    <div className="company-job">
-      <div className="company-job-container">
-        <a href={companyJob.job_link} rel="noreferrer" target="_blank">
-          <div className="company-job-header-and-icon-container">
-            <div className="company-job-header-container">
-              <h4 className="company-job-header">{companyJob.job_title}</h4>
-            </div>
+    <a href={companyJob.job_link} target="_blank">
+      <div className="company-job">
+        <div className="company-job-title-container">
+          <h1 className="company-job-title">{companyJob.job_title}</h1>
+        </div>
+        <div className="company-job-location-date-container">
+          <div className="job-location-container">
+            <h5 className="job-location">{companyJob.job_location}</h5>
           </div>
-          <div className="company-location-and-date-container">
-            <div className="company-location-container">
-              <div className="company-location-icon-container">
-                <CircleIcon fontSize="medium" />
-              </div>
-              <h5 className="company-location">{companyJob.job_location}</h5>
-            </div>
-            <div className="company-date-container">
-              <div className="company-date-icon-container">
-                <CircleIcon fontSize="medium" />
-              </div>
-              <h5 className="company-date">{DateHandler(companyJob.date)}</h5>
-            </div>
+          <div className="job-location-icon">
+            <CircleIcon fontSize="medium" />
           </div>
-        </a>
+          <div className="job-date-container">
+            <h5 className="job-date">{DateHandler(companyJob.date)}</h5>
+          </div>
+        </div>
       </div>
-    </div>
+    </a>
   );
 };
 

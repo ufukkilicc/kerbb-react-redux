@@ -61,7 +61,6 @@ const CompanyDetailJobsPage = () => {
       );
       setLoader(true);
       const jobsResponse = await fetchJobs(newCompanyDetailJobSearchObject);
-      console.log(jobsResponse);
       if (jobsResponse.data.length === 0) {
         setLoader(false);
         setHasMore(false);

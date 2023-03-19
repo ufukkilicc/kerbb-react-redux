@@ -1,51 +1,46 @@
-import React, { useEffect, useState } from "react";
-import "./App.scss";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import NotFoundPage from "./components/NotFoundPage/NotFoundPage";
-import Dashboard from "./components/Dashboard/Dashboard";
-import SideNavbar from "./components/SideNavbar/SideNavbar";
-import LandingPage from "./components/LandingPage/LandingPage";
-import Snackbar from "@mui/material/Snackbar";
-import { useSelector, useDispatch } from "react-redux";
-import { getSnackBar, updateSnackBar } from "./features/snackbar/snackbarSlice";
-import TopMobileNavi from "./components/TopMobileNavi/TopMobileNavi";
-import BottomMobileNavi from "./components/BottomMobileNavi/BottomMobileNavi";
-import AboutPage from "./components/AboutPage/AboutPage";
-import ContactPage from "./components/ContactPage/ContactPage";
-import { Helmet } from "react-helmet";
-import ReactGA from "react-ga4";
-import {
-  getShareMobileOpen,
-  getShareOpen,
-  updateShareDrawerCompany,
-  updateShareMobileOpen,
-  updateShareOpen,
-} from "./features/shareDrawer/shareDrawerSlice";
-import Dialog from "@mui/material/Dialog";
-import ShareDrawer from "./components/ShareDrawer/ShareDrawer";
-import { updateCompanyDetailSettingsDropdown } from "./features/companyDetail/companyDetailSlice";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
-import ShareDrawerMobile from "./components/ShareDrawerMobile/ShareDrawerMobile";
+import Dialog from "@mui/material/Dialog";
 import Drawer from "@mui/material/Drawer";
-import { updateJobSettingsDropdown } from "./features/jobs/jobsSlice";
-import {
-  getShareJobMobileOpen,
-  getShareJobOpen,
-  updateShareDrawerJob,
-  updateShareJobMobileOpen,
-  updateShareJobOpen,
-} from "./features/shareDrawerJob/shareDrawerJobSlice";
+import React, { useEffect, useState } from "react";
+import ReactGA from "react-ga4";
+import { Helmet } from "react-helmet";
+import { useDispatch, useSelector } from "react-redux";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import "./App.scss";
+import AboutPage from "./components/AboutPage/AboutPage";
+import BottomMobileNavi from "./components/BottomMobileNavi/BottomMobileNavi";
+import CompanyFilter from "./components/CompanyFilter/CompanyFilter";
+import CompanyMobileFilter from "./components/CompanyMobileFilter/CompanyMobileFilter";
+import ContactPage from "./components/ContactPage/ContactPage";
+import Dashboard from "./components/Dashboard/Dashboard";
+import LandingPage from "./components/LandingPage/LandingPage";
+import NotFoundPage from "./components/NotFoundPage/NotFoundPage";
+import ShareDrawer from "./components/ShareDrawer/ShareDrawer";
 import ShareDrawerJob from "./components/ShareDrawerJob/ShareDrawerJob";
 import ShareDrawerJobMobile from "./components/ShareDrawerJobMobile/ShareDrawerJobMobile";
+import ShareDrawerMobile from "./components/ShareDrawerMobile/ShareDrawerMobile";
+import SideNavbar from "./components/SideNavbar/SideNavbar";
+import TopMobileNavi from "./components/TopMobileNavi/TopMobileNavi";
+import { updateCompanySettingsDropdown } from "./features/companies/companiesSlice";
+import { updateCompanyDetailSettingsDropdown } from "./features/companyDetail/companyDetailSlice";
 import {
   getCompanyDialog,
   getCompanyMobileDialog,
   updateCompanyDialog,
-  updateCompanyMobileDialog,
+  updateCompanyMobileDialog
 } from "./features/dialogs/dialogsSlice";
-import CompanyFilter from "./components/CompanyFilter/CompanyFilter";
-import CompanyMobileFilter from "./components/CompanyMobileFilter/CompanyMobileFilter";
-import { updateCompanySettingsDropdown } from "./features/companies/companiesSlice";
+import { updateJobSettingsDropdown } from "./features/jobs/jobsSlice";
+import {
+  getShareMobileOpen,
+  getShareOpen, updateShareMobileOpen,
+  updateShareOpen
+} from "./features/shareDrawer/shareDrawerSlice";
+import {
+  getShareJobMobileOpen,
+  getShareJobOpen, updateShareJobMobileOpen,
+  updateShareJobOpen
+} from "./features/shareDrawerJob/shareDrawerJobSlice";
+import { getSnackBar, updateSnackBar } from "./features/snackbar/snackbarSlice";
 
 function App() {
   const dispatch = useDispatch();
@@ -64,7 +59,6 @@ function App() {
   }, [gaActive]);
   useEffect(() => {
     let handler = (event) => {
-      console.log(event.target.className);
       if (
         event.target.className !== "company-settings-dropdown-item-header" &&
         event.target.className !== "company-settings-dropdown-active"

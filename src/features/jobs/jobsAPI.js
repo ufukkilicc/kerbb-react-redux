@@ -3,7 +3,6 @@ import axios from "axios";
 import BASE_URL from "../../common/apis/Api";
 
 export const fetchJobs = async (paramObject) => {
-  console.log(paramObject);
   if (paramObject.is_highlighted) {
     const response = await axios
       .get(`${BASE_URL}/jobs`, {
@@ -11,7 +10,9 @@ export const fetchJobs = async (paramObject) => {
           is_highlighted: paramObject.is_highlighted,
         },
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        return err;
+      });
     return response;
   } else if (paramObject.document_count) {
     const response = await axios
@@ -23,7 +24,9 @@ export const fetchJobs = async (paramObject) => {
           document_count: paramObject.document_count,
         },
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        return err;
+      });
     return response;
   } else {
     const response = await axios
@@ -39,13 +42,15 @@ export const fetchJobs = async (paramObject) => {
           size: paramObject.size,
         },
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        return err;
+      });
     return response;
   }
 };
 export const incrementJobView = async (id) => {
-  const response = await jobsApi
-    .patch(`/${id}/inc-view`)
-    .catch((err) => console.log(err));
+  const response = await jobsApi.patch(`/${id}/inc-view`).catch((err) => {
+    return err;
+  });
   return response;
 };

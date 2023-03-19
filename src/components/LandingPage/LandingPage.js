@@ -206,7 +206,7 @@ const LandingPage = () => {
     //   setSliderCount(
     //     (sliderCount) => (sliderCount + 1) % highlightedNews.length
     //   );
-    //   console.log(sliderCount);
+    //   (sliderCount);
     // }, MINUTE_MS);
 
     // return () => clearInterval(interval);
@@ -217,8 +217,8 @@ const LandingPage = () => {
   //     setTimeout(() => {
   //       if (autoScroll) {
   //         setCurrentSlidernews(highlightedNews[counter]);
-  //         console.log(highlightedNews.length);
-  //         console.log(counter);
+  //         (highlightedNews.length);
+  //         (counter);
   //         if (counter !== highlightedNews.length - 1) {
   //           counter++;
   //         } else {
@@ -233,7 +233,7 @@ const LandingPage = () => {
   // useEffect(() => {
   //   if (currentSliderNews) {
   //     const sec = document.getElementById(currentSliderNews._id);
-  //     console.log(sec.offsetTop);
+  //     (sec.offsetTop);
   //     if (counter !== highlightedNews.length - 1) {
   //       newsSliderRef.current.scrollTo(0, sec.offsetTop);
   //     } else {
@@ -454,13 +454,13 @@ const LandingPage = () => {
             </ul>
           </div>
         </div>
-        <div className="illustration-container">
+        {/* <div className="illustration-container">
           <Illustration
             companies={
               illustrationCompanies.length > 0 ? illustrationCompanies : []
             }
           />
-        </div>
+        </div> */}
       </div>
       <div className="highlighted-companies-container">
         <div className="higlighted-companies-header-container">

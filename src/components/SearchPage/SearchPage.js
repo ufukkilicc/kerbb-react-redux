@@ -116,7 +116,6 @@ const SearchPage = () => {
       date: jobSearchObject.date,
       document_count: true,
     });
-    console.log(jobsCountResponse);
     const jobsResponse = await fetchJobs(newJobSearchObject);
     dispatch(updateJobsCount(jobsCountResponse.data));
     dispatch(addJobs(jobsResponse.data));

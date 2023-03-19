@@ -17,7 +17,6 @@ import {
 import Img from "react-cloudinary-lazy-image";
 
 const Company = ({ company }) => {
-  console.log(company);
   const dispatch = useDispatch();
   const handleDropdown = () => {
     if (companySettingsDropdown) {
@@ -41,19 +40,10 @@ const Company = ({ company }) => {
     <div className="company">
       <div className="company-info-container">
         {company && company.cover_image_url !== "" ? (
-          <Img
-            loading="lazy"
-            cloudName={"kerbb"}
-            quality="best"
-            imageName={company.cover_image_public_id}
-            fluid={{
-              maxWidth: 300,
-              height: 150,
-            }}
-            style={{
-              width: "100%",
-              height: "150px",
-            }}
+          <img
+            src={company.cover_image_url}
+            className="company-cover-image"
+            alt=""
           />
         ) : (
           <img
@@ -62,15 +52,47 @@ const Company = ({ company }) => {
             alt=""
           />
         )}
-        <div className="company-job-count-container">
-          <a href={`/dashboard/companies/${company.name}`}>
-            <span className="company-job-count">+{company.job_count - 2}</span>
-          </a>
+
+        <div
+          className="company-settings-container"
+          onClick={() => handleDropdown(company._id)}
+        >
+          <div className="job-settings">
+            <MoreHorizIcon fontSize="medium" />
+          </div>
+          <div
+            className={
+              companySettingsDropdown === company._id
+                ? "company-settings-dropdown-active"
+                : "company-settings-dropdown"
+            }
+          >
+            <ul className="company-settings-dropdown-list">
+              <li
+                className="company-settings-dropdown-item"
+                onClick={handleShareDrawerCompanyOpen}
+              >
+                <div className="company-settings-dropdown-item-icon-container">
+                  <IosShareIcon fontSize="small" />
+                </div>
+                <div className="company-settings-dropdown-item-header-container">
+                  <h6 className="company-settings-dropdown-item-header">
+                    Paylaş
+                  </h6>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
         <div className="company-info-inner-container">
           <a href={`/dashboard/companies/${company.name}`}>
             <div className="company-title-container">
-              <h2 className="company-title">{company.name}</h2>
+              <h2 className="company-title">
+                {company.name}
+                <sup className="company-job-count">
+                  +{company.job_count - 2}
+                </sup>
+              </h2>
               <div
                 className={
                   company.is_approved
@@ -82,37 +104,6 @@ const Company = ({ company }) => {
               </div>
             </div>
           </a>
-          <div
-            className="company-settings-container"
-            onClick={() => handleDropdown(company._id)}
-          >
-            <div className="job-settings">
-              <MoreHorizIcon fontSize="medium" />
-            </div>
-            <div
-              className={
-                companySettingsDropdown === company._id
-                  ? "company-settings-dropdown-active"
-                  : "company-settings-dropdown"
-              }
-            >
-              <ul className="company-settings-dropdown-list">
-                <li
-                  className="company-settings-dropdown-item"
-                  onClick={handleShareDrawerCompanyOpen}
-                >
-                  <div className="company-settings-dropdown-item-icon-container">
-                    <IosShareIcon fontSize="small" />
-                  </div>
-                  <div className="company-settings-dropdown-item-header-container">
-                    <h6 className="company-settings-dropdown-item-header">
-                      Paylaş
-                    </h6>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
         </div>
       </div>
       <div className="company-jobs-container">

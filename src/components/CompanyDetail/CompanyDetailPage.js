@@ -150,7 +150,7 @@ const CompanyDetailPage = () => {
     dispatch(updateCompanyDetailElementsLoading(false));
   };
   const handleFilterClick = async () => {
-    console.log("hey");
+    ("hey");
     const width = window.innerWidth;
     if (width <= 1120) {
       dispatch(updateCompanyMobileDialog(true));
@@ -269,20 +269,10 @@ const CompanyDetailPage = () => {
       <div className="company-detail-page-navi-container">
         <div className="company-cover-image-and-info-container">
           {companyDetailObject && companyDetailObject.cover_image_url !== "" ? (
-            <Img
-              loading="lazy"
-              cloudName={"kerbb"}
-              quality="best"
-              imageName={companyDetailObject.cover_image_public_id}
-              fluid={{
-                maxWidth: 300,
-                height: 150,
-              }}
-              style={{
-                width: "100%",
-                height: "250px",
-              }}
-            />
+            <img
+              src={companyDetailObject.cover_image_url}
+              alt=""
+            ></img>
           ) : (
             <img
               src={process.env.PUBLIC_URL + "/no-image.png"}
