@@ -18,6 +18,7 @@ import {
 } from "../../features/shareDrawerJob/shareDrawerJobSlice";
 import { getCompanyDetailThemeColor } from "../../features/companyDetail/companyDetailSlice";
 import Img from "react-cloudinary-lazy-image";
+import { Tooltip } from "@mui/material";
 
 const Job = ({ job }) => {
   const dispatch = useDispatch();
@@ -76,14 +77,9 @@ const Job = ({ job }) => {
               <h5 className="job-company">{job.job_company.name}</h5>
             </div>
             <div className="job-title-container">
-              <h5 className="job-title">{job.job_title}</h5>
-              {diffDays(job.date, 3) ? (
-                <div className="job-new-container">
-                  <h5 className="job-new">yeni ilan</h5>
-                </div>
-              ) : (
-                <div></div>
-              )}
+              <Tooltip title={job.job_title} placement="right">
+                <h5 className="job-title">{job.job_title}</h5>
+              </Tooltip>
             </div>
             <div className="job-location-date-container">
               <div className="job-location-container">
@@ -98,6 +94,13 @@ const Job = ({ job }) => {
             </div>
           </div>
         </div>
+        {diffDays(job.date, 3) ? (
+          <div className="job-new-container">
+            <h5 className="job-new">yeni ilan</h5>
+          </div>
+        ) : (
+          <div></div>
+        )}
       </div>
     </a>
     // <div className="job">

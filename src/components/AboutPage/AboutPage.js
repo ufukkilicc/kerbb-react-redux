@@ -57,23 +57,52 @@ const AboutPage = () => {
         </div>
         <div className="first-section-container">
           <div className="first-section-paragraph-container">
-            <h2 className="first-section-paragraph-header">Biz kimiz?</h2>
+            <div className="first-section-paragraph-header-container">
+              <h2 className="first-section-paragraph-header">Biz kimiz?</h2>
+              <div className="first-section-paragraph-header-style"></div>
+            </div>
             <p className="first-section-paragraph">
-              Şirketlerin kendi kariyer sayfalarında yayınladıkları iş
-              ilanlarını derleyen Kerbb.com karanlıkta kalmış ilanlara ışık
-              tutarak, iş arayan adayların zamanlarını verimli kullanmalarını ve
-              kendilerine uygun ilanları kolayca keşfetmelerini sağlıyor. Ayrıca
-              şirket haberleri ve insan kaynakları alanıyla ilgili son
-              gelişmelerin paylaşıldığı Kerbb.com, yüzlerce şirketten binlerce
-              ilanı güncel olarak yayınlayabilen HR Tech girişimidir.
+              Kerbb, hedef kitlesinin geçtiği zorlu bir iş arama sürecinden
+              geçen girişimciler tarafından kurulumuştur, bu nedenle yaşanan
+              süreçleri çok iyi biliyor ve ona göre çözümler sunuyor.
             </p>
           </div>
-          <div className="first-section-illustration">
-            <Illustration
-              companies={
-                illustrationCompanies.length > 0 ? illustrationCompanies : []
-              }
-            />
+        </div>
+        <div className="second-section-container">
+          <div className="second-section-paragraph-container">
+            <div className="second-section-paragraph-header-container">
+              <h2 className="second-section-paragraph-header">Amacımız?</h2>
+              <div className="second-section-paragraph-header-style"></div>
+            </div>
+            <p className="second-section-paragraph">
+              Kerbb, kariyer sayfalarındaki bulunan dağınık iş ilanlarını tek
+              bir sayfada toplayarak kariyerinin başında olan adayların ilgisini
+              çekebilecek tüm ilanları login adımlarıyla uğraştırmadan gösteren
+              ve tüm bu süreçte sunduğu içeriklerle adayların iş arama
+              süreçlerini iyileştirmeyi amaçlayan bir platformdur.
+            </p>
+          </div>
+        </div>
+        <div className="third-section-container">
+          <div className="third-section-paragraph-container">
+            <div className="third-section-paragraph-header-container">
+              <h2 className="third-section-paragraph-header">
+                Neler Yapıyoruz?
+              </h2>
+              <div className="third-section-paragraph-header-style"></div>
+            </div>
+            <p className="third-section-paragraph">
+              Akıllı scrapperlar ile büyük ya da küçük tüm şirketlerin kendi
+              kariyer sayfalarındaki dağınık iş ilanlarını derler.
+            </p>
+            <p className="third-section-paragraph">
+              Kerbb login gerektirmez, sayfaya girer girmez ilan tarama ve iş
+              arama süreci başlar.
+            </p>
+            <p className="third-section-paragraph">
+              Sunduğu içeriklerle, kariyerinin başındaki kişilerin iş arayış
+              süreçlerini optimize eder, stresleirini azaltır.
+            </p>
           </div>
         </div>
       </div>

@@ -15,6 +15,22 @@
   &:hover {
     scale: 101%;
   }
+
+  .job-new-container {
+    position: absolute;
+    top: 7px;
+    right: 5px;
+    padding: 5px 1rem 5px 1rem;
+    background-color: $kerbb-purple-light;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    h5 {
+      font-size: 12px;
+      color: $kerbb-color-logo;
+    }
+  }
   .job-container {
     display: flex;
     justify-items: start;
@@ -27,6 +43,7 @@
       justify-content: start;
       align-items: start;
       height: 75px;
+      width: 100%;
       .job-company-container {
         h5 {
           font-size: 14px;
@@ -36,46 +53,33 @@
       }
       .job-title-container {
         display: flex;
-        justify-content: center;
-        align-items: center;
+        justify-content: start;
+        align-items: start;
         gap: 1rem;
+        width: 100%;
+        overflow: hidden;
         .job-title {
           font-size: 20px;
           font-weight: 500;
           color: $kerbb-color-dark;
-          max-width: 400px;
-          overflow: hidden;
-          white-space: nowrap;
           text-overflow: ellipsis;
-        }
-        .job-new-container {
-          padding: 5px 1rem 5px 1rem;
-          background-color: $kerbb-purple-light;
-          border-radius: 15px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          h5 {
-            font-size: 12px;
-            color: $kerbb-color-logo;
-          }
         }
       }
       .job-location-date-container {
         display: flex;
-        justify-content: center;
-        align-items: center;
+        justify-content: start;
+        align-items: start;
         opacity: 0.5;
+        width: 100%;
+        overflow: hidden;
         h5 {
           font-weight: lighter;
+          text-overflow: ellipsis;
         }
         .job-location-container {
           h5 {
             font-size: 14px;
             color: $kerbb-color-dark;
-            max-width: 400px;
-            overflow: hidden;
-            white-space: nowrap;
             text-overflow: ellipsis;
           }
         }

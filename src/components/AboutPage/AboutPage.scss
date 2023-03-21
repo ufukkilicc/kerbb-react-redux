@@ -17,6 +17,7 @@
     }
     height: 100vh;
   }
+  font-weight: 500;
 
   .top-mobile-navbar-container {
     position: sticky;
@@ -68,12 +69,24 @@
     }
     .first-section-container {
       width: 100%;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
       padding: 2rem 0rem;
-      @include kerbb-border-line-bottom();
       @include media("<=tablet") {
         grid-template-columns: 1fr;
+      }
+      .first-section-paragraph-header-container {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 9fr;
+        gap: 1rem;
+        align-items: center;
+        .first-section-paragraph-header-style {
+          height: 40%;
+          width: 100%;
+          background-color: $kerbb-purple-light;
+        }
+        .first-section-paragraph-header {
+          white-space: nowrap;
+        }
       }
       .first-section-paragraph-container {
         display: flex;
@@ -85,15 +98,69 @@
         gap: 0.5rem;
         @include kerbb-border-line-right();
       }
-      .first-section-illustration {
-        display: flex;
-        justify-content: center;
+    }
+    .second-section-container {
+      width: 100%;
+      padding: 2rem 0rem;
+      @include media("<=tablet") {
+        grid-template-columns: 1fr;
+      }
+      .second-section-paragraph-header-container {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 9fr;
+        gap: 1rem;
         align-items: center;
-        padding: 0rem 15%;
-        @include kerbb-border-line-right();
-        @include media("<=tablet") {
-          display: none;
+        .second-section-paragraph-header-style {
+          height: 40%;
+          width: 100%;
+          background-color: $kerbb-purple-light;
         }
+        .second-section-paragraph-header {
+          white-space: nowrap;
+        }
+      }
+      .second-section-paragraph-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding: 0rem 15%;
+        color: $kerbb-color-dark;
+        gap: 0.5rem;
+        @include kerbb-border-line-right();
+      }
+    }
+    .third-section-container {
+      width: 100%;
+      padding: 2rem 0rem;
+      @include media("<=tablet") {
+        grid-template-columns: 1fr;
+      }
+      .third-section-paragraph-header-container {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 9fr;
+        gap: 1rem;
+        align-items: center;
+        .third-section-paragraph-header-style {
+          height: 40%;
+          width: 100%;
+          background-color: $kerbb-purple-light;
+        }
+        .third-section-paragraph-header {
+          white-space: nowrap;
+        }
+      }
+      .third-section-paragraph-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding: 0rem 15%;
+        color: $kerbb-color-dark;
+        gap: 0.5rem;
+        @include kerbb-border-line-right();
       }
     }
   }

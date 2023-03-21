@@ -481,7 +481,7 @@ const LandingPage = () => {
               highlightedCompanies.map((company, index) => {
                 return (
                   <li key={company._id} className="highlighted-companies-item">
-                    <h1 className="index-header">{`0${index + 1}`}</h1>
+                    {/* <h1 className="index-header">{`0${index + 1}`}</h1> */}
                     <Company key={company._id} company={company} />
                   </li>
                 );

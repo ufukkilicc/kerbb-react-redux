@@ -20,9 +20,9 @@ const Dashboard = () => {
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
-      <div className="side-info-container">
+      {/* <div className="side-info-container">
         <SideInfoBar />
-      </div>
+      </div> */}
     </div>
   );
 };

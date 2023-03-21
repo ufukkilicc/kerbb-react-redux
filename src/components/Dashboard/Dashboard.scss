@@ -4,11 +4,6 @@
 @import "../../common/responsive";
 
 .dashboard-container {
-  display: grid;
-  grid-template-columns: 6fr 2fr;
-  @include media("<=tablet") {
-    grid-template-columns: 1fr;
-  }
   .dashboard-content-container {
     padding: 0 2rem;
     @include media("<=tablet") {

@@ -15,6 +15,7 @@ import {
   updateShareOpen,
 } from "../../features/shareDrawer/shareDrawerSlice";
 import Img from "react-cloudinary-lazy-image";
+import { Link } from "react-router-dom";
 
 const Company = ({ company }) => {
   const dispatch = useDispatch();
@@ -37,81 +38,120 @@ const Company = ({ company }) => {
   };
   const companySettingsDropdown = useSelector(getCompanySettingsDropdown);
   return (
-    <div className="company">
-      <div className="company-info-container">
-        {company && company.cover_image_url !== "" ? (
-          <img
-            src={company.cover_image_url}
-            className="company-cover-image"
-            alt=""
-          />
-        ) : (
-          <img
-            src={process.env.PUBLIC_URL + "/no-image.png"}
-            className="company-cover-image"
-            alt=""
-          />
-        )}
-
-        <div
-          className="company-settings-container"
-          onClick={() => handleDropdown(company._id)}
-        >
-          <div className="job-settings">
-            <MoreHorizIcon fontSize="medium" />
+    <a href={`/dashboard/companies/${company.name}`}>
+      <div className="company">
+        <div className="company-container">
+          <div className="company-company-image">
+            {company && company.cover_image_url !== "" ? (
+              <img
+                src={company.logo_image_url}
+                className="company-cover-image"
+                alt=""
+              />
+            ) : (
+              <img
+                src={process.env.PUBLIC_URL + "/no-image.png"}
+                className="company-cover-image"
+                alt=""
+              />
+            )}
           </div>
-          <div
-            className={
-              companySettingsDropdown === company._id
-                ? "company-settings-dropdown-active"
-                : "company-settings-dropdown"
-            }
-          >
-            <ul className="company-settings-dropdown-list">
-              <li
-                className="company-settings-dropdown-item"
-                onClick={handleShareDrawerCompanyOpen}
-              >
-                <div className="company-settings-dropdown-item-icon-container">
-                  <IosShareIcon fontSize="small" />
-                </div>
-                <div className="company-settings-dropdown-item-header-container">
-                  <h6 className="company-settings-dropdown-item-header">
-                    Paylaş
-                  </h6>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div className="company-info-inner-container">
-          <a href={`/dashboard/companies/${company.name}`}>
+          <div className="company-info-container">
             <div className="company-title-container">
-              <h2 className="company-title">
-                {company.name}
-                <sup className="company-job-count">
-                  +{company.job_count - 2}
-                </sup>
-              </h2>
-              <div
-                className={
-                  company.is_approved
-                    ? "company-title-approve-icon-container-active"
-                    : "company-title-approve-icon-container"
-                }
-              >
-                <CheckCircleIcon fontSize="small" />
+              <h5 className="company-title">{company.name}</h5>
+            </div>
+            <div className="company-location-date-container">
+              <div className="company-date-container">
+                <h5 className="company-location-header">Sektör: </h5>
+                <h5 className="company-location">{company.sector}</h5>
+              </div>
+              <div className="company-location-container">
+                <h5 className="company-location-header">Çalışan sayısı: </h5>
+                <h5 className="company-location">+ {company.staff_count}</h5>
               </div>
             </div>
-          </a>
+          </div>
+        </div>
+        <div className="company-job-count-container">
+          <h5 className="company-job-count">{company.job_count} iş ilanı</h5>
         </div>
       </div>
-      <div className="company-jobs-container">
-        {company.highlighted_jobs.map((job) => {
-          return <CompanyJob key={job._id} companyJob={job} />;
-        })}
-      </div>
-      {/* <div className="company-info-container">
+    </a>
+    // <div className="company">
+    //   <div className="company-info-container">
+    //     {company && company.cover_image_url !== "" ? (
+    //       <img
+    //         src={company.cover_image_url}
+    //         className="company-cover-image"
+    //         alt=""
+    //       />
+    //     ) : (
+    //       <img
+    //         src={process.env.PUBLIC_URL + "/no-image.png"}
+    //         className="company-cover-image"
+    //         alt=""
+    //       />
+    //     )}
+
+    //     <div
+    //       className="company-settings-container"
+    //       onClick={() => handleDropdown(company._id)}
+    //     >
+    //       <div className="job-settings">
+    //         <MoreHorizIcon fontSize="medium" />
+    //       </div>
+    //       <div
+    //         className={
+    //           companySettingsDropdown === company._id
+    //             ? "company-settings-dropdown-active"
+    //             : "company-settings-dropdown"
+    //         }
+    //       >
+    //         <ul className="company-settings-dropdown-list">
+    //           <li
+    //             className="company-settings-dropdown-item"
+    //             onClick={handleShareDrawerCompanyOpen}
+    //           >
+    //             <div className="company-settings-dropdown-item-icon-container">
+    //               <IosShareIcon fontSize="small" />
+    //             </div>
+    //             <div className="company-settings-dropdown-item-header-container">
+    //               <h6 className="company-settings-dropdown-item-header">
+    //                 Paylaş
+    //               </h6>
+    //             </div>
+    //           </li>
+    //         </ul>
+    //       </div>
+    //     </div>
+    //     <div className="company-info-inner-container">
+    //       <a href={`/dashboard/companies/${company.name}`}>
+    //         <div className="company-title-container">
+    //           <h2 className="company-title">
+    //             {company.name}
+    //             <sup className="company-job-count">
+    //               +{company.job_count - 2}
+    //             </sup>
+    //           </h2>
+    //           <div
+    //             className={
+    //               company.is_approved
+    //                 ? "company-title-approve-icon-container-active"
+    //                 : "company-title-approve-icon-container"
+    //             }
+    //           >
+    //             <CheckCircleIcon fontSize="small" />
+    //           </div>
+    //         </div>
+    //       </a>
+    //     </div>
+    //   </div>
+    //   <div className="company-jobs-container">
+    //     {company.highlighted_jobs.map((job) => {
+    //       return <CompanyJob key={job._id} companyJob={job} />;
+    //     })}
+    //   </div>
+    /* <div className="company-info-container">
         <div className="company-image-and-title-container">
           <a href={`/dashboard/companies/${company.name}`}>
             <div className="company-image-container">
@@ -152,9 +192,9 @@ const Company = ({ company }) => {
         {company.highlighted_jobs.map((job) => {
           return <CompanyJob companyJob={job} key={job._id} />;
         })}
-      </div> */}
-      <div className="signutare"></div>
-    </div>
+      </div> */
+    // <div className="signutare"></div>
+    // </div>
   );
 };
 
