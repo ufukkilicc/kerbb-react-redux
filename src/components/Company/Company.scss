@@ -1,6 +1,7 @@
 @import "../../common/global";
 @import "../../common/fonts";
 @import "../../common/colors";
+@import "../../common/responsive";
 
 a {
   width: 100%;
@@ -61,7 +62,7 @@ a {
           width: 100%;
           overflow: hidden;
           .company-title {
-            font-size: 24px;
+            font-size: 21px;
             font-weight: 500;
             color: $kerbb-color-dark;
             text-overflow: ellipsis;
@@ -69,12 +70,17 @@ a {
         }
         .company-location-date-container {
           display: flex;
+          flex-direction: row;
           justify-content: start;
           align-items: start;
           opacity: 0.8;
           width: 100%;
           overflow: hidden;
           gap: 1rem;
+          row-gap: 0;
+          @include media("<landing") {
+            flex-direction: column;
+          }
           h5 {
             font-weight: lighter;
             text-overflow: ellipsis;
@@ -119,7 +125,7 @@ a {
 
       .company-company-image {
         height: 75px;
-        width: 75px;
+        min-width: 75px;
         border-radius: 15px;
         img {
           height: 100%;

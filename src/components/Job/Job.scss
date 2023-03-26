@@ -8,7 +8,7 @@
   justify-content: start;
   align-items: center;
   color: $kerbb-color-dark;
-  width: 100%;
+  min-width: 100%;
   @include kerbb-border();
   border-radius: 5px;
   padding: 1rem;
@@ -57,30 +57,36 @@
         align-items: start;
         gap: 1rem;
         width: 100%;
-        overflow: hidden;
         .job-title {
+          max-width: 100%;
           font-size: 20px;
           font-weight: 500;
           color: $kerbb-color-dark;
-          text-overflow: ellipsis;
+          overflow: hidden;
+          display: -webkit-box;
+          -webkit-line-clamp: 1; /* number of lines to show */
+          line-clamp: 1;
+          -webkit-box-orient: vertical;
         }
       }
       .job-location-date-container {
         display: flex;
         justify-content: start;
-        align-items: start;
+        align-items: center;
         opacity: 0.5;
         width: 100%;
-        overflow: hidden;
         h5 {
           font-weight: lighter;
-          text-overflow: ellipsis;
+          overflow: hidden;
+          display: -webkit-box;
+          -webkit-line-clamp: 1; /* number of lines to show */
+          line-clamp: 1;
+          -webkit-box-orient: vertical;
         }
         .job-location-container {
           h5 {
             font-size: 14px;
             color: $kerbb-color-dark;
-            text-overflow: ellipsis;
           }
         }
         .job-location-icon {
@@ -97,7 +103,7 @@
 
     .job-company-image {
       height: 75px;
-      width: 75px;
+      min-width: 75px;
       border-radius: 15px;
       img {
         height: 100%;

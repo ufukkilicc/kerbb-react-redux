@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import TopMobileNavi from "../TopMobileNavi/TopMobileNavi";
 import BottomMobileNavi from "../BottomMobileNavi/BottomMobileNavi";
+import { AiFillInstagram, AiFillLinkedin } from "react-icons/ai";
 
 const AboutPage = () => {
   const [illustrationCompanies, setIllustrationCompanies] = useState([]);
@@ -107,115 +108,47 @@ const AboutPage = () => {
         </div>
       </div>
       <div className="bottom-navi-container">
-        <div className="bottom-navi-slogan-logo-info-container">
-          <div className="slogan-logo-container">
-            <div className="slogan-container">
-              <p className="slogan">
-                Şirketlerin kendi kariyer platformlarındaki ilanları tek tıkla
-                keşfet!
-              </p>
-            </div>
+        <div className="bottom-navi-first">
+          <div className="bottom-navi-first-logo-container">
             <div className="logo-container">
               <h1 className="logo-header">Kerbb</h1>
               <div className="logo"></div>
             </div>
+            <h1 className="par">
+              Şirketlerin kariyer platformlarındaki ilanları keşfet!
+            </h1>
           </div>
-          <div className="info-container">
-            <div className="info-inner-container">
-              <div className="info-site-links-container">
-                {/* <h4 className="info-site-links-header">Site Linkleri</h4> */}
-                <ul className="info-site-links-list">
-                  <Link to="/about">
-                    <li className="site-links-item">
-                      <h5 className="site-links-item-header">Hakkımızda</h5>
-                    </li>
-                  </Link>
-                  <Link to="/contact">
-                    <li className="site-links-item">
-                      <h5 className="site-links-item-header">İletişim</h5>
-                    </li>
-                  </Link>
-                </ul>
+          <div className="bottom-navi-first-navi">
+            <Link to="/about">
+              <div className="item">
+                <h1>Hakkımızda</h1>
               </div>
-              {/* <div className="info-companies-container">
-                <h4 className="info-companies-header">Şirketler</h4>
-                <ul className="info-companies-list">
-                  <li className="companies-item">
-                    <h5 className="companies-item-header">Getir</h5>
-                  </li>
-                  <li className="companies-item">
-                    <h5 className="companies-item-header">Sanofi</h5>
-                  </li>
-                  <li className="companies-item">
-                    <h5 className="companies-item-header">Koç Holding</h5>
-                  </li>
-                  <li className="companies-item">
-                    <h5 className="companies-item-header">Unilever</h5>
-                  </li>
-                  <li className="companies-item">
-                    <h5 className="companies-item-header">Arçelik Global</h5>
-                  </li>
-                </ul>
-              </div> */}
-              {/* <div className="info-news-container">
-                <h4 className="info-news-header">Haberler</h4>
-                <ul className="info-news-list">
-                  <li className="news-item">
-                    <h5 className="news-item-header">Getir</h5>
-                  </li>
-                  <li className="news-item">
-                    <h5 className="news-item-header">Sanofi</h5>
-                  </li>
-                  <li className="news-item">
-                    <h5 className="news-item-header">Koç Holding</h5>
-                  </li>
-                  <li className="news-item">
-                    <h5 className="news-item-header">Unilever</h5>
-                  </li>
-                </ul>
-              </div> */}
-              {/* <div className="info-partners-container">
-                <h4 className="info-partners-header">Partnerler</h4>
-                <ul className="info-partners-list">
-                  <li className="partners-item">
-                    <a
-                      href="https://www.linkedin.com/company/inbusinesstime"
-                      rel="noreferrer"
-                      target="_blank"
-                    >
-                      <h5 className="partners-item-header">inbusinesstime</h5>
-                    </a>
-                  </li>
-                </ul>
-              </div> */}
-            </div>
+            </Link>
+            <Link to="/contact">
+              <div className="item">
+                <h1>İletişim</h1>
+              </div>
+            </Link>
           </div>
         </div>
-        <div className="bottom-navi-socials-container">
-          <ul className="socials-list">
-            <li className="socials-item">
+        <div className="bottom-navi-second">
+          <h1 className="bottom-navi-second-sss">
+            @ 2023 kerbb.com Her Hakkı Saklıdır.
+          </h1>
+          <div className="bottom-navi-second-socials-container">
+            <h1>Bizi Takip Edin</h1>
+            <div className="bottom-navi-second-socials">
               <a
-                href="https://www.instagram.com/kerbbcom"
-                rel="noreferrer"
+                href="https://www.linkedin.com/company/kerbbcom/"
                 target="_blank"
               >
-                <div className="instagram-icon-container">
-                  <InstagramIcon fontSize="large" />
-                </div>
+                <AiFillInstagram fontSize={30} />
               </a>
-            </li>
-            <li className="socials-item">
-              <a
-                href="https://www.linkedin.com/company/kerbbcom"
-                rel="noreferrer"
-                target="_blank"
-              >
-                <div className="linkedin-icon-container">
-                  <LinkedInIcon fontSize="large" />
-                </div>
+              <a href="https://www.instagram.com/kerbbcom/" target="_blank">
+                <AiFillLinkedin fontSize={30} />
               </a>
-            </li>
-          </ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -112,31 +112,29 @@
     }
   }
   .bottom-navi-container {
-    padding: 2rem 2rem;
-    padding-bottom: 1rem;
-    width: 100%;
-    background-color: $kerbb-purple-light;
     @include kerbb-border-line-top();
+    width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    .bottom-navi-slogan-logo-info-container {
+    justify-content: start;
+    align-items: start;
+    .bottom-navi-first {
+      padding: 1rem 5rem 1rem 5rem;
       width: 100%;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-      @include media("<=m-table") {
-        grid-template-columns: 1fr;
-        grid-template-rows: 1fr 1fr;
-      }
-      .slogan-logo-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      align-items: start;
+      .bottom-navi-first-logo-container {
         display: flex;
         flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
-        gap: 0.5rem;
+        justify-content: start;
+        align-items: start;
+        .par {
+          font-size: 12px;
+          color: $kerbb-color-dark;
+          opacity: 0.8;
+        }
         .logo-container {
           position: relative;
           .logo-header {
@@ -152,140 +150,65 @@
             border-top: 3px solid $kerbb-color-logo;
           }
         }
-        .slogan-container {
-          .slogan {
-            color: $kerbb-color-dark;
-          }
-        }
       }
-      .info-container {
+      .bottom-navi-first-navi {
         width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-        // Temporary
-        gap: 1rem;
-        color: $kerbb-color-logo;
-        // Temprary
-        .info-inner-container {
+        padding: 1rem 0 1rem 0;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        justify-items: center;
+        .item {
+          @include kerbb-border-line-left();
+          padding: 1rem 5rem 1rem 5rem;
+          width: 100%;
           display: flex;
-          flex-direction: row;
+          color: $kerbb-color-dark;
+          opacity: 0.8;
           justify-content: center;
-          align-items: flex-start;
-          gap: 2rem;
-          .info-companies-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: flex-start;
-            gap: 1rem;
-            .info-companies-header {
-              color: $kerbb-color-logo;
-              opacity: 0.9;
-            }
-            .info-companies-list {
-              display: flex;
-              flex-direction: column;
-              justify-content: flex-start;
-              align-items: flex-start;
-              gap: 5px;
-              .companies-item {
-                color: $kerbb-color-dark;
-              }
-            }
+          align-items: center;
+          transition: 0.2s ease-in-out;
+          h1 {
+            font-size: 1rem;
           }
-          .info-site-links-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: flex-start;
-            gap: 1rem;
-            .info-site-links-header {
-              color: $kerbb-color-logo;
-              opacity: 0.9;
-            }
-            .info-site-links-list {
-              display: flex;
-              flex-direction: column;
-              justify-content: flex-start;
-              align-items: flex-start;
-              gap: 5px;
-              .site-links-item {
-                color: $kerbb-color-logo;
-                opacity: 0.9;
-                &:hover {
-                  opacity: 0.7;
-                }
-                &:active {
-                  opacity: 0.9;
-                }
-              }
-            }
-          }
-          .info-news-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: flex-start;
-            gap: 1rem;
-            .info-news-header {
-              color: $kerbb-color-logo;
-              opacity: 0.9;
-            }
-            .info-news-list {
-              display: flex;
-              flex-direction: column;
-              justify-content: flex-start;
-              align-items: flex-start;
-              gap: 5px;
-              .news-item {
-                color: $kerbb-color-dark;
-              }
-            }
-          }
-          .info-partners-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: flex-start;
-            gap: 1rem;
-            .info-partners-header {
-              color: $kerbb-color-logo;
-              opacity: 0.9;
-            }
-            .info-partners-list {
-              display: flex;
-              flex-direction: column;
-              justify-content: flex-start;
-              align-items: flex-start;
-              gap: 5px;
-              .partners-item {
-                color: $kerbb-color-dark;
-                a {
-                  color: $kerbb-color-dark;
-                }
-              }
-            }
+          &:hover {
+            background-color: $kerbb-purple-light;
+            cursor: pointer;
           }
         }
       }
     }
-    .bottom-navi-socials-container {
+    .bottom-navi-second {
       width: 100%;
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-      .socials-list {
+      background-color: $kerbb-purple-light;
+      padding: 0.5rem;
+      .bottom-navi-second-sss {
+        font-size: 12px;
+        color: $kerbb-color-dark;
+        opacity: 0.5;
+      }
+      .bottom-navi-second-socials-container {
         display: flex;
-        flex-direction: row;
         justify-content: center;
         align-items: center;
-        gap: 0.5rem;
-        .socials-item {
-          opacity: 0.9;
-          a {
-            color: $kerbb-color-logo;
-          }
+        gap: 1rem;
+        h1 {
+          font-size: 1rem;
+          color: $kerbb-color-dark;
+          opacity: 0.8;
+        }
+        a {
+          font-size: 1rem;
+          color: $kerbb-color-dark;
+          opacity: 0.5;
+        }
+        .bottom-navi-second-socials {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 0.5rem;
         }
       }
     }
