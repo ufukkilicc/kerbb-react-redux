@@ -66,6 +66,11 @@ a {
             font-weight: 500;
             color: $kerbb-color-dark;
             text-overflow: ellipsis;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 1; /* number of lines to show */
+            line-clamp: 1;
+            -webkit-box-orient: vertical;
           }
         }
         .company-location-date-container {
@@ -75,10 +80,9 @@ a {
           align-items: start;
           opacity: 0.8;
           width: 100%;
-          overflow: hidden;
           gap: 1rem;
           row-gap: 0;
-          @include media("<landing") {
+          @include media("<Lgdesktop") {
             flex-direction: column;
           }
           h5 {
@@ -118,6 +122,11 @@ a {
               opacity: 0.9;
               color: $kerbb-color-dark;
               font-weight: 900;
+              overflow: hidden;
+              display: -webkit-box;
+              -webkit-line-clamp: 1; /* number of lines to show */
+              line-clamp: 1;
+              -webkit-box-orient: vertical;
             }
           }
         }

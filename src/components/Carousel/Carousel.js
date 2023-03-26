@@ -31,7 +31,10 @@ export default class Carousel2 extends Component {
               </Link>
             </div>
           </div>
-          <img src={require("../../common/images/banner_1_image.jpg")} />
+          <img
+            className="carousel-image"
+            src={require("../../common/images/banner_1_image.jpg")}
+          />
         </div>
         <div className="carousel-box">
           <div className="carousel-content-container">
@@ -52,7 +55,10 @@ export default class Carousel2 extends Component {
               </Link>
             </div>
           </div>
-          <img src={require("../../common/images/banner_2_image.jpg")} />
+          <img
+            className="carousel-image"
+            src={require("../../common/images/banner_2_image.jpg")}
+          />
         </div>
         <div className="carousel-box">
           <div className="carousel-content-container">
@@ -69,7 +75,10 @@ export default class Carousel2 extends Component {
               </Link>
             </div>
           </div>
-          <img src={require("../../common/images/banner_3_image.jpg")} />
+          <img
+            className="carousel-image"
+            src={require("../../common/images/banner_3_image.jpg")}
+          />
         </div>
       </Carousel>
     );
