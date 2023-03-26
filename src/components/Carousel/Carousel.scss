@@ -1,0 +1,90 @@
+@import "../../common/global";
+@import "../../common/fonts";
+@import "../../common/responsive";
+
+.main-slide {
+  padding-top: 30px;
+  .carousel-box {
+    padding: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    overflow: visible;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    .carousel-content-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      align-items: start;
+      gap: 1rem;
+      width: 500px;
+      @include media("<tablet") {
+        padding-left: 5rem;
+        padding-right: 5rem;
+      }
+      .carousel-text {
+        text-align: start;
+        .carousel-text-header {
+          font-size: 1.5rem;
+          color: $kerbb-color-dark;
+          font-weight: bold;
+        }
+        .carousel-text-par {
+          color: $kerbb-color-dark;
+          font-size: 1rem;
+          opacity: 0.5;
+        }
+        p {
+          font-size: 1.5rem;
+          color: $kerbb-color-dark;
+          span {
+            color: $kerbb-color-logo;
+            font-weight: bold;
+          }
+        }
+      }
+      .carousel-button {
+        padding: 1rem;
+        background-color: $kerbb-color-logo;
+        border-radius: 5px;
+        cursor: pointer;
+        h1 {
+          font-size: 12px;
+          color: #ffffff;
+        }
+      }
+    }
+    img {
+      height: 200px;
+      width: 400px;
+      @include media("<tablet") {
+        display: none;
+      }
+    }
+  }
+}
+
+.carousel .slider-wrapper {
+  width: 80%;
+}
+.carousel .thumb {
+  width: 5%;
+  height: 50px;
+}
+
+.carousel {
+  text-align: center;
+}
+
+.thumbs.animated {
+  .thumb {
+    cursor: pointer;
+  }
+  .thumb.selected {
+    cursor: pointer;
+    border-radius: 5px;
+    border: 2px solid rgba(0, 0, 0, 0.5);
+  }
+}

@@ -44,8 +44,14 @@ import { updateMobileNaviObject } from "../../features/navigation/navigationSlic
 import TopMobileNavi from "../TopMobileNavi/TopMobileNavi";
 import BottomMobileNavi from "../BottomMobileNavi/BottomMobileNavi";
 import { Cursor, useTypewriter } from "react-simple-typewriter";
-import { AiFillInstagram } from "react-icons/ai";
+import {
+  AiFillInstagram,
+  AiFillRightCircle,
+  AiOutlineRight,
+} from "react-icons/ai";
 import { AiFillLinkedin } from "react-icons/ai";
+import Carousel from "../Carousel/Carousel";
+import Carousel2 from "../Carousel/Carousel";
 
 const HtmlTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} classes={{ popper: className }} />
@@ -73,28 +79,6 @@ const HtmlTooltip = styled(({ className, ...props }) => (
 }));
 
 const LandingPage = () => {
-  const [text, count] = useTypewriter({
-    words: ["Tek tıkla yüzlerce sitede dolaş."],
-    delaySpeed: 2000,
-    deleteSpeed: 30,
-    loop: 1,
-    onLoopDone: () => {
-      setNextLine(true);
-    },
-    typeSpeed: 30,
-  });
-  const [textNextLine, countNextLine] = useTypewriter({
-    words: [
-      "Şirketlerin kendi kariyer platformlarındaki ilanları tek tıkla keşfet!",
-    ],
-    delaySpeed: 5000,
-    deleteSpeed: 30,
-    loop: 1,
-    onLoopDone: () => {
-      setLineEnd(true);
-    },
-    typeSpeed: 30,
-  });
   const dispatch = useDispatch();
   const companiesSlideRef = useRef();
   const landingPageRef = useRef();
@@ -426,43 +410,7 @@ const LandingPage = () => {
         />
       </Helmet>
       <div className="landing-page-banner-container">
-        <div className="content-container">
-          <div className="content-header-container">
-            <h1 className="content-header">
-              {text}
-              {!nextLine ? <Cursor cursorColor="#4e21e7" /> : <div></div>}
-            </h1>
-          </div>
-          <div className="content-content-container">
-            <p className="content-content">
-              {nextLine ? textNextLine : ""}
-              {!lineEnd ? <Cursor cursorColor="#4e21e7" /> : <div></div>}
-            </p>
-          </div>
-          <div className="job-company-container">
-            <ul className="job-company-list">
-              <li className="job-item">
-                <h2 className="job-count">
-                  <CountUp end={jobCount} duration={0.5} />
-                </h2>
-                <h2 className="job-header">İş İlanı</h2>
-              </li>
-              <li className="company-item">
-                <h2 className="company-count">
-                  <CountUp end={companyCount} duration={0.5} />
-                </h2>
-                <h2 className="company-header">Şirket</h2>
-              </li>
-            </ul>
-          </div>
-        </div>
-        {/* <div className="illustration-container">
-          <Illustration
-            companies={
-              illustrationCompanies.length > 0 ? illustrationCompanies : []
-            }
-          />
-        </div> */}
+        <Carousel2 />
       </div>
       <div className="highlighted-companies-container">
         <div className="higlighted-companies-header-container">

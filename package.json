@@ -35,6 +35,7 @@
     "react-is-scrolling": "^1.0.1",
     "react-lazy-load-image-component": "^1.5.5",
     "react-redux": "^8.0.2",
+    "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "react-share": "^4.4.0",
