@@ -1,57 +1,48 @@
-import React, { useEffect, useRef, useState } from "react";
-import "./LandingPage.scss";
-import { fetchCompanies } from "../../features/companies/companiesAPI";
-import Company from "../Company/Company";
-import Job from "../Job/Job";
-import { fetchJobs } from "../../features/jobs/jobsAPI";
-import Illustration from "../Illustration/Illustration";
-import GridOnIcon from "@mui/icons-material/GridOn";
-import WindowIcon from "@mui/icons-material/Window";
-import CropSquareIcon from "@mui/icons-material/CropSquare";
-import SlideCompany from "../SlideCompany/SlideCompany";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import { fetchNews } from "../../features/news/newsAPI";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import CircleIcon from "@mui/icons-material/Circle";
+import CropSquareIcon from "@mui/icons-material/CropSquare";
+import DoNotDisturbIcon from "@mui/icons-material/DoNotDisturb";
+import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
+import GridOnIcon from "@mui/icons-material/GridOn";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import WindowIcon from "@mui/icons-material/Window";
+import ClickAwayListener from "@mui/material/ClickAwayListener";
 import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
 import { styled } from "@mui/material/styles";
 import { Box } from "@mui/system";
-import ClickAwayListener from "@mui/material/ClickAwayListener";
-import DoNotDisturbIcon from "@mui/icons-material/DoNotDisturb";
-import CircleIcon from "@mui/icons-material/Circle";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet";
-import SkeletonJob from "../SkeletonJob/SkeletonJob";
-import SkeletonCompanySlide from "../SkeletonCompanySlide/SkeletonCompanySlide";
-import SkeletonCompany from "../SkeletonCompany/SkeletonCompany";
-import SkeletonNews from "../SkeletonNews/SkeletonNews";
-import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
+import {
+  AiFillInstagram,
+  AiFillLinkedin,
+  AiFillRightCircle,
+} from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { getUserSearchHistory } from "../../features/auth/authSlice";
+import { fetchCompanies } from "../../features/companies/companiesAPI";
+import { fetchJobs } from "../../features/jobs/jobsAPI";
+import { updateMobileNaviObject } from "../../features/navigation/navigationSlice";
+import { fetchNews } from "../../features/news/newsAPI";
 import {
   getScrolledPage,
   updateScrolledPage,
 } from "../../features/scrolls/scrollsSlice";
-import { getUserSearchHistory } from "../../features/auth/authSlice";
-import { DateHelper } from "../../helpers/dateHelper";
-import { Link } from "react-router-dom";
-import { toDateHelper } from "../../helpers/toDateHelper";
-import { ReadHelper } from "../../helpers/readHelper";
-import CountUp from "react-countup";
 import { fetchTotal } from "../../features/total/totalAPI";
-import { updateMobileNaviObject } from "../../features/navigation/navigationSlice";
-import TopMobileNavi from "../TopMobileNavi/TopMobileNavi";
-import BottomMobileNavi from "../BottomMobileNavi/BottomMobileNavi";
-import { Cursor, useTypewriter } from "react-simple-typewriter";
-import {
-  AiFillInstagram,
-  AiFillRightCircle,
-  AiOutlineRight,
-} from "react-icons/ai";
-import { AiFillLinkedin } from "react-icons/ai";
-import Carousel from "../Carousel/Carousel";
+import { DateHelper } from "../../helpers/dateHelper";
+import { ReadHelper } from "../../helpers/readHelper";
+import { toDateHelper } from "../../helpers/toDateHelper";
 import Carousel2 from "../Carousel/Carousel";
+import Company from "../Company/Company";
+import Job from "../Job/Job";
+import SkeletonCompany from "../SkeletonCompany/SkeletonCompany";
+import SkeletonCompanySlide from "../SkeletonCompanySlide/SkeletonCompanySlide";
+import SkeletonJob from "../SkeletonJob/SkeletonJob";
+import SkeletonNews from "../SkeletonNews/SkeletonNews";
+import SlideCompany from "../SlideCompany/SlideCompany";
+import "./LandingPage.scss";
+import { FaChevronRight } from "react-icons/fa";
 
 const HtmlTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} classes={{ popper: className }} />
@@ -416,6 +407,19 @@ const LandingPage = () => {
         <div className="higlighted-companies-header-container">
           <h1 className="highlighted-companies-header">ÖNE ÇIKAN ŞİRKETLER</h1>
         </div>
+
+        <div className="highlighted-companies-see-more-header-container">
+          <div>
+            <Link to="/dashboard/search">
+              <div className="highlighted-companies-see-more-header-inner">
+                <h1 className="highlighted-companies-see-more-header">
+                  Tümünü gör
+                </h1>
+                <AiFillRightCircle className="icon" />
+              </div>
+            </Link>
+          </div>
+        </div>
         {elementsLoading ? (
           <div className="highlighted-companies-skeleton-list">
             <SkeletonCompany />
@@ -441,13 +445,6 @@ const LandingPage = () => {
             )}
           </ul>
         )}
-        <div className="highlighted-companies-see-more-header-container">
-          <Link to="/dashboard/search">
-            <h1 className="highlighted-companies-see-more-header">
-              Tümünü gör
-            </h1>
-          </Link>
-        </div>
       </div>
       <div className="companies-slide-container">
         <div className="companies-slide-grid-button-container">
@@ -537,6 +534,16 @@ const LandingPage = () => {
         <div className="highlighted-jobs-header-container">
           <h1 className="highlighted-jobs-header">ÖNE ÇIKAN İLANLAR</h1>
         </div>
+        <div className="highlighted-jobs-see-more-header-container">
+          <div>
+            <Link to="/dashboard/search">
+              <div className="highlighted-jobs-see-more-header-inner">
+                <h1 className="highlighted-jobs-see-more-header">Tümünü gör</h1>
+                <AiFillRightCircle className="icon" />
+              </div>
+            </Link>
+          </div>
+        </div>
         {elementsLoading ? (
           <div className="highlighted-jobs-skeleton-list">
             <SkeletonJob />
@@ -561,11 +568,6 @@ const LandingPage = () => {
             )}
           </ul>
         )}
-        <div className="highlighted-jobs-see-more-header-container">
-          <Link to="/dashboard/search">
-            <h1 className="highlighted-jobs-see-more-header">Tümünü gör</h1>
-          </Link>
-        </div>
       </div>
       <div className="highlighted-news-container">
         <div className="highlighted-news-header-container">
@@ -582,6 +584,17 @@ const LandingPage = () => {
               <h1 className="sponsor-header">inbusinesstime</h1>
             </div>
           </a> */}
+        </div>
+
+        <div className="highlighted-news-see-more-header-container">
+          <div>
+            <Link to="/dashboard/news">
+              <div className="highlighted-news-see-more-header-inner">
+                <h1 className="highlighted-news-see-more-header">Tümünü gör</h1>
+                <AiFillRightCircle className="icon" />
+              </div>
+            </Link>
+          </div>
         </div>
         <div className="higlighted-news-inner-container">
           {elementsLoading ? (
@@ -808,23 +821,6 @@ const LandingPage = () => {
               />
             </a>
           </div>
-        </div>
-        <div className="highlighted-news-see-more-header-container">
-          <Link to="/dashboard/news">
-            <h1 className="highlighted-news-see-more-header">Tümünü gör</h1>
-          </Link>
-          {/* <a
-            href="https://www.linkedin.com/company/inbusinesstime"
-            rel="noreferrer"
-            target="_blank"
-          >
-            <div className="sponsor">
-              <div className="sponsor-icon">
-                <HandshakeIcon fontSize="small" />
-              </div>
-              <h1 className="sponsor-header">inbusinesstime</h1>
-            </div>
-          </a> */}
         </div>
       </div>
       <div className="bottom-navi-container">

@@ -3,16 +3,17 @@
 @import "../../common/responsive";
 
 .main-slide {
-  padding-top: 30px;
+  padding-top: 50px;
+  width: 90%;
   .carousel-box {
-    padding: 5rem;
+    padding: 5rem 1rem 5rem 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
     overflow: visible;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
     .carousel-content-container {
       display: flex;
       flex-direction: column;
@@ -21,8 +22,6 @@
       gap: 1rem;
       width: 500px;
       @include media("<tablet") {
-        padding-left: 5rem;
-        padding-right: 5rem;
       }
       .carousel-text {
         text-align: start;
